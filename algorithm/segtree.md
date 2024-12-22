@@ -36,6 +36,10 @@ public:
     }
     return s;
   }
+
+  T top() {
+    return arr[1];
+  }
 };
 
 ```
