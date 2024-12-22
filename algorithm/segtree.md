@@ -3,6 +3,7 @@
 using namespace std;
 ```
 
+# 코드
 ```cpp
 template <typename T>
 class segtree {
@@ -39,6 +40,10 @@ public:
 
 ```
 
-문제: [구간 합 구하기](https://boj.kr/2042)
-
-[전체 코드](http://boj.kr/1a8be0056d4e48e591bdf82dccb955ae)
+# 문제
+* [구간 합 구하기](https://boj.kr/2042)
+  * [전체 코드](http://boj.kr/1a8be0056d4e48e591bdf82dccb955ae)
+* [구간 곱 구하기](https://boj.kr/11505)
+  * [전체 코드](http://boj.kr/4e68e526b26c4f8bb18d631ef7171b40)
+* [최솟값과 최댓값](https://boj.kr/2357)
+  * [전체 코드](http://boj.kr/a7b203814a474eb0a00c0878bd51c22e)
