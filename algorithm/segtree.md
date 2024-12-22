@@ -13,7 +13,7 @@ class segtree {
   function<T(T, T)> choose;
 
 public:
-  segtree(int n, function<T(T, T)> choose, T raw) : choose(choose), raw(raw) {
+  segtree(int n, function<T(T, T)> choose, T raw = T()) : choose(choose), raw(raw) {
     while (sz < n) sz *= 2;
     arr.resize(2 * sz, raw);
   }
