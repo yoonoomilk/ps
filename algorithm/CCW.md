@@ -3,7 +3,10 @@ using pt = pair<int, int>;
 using line = pair<pt, pt>;
 #define x first
 #define y second
+```
 
+# 코드
+```cpp
 int ccw(pt &a, pt &b, pt &c) {
   ll s = (b.x - a.x) * (c.y - b.y) - (c.x - b.x) * (b.y - a.y);
   if(s > 0) return 1;
@@ -20,3 +23,12 @@ bool cross(line &a, line &b) {
   return (p1p2 <= 0 && p3p4 <= 0);
 }
 ```
+
+# 문제
+* [CCW](https://boj.kr/11758)
+  * http://boj.kr/f515cc5699cd4d838245f2f997b903d0
+* [선분 교차 1](https://boj.kr/17386), [선분 교차 2](https://boj.kr/17387)
+  * http://boj.kr/91a3f8e8aa604c5ea3dbb0565e76f045
+  * http://boj.kr/2fbf41c2245f4bf58615256eb2e7cfb4
+* [선분 그룹](https://boj.kr/2162)
+  * http://boj.kr/978059d6cdd04c85bc2fe65455333938
