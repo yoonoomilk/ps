@@ -1,8 +1,3 @@
-```cpp
-#include <bits/stdc++.h>
-using namespace std;
-```
-
 # 코드
 ```cpp
 template <typename T>
