@@ -27,14 +27,14 @@ public:
   T query(int l, int r) {
     l += sz;
     r += sz;
-    T s = raw;
+    T s1 = raw, s2 = raw;
     while (l <= r) {
-      if (l % 2 == 1) s = choose(s, arr[l++]);
-      if (r % 2 == 0) s = choose(s, arr[r--]);
+      if (l % 2 == 1) s1 = choose(s1, arr[l++]);
+      if (r % 2 == 0) s2 = choose(arr[r--], s2);
       l /= 2;
       r /= 2;
     }
-    return s;
+    return choose(s1, s2);
   }
 
   T top() {
