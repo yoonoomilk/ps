@@ -51,3 +51,5 @@ public:
   * http://boj.kr/4e68e526b26c4f8bb18d631ef7171b40
 * [최솟값과 최댓값](https://boj.kr/2357)
   * http://boj.kr/a7b203814a474eb0a00c0878bd51c22e
+* [연속합과 쿼리](https://boj.kr/16993)
+  * http://boj.kr/da21d05be1a64f73a695049f7a8eec7d
