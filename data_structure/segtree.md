@@ -36,7 +36,6 @@ public:
     return arr[1];
   }
 };
-
 ```
 
 # 문제
