@@ -1,16 +1,20 @@
-# 코드
+# 코드 (**NOT DONE**)
 ```cpp
 template <typename T>
-class segtree {
+class lazy_segtree {
   int sz = 1;
-  T raw;
+  const T raw;
   vector<T> arr;
+  vector<T> lazy;
   function<T(T, T)> op;
+  function<T(T, T, int)> ops;
 
 public:
-  segtree(int n, function<T(T, T)> op, T raw = T()) : op(op), raw(raw) {
+  lazy_segtree(int n, function<T(T, T)> op, function<T(T, T, int)> ops, T raw = T())
+    : op(op), ops(ops), raw(raw) {
     while (sz < n) sz *= 2;
     arr.resize(2 * sz, raw);
+    lazy.resize(sz, raw);
   }
 
   void update(int a, T x) {
@@ -42,13 +46,3 @@ public:
   }
 };
 ```
-
-# 문제
-* [구간 합 구하기](https://boj.kr/2042)
-  * http://boj.kr/1a8be0056d4e48e591bdf82dccb955ae
-* [구간 곱 구하기](https://boj.kr/11505)
-  * http://boj.kr/4e68e526b26c4f8bb18d631ef7171b40
-* [최솟값과 최댓값](https://boj.kr/2357)
-  * http://boj.kr/a7b203814a474eb0a00c0878bd51c22e
-* [연속합과 쿼리](https://boj.kr/16993)
-  * http://boj.kr/da21d05be1a64f73a695049f7a8eec7d
