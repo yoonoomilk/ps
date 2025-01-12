@@ -9,9 +9,7 @@ using line = pair<pt, pt>;
 ```cpp
 int ccw(pt &a, pt &b, pt &c) {
   ll s = (b.x - a.x) * (c.y - b.y) - (c.x - b.x) * (b.y - a.y);
-  if (s > 0) return 1;
-  if (s < 0) return -1;
-  return 0;
+  return (s > 0) - (s < 0);
 }
 
 bool cross(line &a, line &b) {
