@@ -31,5 +31,10 @@ bool cross(line &a, line &b) {
 * [선분 그룹](https://boj.kr/2162)
   * http://boj.kr/978059d6cdd04c85bc2fe65455333938
 
+<<<<<<< HEAD
 # with
 * [template/pt_from_pii.md](../template/pt_from_pii.md)
+=======
+# from
+* [template/pt_from_pii.md](../template/pt_from_pii.md)
+>>>>>>> e8c46368099ad514376774f49a99f6636b2e8b9e
