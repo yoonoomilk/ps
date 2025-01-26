@@ -12,7 +12,7 @@ istream &operator >> (istream &cin, pt &v) {
   return cin;
 }
 
-ostream &operator << (ostream &cout, pt &v) { cout << v.x << ' ' << v.y; return cout; }
+ostream &operator << (ostream &cout, pt &v) { cout << v.x << ' ' << v.y << '\n'; return cout; }
 ```
 
 # calculate

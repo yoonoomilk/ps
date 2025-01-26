@@ -8,7 +8,7 @@ using pt = pair<int, int>;
 ```cpp
 istream &operator >> (istream &cin, pt &v) { cin >> v.x >> v.y; return cin; }
 
-ostream &operator << (ostream &cout, pt &v) { cout << v.x << ' ' << v.y; return cout; }
+ostream &operator << (ostream &cout, pt &v) { cout << v.x << ' ' << v.y << '\n'; return cout; }
 ```
 
 # calculate
