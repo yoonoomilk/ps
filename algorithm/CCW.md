@@ -1,4 +1,5 @@
 ```cpp
+using ll = long long;
 using pt = pair<int, int>;
 using line = pair<pt, pt>;
 #define x first
@@ -8,7 +9,7 @@ using line = pair<pt, pt>;
 # 코드
 ```cpp
 int ccw(pt &a, pt &b, pt &c) {
-  ll s = (b.x - a.x) * (c.y - b.y) - (c.x - b.x) * (b.y - a.y);
+  ll s = (ll)(b.x - a.x) * (c.y - b.y) - (ll)(c.x - b.x) * (b.y - a.y);
   return (s > 0) - (s < 0);
 }
 
@@ -31,10 +32,5 @@ bool cross(line &a, line &b) {
 * [선분 그룹](https://boj.kr/2162)
   * http://boj.kr/978059d6cdd04c85bc2fe65455333938
 
-<<<<<<< HEAD
-# with
-* [template/pt_from_pii.md](../template/pt_from_pii.md)
-=======
 # from
 * [template/pt_from_pii.md](../template/pt_from_pii.md)
->>>>>>> e8c46368099ad514376774f49a99f6636b2e8b9e

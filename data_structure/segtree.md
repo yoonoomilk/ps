@@ -13,6 +13,11 @@ public:
     arr.resize(2 * sz, raw);
   }
 
+  void assign(vector<T> raw) {
+    for (int i = 0;i < raw.size();i++) arr[i+sz] = raw[i];
+    for (int i = sz;--i;) arr[i] = op(arr[i * 2], op[a * 2 + 1]);
+  }
+
   void update(int a, T x) {
     a += sz;
     arr[a] = x;
@@ -33,8 +38,7 @@ public:
   }
 
   T value(int a) {
-    a += sz;
-    return arr[a];
+    return arr[a + sz];
   }
 
   T top() {
