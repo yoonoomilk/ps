@@ -28,3 +28,7 @@ public:
 # 문제
 * [찾기](https://boj.kr/1786)
   * http://boj.kr/4a6a0e07276b4561b7886f5f949386b0
+* [광고](https://boj.kr/1305)
+  * http://boj.kr/652c19b2baad413e812e6970f50f1336
+* [문자열 제곱](https://boj.kr/4354)
+  * http://boj.kr/7a62f9a082ff4a52845d6c48fd79999f
