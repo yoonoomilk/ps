@@ -38,14 +38,6 @@ public:
     }
     return op(s1, s2);
   }
-
-  T value(int a) {
-    return get(a + sz);
-  }
-
-  T top() {
-    return get(1);
-  }
 };
 ```
 
