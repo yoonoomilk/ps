@@ -1,14 +1,14 @@
 # 코드 (**NOT DONE**)
 ```cpp
 template <typename T>
-struct lazy_segtree {
+struct lazy_segment_tree {
   int sz = 1, h = 0;
   vector<T> arr, lazy;
   T raw;
   function<T(T, T)> op;
   function<T(T, T, int)> ops;
 
-  lazy_segtree(int n, function<T(T, T)> op, function<T(T, T, int)> ops, T raw = T())
+  lazy_segment_tree(int n, function<T(T, T)> op, function<T(T, T, int)> ops, T raw = T())
     : op(op), ops(ops), raw(raw) {
     while(sz < n) {
       sz *= 2;

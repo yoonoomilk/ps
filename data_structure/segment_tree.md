@@ -1,14 +1,14 @@
 # 코드
 ```cpp
 template <typename T>
-class segtree {
+class segment_tree {
   int sz = 1;
   T raw;
   vector<T> arr;
   function<T(T, T)> op;
 
 public:
-  segtree(int n, function<T(T, T)> op, T raw = T()) : op(op), raw(raw) {
+  segment_tree(int n, function<T(T, T)> op, T raw = T()) : op(op), raw(raw) {
     while (sz < n) sz *= 2;
     arr.resize(2 * sz, raw);
   }
