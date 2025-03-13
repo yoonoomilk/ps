@@ -40,11 +40,11 @@ public:
   }
 
   T value(int a) {
-    return get(arr[a + sz]);
+    return get(a + sz);
   }
 
   T top() {
-    return get(arr[1]);
+    return get(1);
   }
 };
 ```
