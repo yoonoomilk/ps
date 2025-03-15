@@ -11,47 +11,47 @@ public:
     arr.resize(sz);
   }
 
-  bool insert(string &v, int idx) {
-    if(idx == v.size() - 1) {
-      if(have) return false;
+  bool insert(const char* s, const char* e) {
+    if (s == e) {
+      if (have) return false;
       cnt++;
       return have = true;
-    }
-    else {
-      int nxt = op(v[idx]);
-      if(arr[nxt] == nullptr) arr[nex] = new trie(sz, op);
-      if(arr[nxt]->insert(v, idx + 1)) {
+    } else {
+      int nxt = op(*s);
+      if (arr[nxt] == nullptr) arr[nxt] = new trie(sz, op);
+      if (arr[nxt]->insert(s + 1, e)) {
         cnt++;
         return true;
       }
+      return false;
     }
   }
-  void insert(string &v) {
-    insert(v, 0);
+  bool insert(string &v) {
+    return insert(v.c_str(), v.c_str()+v.size());
   }
 
-  bool find(string &v, int idx) {
-    if(idx == v.size() - 1) return have;
-    int nxt = op(v[idx]);
-    if(arr[nxt] == nullptr) return false;
-    return arr[nxt]->find(v, idx + 1);
+  bool find(const char* s, const char* e) {
+    if (s == e) return have;
+    int nxt = op(*s);
+    if (arr[nxt] == nullptr) return false;
+    return arr[nxt]->find(s + 1, e);
   }
-  void find(string &v) {
-    find(v, 0);
+  bool find(string &v) {
+    return find(v.c_str(), v.c_str()+v.size());
   }
 
-  int match(string &v, int idx) {
-    if(idx == v.size() - 1) return cnt;
-    int nxt = op(v[idx]);
-    if(arr[nxt] == nullptr) return false;
-    return arr[nxt]->find(v, idx + 1);
+  int match(const char* s, const char* e) {
+    if (s == e) return cnt;
+    int nxt = op(*s);
+    if (arr[nxt] == nullptr) return false;
+    return arr[nxt]->match(s + 1, e);
   }
-  void match(string &v) {
-    match(v, 0);
+  int match(string &v) {
+    return match(v.c_str(), v.c_str()+v.size());
   }
 };
 ```
 
 # 문제
-* [뭐시기](https://boj.kr/1000)
-  * http://boj.kr/
+* [전화번호 목록](https://boj.kr/5052)
+  * http://boj.kr/d1e5807caab4438180739661914e200b
