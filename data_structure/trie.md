@@ -11,6 +11,10 @@ public:
     arr.resize(sz);
   }
 
+  ~trie() {
+    for (int i = 0;i < sz;i++) if (arr[i] != nullptr) delete arr[i];
+  }
+
   bool insert(const char* s, const char* e) {
     if (s == e) {
       if (have) return false;
@@ -26,8 +30,8 @@ public:
       return false;
     }
   }
-  bool insert(string &v) {
-    return insert(v.c_str(), v.c_str()+v.size());
+  bool insert(string& v) {
+    return insert(v.c_str(), v.c_str() + v.size());
   }
 
   bool find(const char* s, const char* e) {
@@ -36,8 +40,8 @@ public:
     if (arr[nxt] == nullptr) return false;
     return arr[nxt]->find(s + 1, e);
   }
-  bool find(string &v) {
-    return find(v.c_str(), v.c_str()+v.size());
+  bool find(string& v) {
+    return find(v.c_str(), v.c_str() + v.size());
   }
 
   int match(const char* s, const char* e) {
@@ -46,8 +50,8 @@ public:
     if (arr[nxt] == nullptr) return false;
     return arr[nxt]->match(s + 1, e);
   }
-  int match(string &v) {
-    return match(v.c_str(), v.c_str()+v.size());
+  int match(string& v) {
+    return match(v.c_str(), v.c_str() + v.size());
   }
 };
 ```
