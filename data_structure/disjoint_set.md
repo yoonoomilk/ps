@@ -1,3 +1,4 @@
+# 코드
 ```cpp
 class disjoint_set {
   int sz;
