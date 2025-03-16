@@ -1,18 +1,17 @@
 # 코드
 ```cpp
 class trie {
-  int sz, cnt = 0;
-  vector<trie*> arr;
-  function<int(char)> op;
+  int cnt;
+  map<char, trie*> arr;
   bool have = false;
 
 public:
-  trie(int sz, function<int(char)> op) : sz(sz), op(op) {
-    arr.resize(sz);
+  trie() {
+    cnt = 0;
   }
 
   ~trie() {
-    for (int i = 0;i < sz;i++) if (arr[i] != nullptr) delete arr[i];
+    for (auto i = arr.begin();i != arr.end();i++) delete i->second;
   }
 
   bool insert(const char* s, const char* e) {
@@ -21,9 +20,8 @@ public:
       cnt++;
       return have = true;
     } else {
-      int nxt = op(*s);
-      if (arr[nxt] == nullptr) arr[nxt] = new trie(sz, op);
-      if (arr[nxt]->insert(s + 1, e)) {
+      if (arr.find(*s) == arr.end()) arr[*s] = new trie;
+      if (arr[*s]->insert(s + 1, e)) {
         cnt++;
         return true;
       }
@@ -36,9 +34,8 @@ public:
 
   bool find(const char* s, const char* e) {
     if (s == e) return have;
-    int nxt = op(*s);
-    if (arr[nxt] == nullptr) return false;
-    return arr[nxt]->find(s + 1, e);
+    if (arr.find(*s) == arr.end()) return false;
+    return arr[*s]->find(s + 1, e);
   }
   bool find(string& v) {
     return find(v.c_str(), v.c_str() + v.size());
@@ -46,16 +43,16 @@ public:
 
   int match(const char* s, const char* e) {
     if (s == e) return cnt;
-    int nxt = op(*s);
-    if (arr[nxt] == nullptr) return false;
-    return arr[nxt]->match(s + 1, e);
+    if (arr.find(*s) == arr.end()) return false;
+    return arr[*s]->match(s + 1, e);
   }
   int match(string& v) {
     return match(v.c_str(), v.c_str() + v.size());
   }
 
-  *trie child(char c) {
-    return arr[op(c)];
+  trie* child(char c) {
+    if (arr.find(c) != arr.end()) return arr[c];
+    return nullptr;
   }
 };
 ```
