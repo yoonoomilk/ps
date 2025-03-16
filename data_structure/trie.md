@@ -41,3 +41,5 @@ public:
 # 문제
 * [전화번호 목록](https://boj.kr/5052)
   * http://boj.kr/d1e5807caab4438180739661914e200b
+* [전설](https://boj.kr/19585)
+  * http://boj.kr/a470a4fb004f44f1be80fb77310aea3f
