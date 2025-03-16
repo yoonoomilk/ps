@@ -53,6 +53,16 @@ public:
   int match(string& v) {
     return match(v.c_str(), v.c_str() + v.size());
   }
+
+  int depth(const char& s, const char* e) {
+    if (s == e) return 1;
+    int nxt = op(*s);
+    if (arr[nxt] == nullptr) return 0;
+    return arr[nxt]->depth(s + 1, e) + 1;
+  }
+  int depth(string& v) {
+    return depth(v.c_str(), v.c_str() + v.size());
+  }
 };
 ```
 
