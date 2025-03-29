@@ -2,38 +2,28 @@
 ```cpp
 class trie {
 public:
-  map<char, trie*> arr;
+  vector<pair<char, trie>> arr;
   bool have = false;
 
   trie() { }
 
-  ~trie() {
-    for (auto i = arr.begin();i != arr.end();i++) delete i->second;
-  }
-
-  void insert(const char* s, const char* e) {
-    if (s == e) have = true;
-    else {
-      if (arr.find(*s) == arr.end()) arr[*s] = new trie;
-      arr[*s]->insert(s + 1, e);
-    }
-  }
-  void insert(string& v) {
-    return insert(v.c_str(), v.c_str() + v.size());
-  }
-
-  bool find(const char* s, const char* e) {
-    if (s == e) return have;
-    if (arr.find(*s) == arr.end()) return false;
-    return arr[*s]->find(s + 1, e);
-  }
-  bool find(string& v) {
-    return find(v.c_str(), v.c_str() + v.size());
-  }
-
   trie* child(char c) {
-    if (arr.find(c) != arr.end()) return arr[c];
+    for(auto& [k, v] : arr) if(k == c) return &v;
     return nullptr;
+  }
+
+  template <typename I>
+  void insert(I s, I e) {
+    trie* cur = this;
+    for(;s != e;s++) {
+      trie* nxt = cur->child(*s);
+      if(nxt == nullptr) {
+        cur->arr.push_back({*s, trie()});
+        nxt = &cur->arr.back().second;
+      }
+      cur = nxt;
+    }
+    cur->have = true;
   }
 };
 ```
