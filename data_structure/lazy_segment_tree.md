@@ -1,4 +1,7 @@
 # 코드 (**NOT DONE**)
+
+[Segment Tree with Lazy Propagation의 비재귀 구현](https://www.acmicpc.net/blog/view/117)
+[Efficient and easy segment trees](https://codeforces.com/blog/entry/18051)
 ```cpp
 template <typename T>
 class lazy_segment_tree {
