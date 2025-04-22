@@ -24,7 +24,7 @@ public:
   void merge(int a, int b) {
     a = find(a);
     b = find(b);
-    arr[b] = a;
+    if (!same(a, b)) arr[b] = a;
   }
 };
 ```

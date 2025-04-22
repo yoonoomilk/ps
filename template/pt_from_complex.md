@@ -15,7 +15,7 @@ istream &operator >> (istream &cin, pt &v) {
 ostream &operator << (ostream &cout, pt &v) { cout << v.x << ' ' << v.y << '\n'; return cout; }
 ```
 
-# calculate
+# calculate (for sorting, etc)
 ```cpp
 bool operator < (pt &a, pt &b) { return (a.x != b.x) ? a.x < b.x : a.y < b.y; }
 ```
