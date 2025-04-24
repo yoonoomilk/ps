@@ -1,4 +1,4 @@
-# 코드
+# 코드 (**not done**)
 ```cpp
 template <typename T, typename Merge>
 class segment_tree {
@@ -12,6 +12,7 @@ class segment_tree {
     }
   };
   vector<node> tree;
+  vector<int> nth;
   Merge op;
 
   int append() {
@@ -49,7 +50,7 @@ class segment_tree {
 
 public:
   segment_tree(int mx, const T &raw = T()) : mx(mx), raw(raw) {
-    tree.push_back(node());
+    nth.push_back(append());
   }
 
   void update(int i, const T &x) {

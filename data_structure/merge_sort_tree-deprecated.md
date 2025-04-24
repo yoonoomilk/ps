@@ -1,6 +1,23 @@
 # 코드
 ```cpp
 template <typename T>
+struct op {
+  vector<T> operator() (const vector<T> &a, const vector<T> &b) {
+    vector<T> tmp(a.size() + b.size());
+    merge(
+      a.begin(), a.end(),
+      b.begin(), b.end(),
+      tmp.begin()
+    );
+    return tmp;
+  }
+};
+segment_tree<vector<T>, op>
+//but O(n) for query
+```
+##  deprecated
+```cpp
+template <typename T>
 class merge_sort_tree {
   int sz = 1;
   vector<vector<T>> arr;
