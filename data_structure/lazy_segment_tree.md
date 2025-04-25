@@ -100,7 +100,9 @@ public:
   * http://boj.kr/423b3aeec32d4adb9a22d9d5a9afc9ce
 * [스위치](https://boj.kr/1395)
   * http://boj.kr/68d225afeb8a430db1131870685452d4
-* [XOR](https://boj.kr/12844)
+* [XOR](https://boj.kr/12844) (12844)
   * http://boj.kr/250ab06024954f229a38d38733ee8269
+* [XOR](https://boj.kr/14245) (14245)
+  * http://boj.kr/e79c9109db6f47beaa60ea243a43ce3b
 
 ## [Segment Tree with Lazy Propagation의 비재귀 구현](https://www.acmicpc.net/blog/view/117)
