@@ -10,9 +10,9 @@ class segment_tree {
 public:
   segment_tree(int n, const T &raw = T()) : sz(1 << __lg(n * 2 - 1)), raw(raw), tree(sz * 2, raw) {}
 
-  void update(int i, const T &x) {
+  void update(int i, const T &v) {
     i += sz;
-    tree[i] = x;
+    tree[i] = v;
     while (i /= 2) tree[i] = op(tree[i * 2], tree[i * 2 + 1]);
   }
 

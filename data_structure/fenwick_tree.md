@@ -1,34 +1,23 @@
-# 코드 (**NOT DONE**)
+# 코드 (1-based)
 ```cpp
-template <typename T>
+template <typename T, typename Merge>
 class fenwick_tree {
-  int sz;
-  vector<T> arr;
-
-  T sum(int r) {
-    T s = 0;
-    while(r > 0) {
-      s += arr[r-1];
-      r -= r & -r;
-    }
-    return s;
-  }
+  const int sz;
+  const T raw;
+  vector<T> tree;
+  Merge op;
 
 public:
-  fenwick_tree(int n) : sz(n) {
-    arr.resize(sz);
+  fenwick_tree(int sz, const T& raw = T()) : sz(sz), raw(raw), tree(sz + 1, raw) {}
+
+  void update(int i, const T& v) {
+    for (;i <= sz;i += i & -i) tree[i] += v;
   }
 
-  void add(int a, T x) {
-    a++;
-    while (a <= sz) {
-      arr[a - 1] += x;
-      a += a & -a;
-    }
-  }
-
-  T query(int l, int r) {
-    return sum(r) - sum(l);
+  T Query(int i) {
+    T s = raw;
+    for (;i;i -= i & -i) s = op(s, tree[i]);
+    return s;
   }
 };
 ```
@@ -37,8 +26,4 @@ public:
 * [구간 합 구하기](https://boj.kr/2042)
   * http://boj.kr/
 * [구간 곱 구하기](https://boj.kr/11505)
-  * http://boj.kr/
-* [최솟값과 최댓값](https://boj.kr/2357)
-  * http://boj.kr/
-* [연속합과 쿼리](https://boj.kr/16993)
   * http://boj.kr/

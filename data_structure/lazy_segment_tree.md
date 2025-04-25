@@ -81,7 +81,7 @@ public:
 };
 ```
 
-# 의미미
+# 의미
 `lazy_segment_tree<T, L, Merge, Update, Composition> seg(n, raw, lazy_raw)`
 
 * T : tree에 들어갈 값
