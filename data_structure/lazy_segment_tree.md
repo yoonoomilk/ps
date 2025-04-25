@@ -91,7 +91,7 @@ public:
 * Update : `pair<T, int> operator() (const L& a, const pair<T, int>& b)` 형식
   * b에 lazy한 a를 적용
 * Composition : `L operator() (const L& a, const L& b)` 형식
-  * lazy끼리 합치기기
+  * lazy한 b에 a 합치기기
 
 # 문제
 * [구간 합 구하기 2](https://boj.kr/10999)
