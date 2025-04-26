@@ -70,3 +70,5 @@ public:
   * http://boj.kr/8f2e2777bea24c21922252adac0c84fd
 * [북서풍](https://boj.kr/5419)
   * http://boj.kr/429cf0d020214635a036669ca712bb1d
+* [커피숍2](https://boj.kr/1275)
+  * http://boj.kr/27689e0f91e947f79578ab1c8419e6f1
