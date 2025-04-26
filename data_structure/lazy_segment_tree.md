@@ -5,7 +5,7 @@ class lazy_segment_tree {
   const int lg, sz;
   const T raw;
   const L lazy_raw;
-  vector<pair<T, int>> tree;
+  vector<T> tree;
   vector<L> lazy;
   Merge op;
   Update upd;
@@ -28,10 +28,10 @@ class lazy_segment_tree {
 
 public:
   lazy_segment_tree(int n, const T &raw = T(), const L &lazy_raw = L())
-  : lg(__lg(n * 2 - 1)), sz(1 << lg), raw(raw), lazy_raw(lazy_raw), tree(sz * 2, {raw, 1}), lazy(sz * 2, lazy_raw) {}
+  : lg(__lg(n * 2 - 1)), sz(1 << lg), raw(raw), lazy_raw(lazy_raw), tree(sz * 2, raw), lazy(sz * 2, lazy_raw) {}
 
   void set(int i, const T &v) {
-    tree[i + sz] = {v, 1};
+    tree[i + sz] = v;
   }
 
   void init() {
@@ -63,11 +63,11 @@ public:
   T query(int i) {
     i += sz;
     for (int j = lg;j;j--) push(i >> j);
-    return tree[i].first;
+    return tree[i];
   }
   T query(int l, int r) {
     l += sz; r += sz;
-    pair<T, int> s1 = {raw, 0}, s2 = {raw, 0};
+    T s1 = raw, s2 = raw;
     for (int i = lg;i;i--) {
       if (l >> i << i != l) push(l >> i);
       if (r + 1 >> i << i != r + 1) push(r >> i);
@@ -76,7 +76,7 @@ public:
       if (l & 1) s1 = op(s1, tree[l++]);
       if (~r & 1) s2 = op(tree[r--], s2);
     }
-    return op(s1, s2).first;
+    return op(s1, s2);
   }
 };
 ```
@@ -86,12 +86,12 @@ public:
 
 * T : tree에 들어갈 값
 * L : lazy에 들어갈 값
-* Merge : `pair<T, int> operator() (const pair<T, int>& a, const pair<T, int>& b)` 형식
-  * `pair<T, int>.second`는 개수
-* Update : `pair<T, int> operator() (const L& a, const pair<T, int>& b)` 형식
-  * b에 lazy한 a를 적용
-* Composition : `L operator() (const L& a, const L& b)` 형식
-  * lazy한 b에 a 합치기기
+* Merge : `T operator() (const T& a, const T& b)`
+  * non-lazy한  값끼리 합치기
+* Update : `T operator() (const L& a, const T& b)`
+  * non-lazy한 b에 lazy한 a를 적용
+* Composition : `L operator() (const L& a, const L& b)`
+  * lazy한 b에 a 합치기
 
 # 문제
 * [구간 합 구하기 2](https://boj.kr/10999)
@@ -104,5 +104,7 @@ public:
   * http://boj.kr/250ab06024954f229a38d38733ee8269
 * [XOR](https://boj.kr/14245) (14245)
   * http://boj.kr/e79c9109db6f47beaa60ea243a43ce3b
+* [가로 블록 쌓기](https://boj.kr/18407)
+  * http://boj.kr/15e191d543e7426fae5dc682a6de0134
 
 ## [Segment Tree with Lazy Propagation의 비재귀 구현](https://www.acmicpc.net/blog/view/117)
