@@ -31,7 +31,7 @@ public:
 };
 ```
 
-# 추가
+## 추가
 ```cpp
 void assign(const vector<T> &raw) {
   for (int i = 0;i < raw.size();i++) tree[i + sz] = raw[i];
@@ -49,6 +49,10 @@ T top() {
 * [구간 곱 구하기](https://boj.kr/11505)
   * http://boj.kr/4e68e526b26c4f8bb18d631ef7171b40
 * [최솟값과 최댓값](https://boj.kr/2357)
-  * http://boj.kr/a7b203814a474eb0a00c0878bd51c22e
+  * http://boj.kr/c37b406050744fc3977f495931590979
 * [연속합과 쿼리](https://boj.kr/16993)
-  * http://boj.kr/da21d05be1a64f73a695049f7a8eec7d
+  * http://boj.kr/00ae7566aa0f4f30a1c695fb2a02e287
+* [디지털 비디오 디스크(DVDs)](https://boj.kr/9345)
+  * http://boj.kr/ae8b800440314fd3a9f3715f49223f6d
+* [굉장한 학생](https://boj.kr/9345)
+  * http://boj.kr/ae8b800440314fd3a9f3715f49223f6d
