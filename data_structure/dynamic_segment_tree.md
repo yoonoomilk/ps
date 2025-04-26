@@ -1,7 +1,7 @@
 # 코드
 ```cpp
 template <typename T, typename Merge>
-class segment_tree {
+class dynamic_segment_tree {
   const int mx;
   const T raw;
   struct node {
@@ -44,11 +44,11 @@ class segment_tree {
     if (r < s || e < l) return raw;
     if (l <= s && e <= r) return tree[cur].v;
     int m = (s + e) / 2;
-    return query(tree[cur].l, s, m, l, r) + query(tree[cur].r, m + 1, e, l, r);
+    return op(query(tree[cur].l, s, m, l, r), query(tree[cur].r, m + 1, e, l, r));
   }
 
 public:
-  segment_tree(int mx, const T &raw = T()) : mx(mx), raw(raw) {
+  dynamic_segment_tree(int mx, const T &raw = T()) : mx(mx), raw(raw) {
     tree.push_back(node());
   }
 
@@ -61,3 +61,7 @@ public:
   }
 };
 ```
+
+# 문제
+* [달리기](https://boj.kr/2517)
+  * http://boj.kr/da9969f707114ffca31593e742e523a5

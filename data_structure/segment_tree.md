@@ -54,5 +54,5 @@ T top() {
   * http://boj.kr/00ae7566aa0f4f30a1c695fb2a02e287
 * [디지털 비디오 디스크(DVDs)](https://boj.kr/9345)
   * http://boj.kr/ae8b800440314fd3a9f3715f49223f6d
-* [굉장한 학생](https://boj.kr/9345)
-  * http://boj.kr/ae8b800440314fd3a9f3715f49223f6d
+* [굉장한 학생](https://boj.kr/2336)
+  * http://boj.kr/916609cff19548ae8a1dea63ebe5a1d9

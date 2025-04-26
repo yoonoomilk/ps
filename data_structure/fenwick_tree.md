@@ -25,7 +25,7 @@ public:
 };
 ```
 
-# point update range query
+## point update range query
 ```cpp
 template <typename T, typename Merge>
 class fenwick_tree {
@@ -62,6 +62,8 @@ public:
   * http://boj.kr/386958a926f54c71a27f0fac388535d9
 * [LRH 식물](https://boj.kr/2934)
   * http://boj.kr/70c7d3bab61049f09f1d166c68fa7128
+* [하늘에서 떨어지는 1, 2, ..., R-L+1개의 별](https://boj.kr/17353)
+  * http://boj.kr/caf2c870bcd047ae9a80819ad8ff9791
 
 ## point update range query
 * [구간 합 구하기](https://boj.kr/2042)

@@ -81,17 +81,17 @@ public:
 };
 ```
 
-# 의미
+## 참고
 `lazy_segment_tree<T, L, Merge, Update, Composition> seg(n, raw, lazy_raw)`
 
-* T : tree에 들어갈 값
-* L : lazy에 들어갈 값
+* T : tree에 들어갈 타입
+* L : lazy에 들어갈 타입
 * Merge : `T operator() (const T& a, const T& b)`
-  * non-lazy한  값끼리 합치기
+  * non-lazy한 값끼리 합치기
 * Update : `T operator() (const L& a, const T& b)`
   * non-lazy한 b에 lazy한 a를 적용
 * Composition : `L operator() (const L& a, const L& b)`
-  * lazy한 b에 a 합치기
+  * lazy한 b에 lazy한 a 합치기
 
 # 문제
 * [구간 합 구하기 2](https://boj.kr/10999)
