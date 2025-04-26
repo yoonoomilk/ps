@@ -25,6 +25,40 @@ public:
   }
 };
 ```
+
+## 추가
+```cpp
+// x와 xor했을 때의 최댓값
+int max(int x) {
+  trie* cur = this;
+  int tmp = 0;
+  for (int i = 30;i >= 0;i--) {
+    bool bit = x >> i & 1;
+    if (cur->arr[!bit] && cur->arr[!bit]->cnt > 0) {
+      tmp |= (1 << j);
+      cur = cur->arr[!bit];
+    } else cur = cur->arr[bit];
+  }
+  return tmp;
+}
+
+// x와 xor했을 때 k 미만인 경우의 수
+int cnt(int x, int k) {
+  int tmp = 0;
+  trie *cur = &root;
+  for(int i = 30;i >= 0;i--) {
+    bool bit = x >> i & 1;
+    if(k >> i & 1) {
+      if(cur->arr[bit]) tmp += cur->arr[bit]->cnt;
+      if(cur->arr[!bit]) cur = cur->arr[!bit];
+      else break;
+    } else if(cur->arr[bit]) cur = cur->arr[bit];
+    else break;
+  }
+  return tmp;
+}
+```
+
 # 문제
 * [xor 쿼리](https://boj.kr/30865)
   * http://boj.kr/a451f87e42d442b6b2390b1a3c2c69bd
