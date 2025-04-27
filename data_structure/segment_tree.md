@@ -43,6 +43,24 @@ T top() {
 }
 ```
 
+### 최대 구간합
+```cpp
+struct hoit {
+  int p, l, r, a;
+};
+
+struct op {
+  hoit operator() (const hoit& a, const hoit& b) const {
+    hoit tmp;
+    tmp.p = max({a.r + b.l, a.p, b.p});
+    tmp.l = max(a.l, a.a + b.l);
+    tmp.r = max(a.r + b.a, b.r);
+    tmp.a = a.a + b.a;
+    return tmp;
+  }
+};
+```
+
 # 문제
 * [구간 합 구하기](https://boj.kr/2042)
   * http://boj.kr/6b446911272241bab8c327bf135b9400
