@@ -7,16 +7,14 @@ class dynamic_segment_tree {
   struct node {
     int l, r;
     T v;
-    node() : l(-1), r(-1) {
-      v = raw;
-    }
+    node(T a) : l(-1), r(-1), v(a) {}
   };
   vector<node> tree;
   Merge op;
 
   int append() {
     int tmp = tree.size();
-    tree.push_back(node());
+    tree.push_back(node(raw));
     return tmp;
   }
 
@@ -49,7 +47,7 @@ class dynamic_segment_tree {
 
 public:
   dynamic_segment_tree(int mx, const T &raw = T()) : mx(mx), raw(raw) {
-    tree.push_back(node());
+    tree.push_back(node(raw));
   }
 
   void update(int i, const T &x) {

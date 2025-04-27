@@ -31,6 +31,3 @@ bool cross(line &a, line &b) {
   * http://boj.kr/2fbf41c2245f4bf58615256eb2e7cfb4
 * [선분 그룹](https://boj.kr/2162)
   * http://boj.kr/978059d6cdd04c85bc2fe65455333938
-
-# from
-* [template/pt_from_pii.md](../template/pt_from_pii.md)
