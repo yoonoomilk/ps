@@ -106,5 +106,3 @@ public:
   * http://boj.kr/e79c9109db6f47beaa60ea243a43ce3b
 * [가로 블록 쌓기](https://boj.kr/18407)
   * http://boj.kr/15e191d543e7426fae5dc682a6de0134
-
-## [Segment Tree with Lazy Propagation의 비재귀 구현](https://www.acmicpc.net/blog/view/117)
