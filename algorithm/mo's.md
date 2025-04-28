@@ -11,11 +11,11 @@ struct query {
 };
 
 int l = 0, r = 0;
-for (int i = 0;i < m;i++) {
-  while (q[i].l < l) add(raw[--l]);
-  while (q[i].l > l) del(raw[l++]);
-  while (q[i].r < r) del(raw[r--]);
-  while (q[i].r > r) add(raw[++r]);
+for(int i = 0;i < m;i++) {
+  while(q[i].l < l) add(raw[--l]);
+  while(q[i].l > l) del(raw[l++]);
+  while(q[i].r < r) del(raw[r--]);
+  while(q[i].r > r) add(raw[++r]);
   ans[q[i].idx] = tmp;
 }
 ```
@@ -31,3 +31,7 @@ for (int i = 0;i < m;i++) {
   * http://boj.kr/9be65825bfcf47d0aaa21e0f5e775223
 * [수열과 쿼리 6](https://boj.kr/13548)
   * http://boj.kr/2d4d89d9f2d64a5ab2ced88baa1bceba
+* [배열의 힘](https://boj.kr/8462)
+  * http://boj.kr/6eafcfeea9584beea2ace18a1a45d42f
+* [백설공주와 난쟁이](https://boj.kr/2912)
+  * http://boj.kr/99d9a9b5f84d443fbae1476c7c0f52f3

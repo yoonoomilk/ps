@@ -62,3 +62,5 @@ public:
   }
 };
 ```
+
+[블로그](https://www.acmicpc.net/blog/view/86)
