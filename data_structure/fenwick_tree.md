@@ -1,6 +1,6 @@
 # 코드 (1-based)
 
-## range update point query
+## 구간 업데이트 점 쿼리
 ```cpp
 template <typename T, typename Merge>
 class fenwick_tree {
@@ -25,7 +25,7 @@ public:
 };
 ```
 
-## point update range query
+## 점 업데이트 구간 쿼리
 ```cpp
 template <typename T, typename Merge>
 class fenwick_tree {
@@ -54,10 +54,47 @@ public:
   }
 };
 ```
+[l, r] 쿼리 함수 없는거
+```cpp
+template <typename T, typename Merge>
+class fenwick_tree {
+  const int sz;
+  const T raw;
+  vector<T> tree;
+  Merge op;
+
+public:
+  fenwick_tree(int sz, const T& raw = T()) : sz(sz), raw(raw), tree(sz + 1, raw) {}
+
+  void update(int i, const T& v) {
+    for (;i <= sz;i += i & -i) tree[i] = op(tree[i], v);
+  }
+
+  T query(int i) {
+    if (i < 1) return raw;
+    if (i > sz) i = sz;
+    T s = raw;
+    for (;i;i -= i & -i) s = op(s, tree[i]);
+    return s;
+  }
+};
+```
+
+## 추가
+범위 벗어나도 안전하게!
+```cpp
+T query(int i) {
+  if (i < 1) return raw;
+  if (i > sz) i = sz;
+  T s = raw;
+  for (;i;i -= i & -i) s = op(s, tree[i]);
+  return s;
+}
+```
 
 # 문제
 
-## range update point query
+## 구간 업데이트 점 쿼리
 * [수열과 쿼리 21](https://boj.kr/16975)
   * http://boj.kr/386958a926f54c71a27f0fac388535d9
 * [LRH 식물](https://boj.kr/2934)
@@ -65,7 +102,7 @@ public:
 * [하늘에서 떨어지는 1, 2, ..., R-L+1개의 별](https://boj.kr/17353)
   * http://boj.kr/caf2c870bcd047ae9a80819ad8ff9791
 
-## point update range query
+## 점 업데이트 구간 쿼리
 * [구간 합 구하기](https://boj.kr/2042)
   * http://boj.kr/1fbe27944c56499489838b3bc2aca0cd
 * [공장](https://boj.kr/7578)

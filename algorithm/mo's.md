@@ -20,18 +20,20 @@ for(int i = 0;i < m;i++) {
 }
 ```
 
-## [설명](https://justicehui.github.io/hard-algorithm/2019/06/17/MoAlgorithm/)
+## 설명
 
-* `tmp`는 누적(?)합
-* `add(v)`는 `tmp`에 `v`더하고, `del(v)`는 `tmp`에 `v`를 빼고
+* `tmp`는 **[l, r]** 쿼리의 값
+* `add(v)`는 `v`를 범위에 포함시켰을 때, `del(v)`는 `v`를 범위에서 제거했을 때
 
 
 # 문제
 * [수열과 쿼리 5](https://boj.kr/13547)
   * http://boj.kr/9be65825bfcf47d0aaa21e0f5e775223
 * [수열과 쿼리 6](https://boj.kr/13548)
-  * http://boj.kr/2d4d89d9f2d64a5ab2ced88baa1bceba
+  * http://boj.kr/ed8e687f70e74bb380a16f41ec74ef08
 * [배열의 힘](https://boj.kr/8462)
   * http://boj.kr/6eafcfeea9584beea2ace18a1a45d42f
 * [백설공주와 난쟁이](https://boj.kr/2912)
   * http://boj.kr/99d9a9b5f84d443fbae1476c7c0f52f3
+* [화려한 마을 3](https://boj.kr/12999)
+  * http://boj.kr/cd0ef53243224f7b945efb1b47387a11
