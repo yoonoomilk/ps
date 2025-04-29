@@ -23,11 +23,9 @@ for(int i = 0;i < m;i++) {
 O(N√Q)
 https://codeforces.com/blog/entry/61203
 ```cpp
-inline int64_t gilbertOrder(int x, int y, int pow, int rotate) {
-  if (pow == 0) {
-    return 0;
-  }
-  int hpow = 1 << (pow-1);
+inline int64_t hilbertOrder(int x, int y, int pow, int rotate) {
+  if (pow == 0) return 0;
+  int hpow = 1 << (pow - 1);
   int seg = (x < hpow) ? (
     (y < hpow) ? 0 : 3
   ) : (
@@ -37,9 +35,9 @@ inline int64_t gilbertOrder(int x, int y, int pow, int rotate) {
   const int rotateDelta[4] = {3, 0, 0, 1};
   int nx = x & (x ^ hpow), ny = y & (y ^ hpow);
   int nrot = (rotate + rotateDelta[seg]) & 3;
-  int64_t subSquareSize = int64_t(1) << (2*pow - 2);
+  int64_t subSquareSize = int64_t(1) << (2 * pow - 2);
   int64_t ans = seg * subSquareSize;
-  int64_t add = gilbertOrder(nx, ny, pow-1, nrot);
+  int64_t add = hilbertOrder(nx, ny, pow - 1, nrot);
   ans += (seg == 1 || seg == 2) ? add : (subSquareSize - add - 1);
   return ans;
 }
@@ -48,7 +46,7 @@ struct query {
   int l, r, idx;
   int64_t ord;
   void calcOrder() {
-    ord = gilbertOrder(l, r, 21, 0);
+    ord = hilbertOrder(l, r, 21, 0);
   }
   bool operator < (const query& v) const {
     return ord < v.ord;
@@ -80,4 +78,6 @@ struct query {
 * [스퀘어 게임](https://boj.kr/32277)
   * http://boj.kr/7a988a00b3a44611ae2928da5884d8bf
 * [민호의 소원](https://boj.kr/13028)
+  * http://boj.kr/b86b24a27a7a4967a90cb6fd4bb90c8d
+* [서로 다른 수와 쿼리 1](https://boj.kr/14897)
   * http://boj.kr/b86b24a27a7a4967a90cb6fd4bb90c8d
