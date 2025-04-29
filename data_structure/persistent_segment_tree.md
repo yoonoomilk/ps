@@ -1,66 +1,69 @@
-# 코드 (**not done**)
+# 코드 (오류가 있을지도?)
 ```cpp
 template <typename T, typename Merge>
-class segment_tree {
-  const int mx;
+class persistent_segment_tree {
+  const int sz;
   const T raw;
   struct node {
     int l, r;
     T v;
-    node() : l(-1), r(-1) {
-      v = raw;
-    }
+    node(const T& a) : l(-1), r(-1), v(a) {}
   };
   vector<node> tree;
-  vector<int> nth;
+  vector<int> root;
   Merge op;
 
   int append() {
-    int tmp = tree.size();
     tree.push_back(node());
-    return tmp;
+    return tree.size() - 1;
   }
 
-  void update(int cur, int s, int e, int x, const T &v) {
-    if (s == e) {
-      tree[cur].v = v;
-      return;
+  int update(int cur, int s, int e, int i, const T &v){
+    int id = append();
+    tree[id] = tree[cur];
+    if(s == e){
+      tree[id].v = v;
+      return id;
     }
-    int m = (s + e) / 2;
-    if (x <= m) {
-      if (tree[cur].l == -1) tree[cur].l = append();
-      update(tree[cur].l, s, m, x, v);
+    int m=(s+e)/2;
+    if(i <= m){
+      int old = tree[cur].l;
+      if(old == -1) old = append();
+      tree[id].l = update(old, s, m, i, v);
     } else {
-      if (tree[cur].r == -1) tree[cur].r = append();
-      update(tree[cur].r, m + 1, e, x, v);
+      int old = tree[cur].r;
+      if(old == -1) old = append();
+      tree[id].r = update(old, m+1, e, i, v);
     }
-    tree[cur].v = op(
-      tree[cur].l != -1 ? tree[tree[cur].l].v : raw,
-      tree[cur].r != -1 ? tree[tree[cur].r].v : raw
+    tree[id].v = op(
+      tree[id].l != -1 ? tree[tree[id].l].v : raw,
+      tree[id].r != -1 ? tree[tree[id].r].v : raw
     );
+    return id;
   }
 
   T query(int cur, int s, int e, int l, int r) {
-    if (cur == -1) return raw;
-    if (r < s || e < l) return raw;
+    if (cur == -1 || r < s || e < l) return raw;
     if (l <= s && e <= r) return tree[cur].v;
     int m = (s + e) / 2;
-    return query(tree[cur].l, s, m, l, r) + query(tree[cur].r, m + 1, e, l, r);
+    return op(
+      query(tree[cur].l, s, m, l, r),
+      query(tree[cur].r, m + 1, e, l, r)
+    );
   }
 
 public:
-  segment_tree(int mx, const T &raw = T()) : mx(mx), raw(raw) {
-    nth.push_back(append());
+  persistent_segment_tree(int mx, const T &raw = T()) : sz(mx + 1), raw(raw) {
+    root.push_back(append());
   }
 
-  void update(int i, const T &x) {
-    update(0, 0, mx, i, x);
+  int update(int i, const T &v, int base_ver = 0){
+    root.push_back(update(root[base_ver], 0, sz, i, v));
+    return root.size() - 1;
   }
 
-  T query(int l, int r) {
-    return query(0, 0, mx, l, r);
+  T query(int ver, int l, int r) {
+    return query(root[ver], 0, sz, l, r);
   }
 };
 ```
-
-[블로그](https://www.acmicpc.net/blog/view/86)

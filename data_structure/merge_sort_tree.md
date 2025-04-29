@@ -1,13 +1,15 @@
 # 코드
 ```cpp
-template <typename T>
+template <typename T, typename Count>
 class merge_sort_tree {
   const int sz;
   vector<vector<T>> tree;
+  Count cnt;
 
 public:
-  merge_sort_tree(const vector<T>& raw) : sz(1 << __lg(raw.size() * 2 - 1)), tree(sz * 2) {
-    for(int i = 0;i < raw.size();i++) tree[i + sz].push_back(raw[i]);
+  template <typename I>
+  merge_sort_tree(int n, I s) : sz(1 << __lg(n * 2 - 1)), tree(sz * 2) {
+    for(int i = 0;i < n;i++) tree[i + sz].push_back(s[i]);
     for(int i = sz;--i;) {
       auto &l = tree[i * 2], &r = tree[i * 2 + 1];
       tree[i].resize(l.size() + r.size());
@@ -18,36 +20,12 @@ public:
     l += sz; r += sz;
     int s = 0;
     for(;l <= r;l /= 2, r /= 2) {
-      if(l & 1) {
-        s += tree[l].end() - upper_bound(tree[l].begin(), tree[l].end(), k);
-        l++;
-      }
-      if(~r & 1) {
-        s += tree[r].end() - upper_bound(tree[r].begin(), tree[r].end(), k);
-        r--;
-      }
+      if(l & 1) s += cnt(tree[l++], k);
+      if(~r & 1) s += cnt(tree[r--], k);
     }
     return s;
   }
 };
-```
-
-## with segment_tree template
-```cpp
-template <typename T>
-struct op {
-  vector<T> operator() (const vector<T> &a, const vector<T> &b) {
-    vector<T> tmp(a.size() + b.size());
-    merge(
-      a.begin(), a.end(),
-      b.begin(), b.end(),
-      tmp.begin()
-    );
-    return tmp;
-  }
-};
-segment_tree<vector<T>, op>
-//but O(n) for query
 ```
 
 # 문제

@@ -1,8 +1,8 @@
 # 코드
+O((N+Q)√N)
 ```cpp
 int sz = sqrt(n);
 
-// O((N+Q)√N)
 struct query {
   int l, r, idx;
   bool operator < (const query& v) const {
@@ -11,7 +11,7 @@ struct query {
   }
 };
 
-int l = 0, r = 0;
+int l = q[0].l, r = l-1;
 for(int i = 0;i < m;i++) {
   while(q[i].l < l) add(raw[--l]);
   while(q[i].l > l) del(raw[l++]);
@@ -20,8 +20,7 @@ for(int i = 0;i < m;i++) {
   ans[q[i].idx] = tmp;
 }
 ```
-O(N√Q)
-https://codeforces.com/blog/entry/61203
+O(N√Q) [An alternative sorting order for Mo's algorithm](https://codeforces.com/blog/entry/61203)
 ```cpp
 inline int64_t hilbertOrder(int x, int y, int pow, int rotate) {
   if (pow == 0) return 0;

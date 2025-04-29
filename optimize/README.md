@@ -6,7 +6,7 @@
 #pragma GCC target("avx,avx2")
 ```
 
-# short fast IO
+# short & fast IO
 
 ## mmap fast input
 ```cpp
