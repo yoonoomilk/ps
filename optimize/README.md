@@ -30,8 +30,13 @@ auto readInt = [&]() {
   for(;c & 16;c = *rp++) tmp = tmp * 10 + (c & 15);
   return flag ? -tmp : tmp;
 };
+```
 
-char wbuf[1 << 16];
+## fast output
+```cpp
+#include <unistd.h>
+
+char wbuf[1 << 18];
 int wp = 0;
 
 auto getSz = [](ll a) {
@@ -42,7 +47,7 @@ auto getSz = [](ll a) {
 
 auto writeInt = [&](ll a) {
   int sz = getSz(a);
-  if(wp + sz + 1 > (1 << 16)) write(1, wbuf, wp), wp = 0;
+  if(wp + sz + 1 > (1 << 18)) write(1, wbuf, wp), wp = 0;
   for(int i = sz;i--;a /= 10) wbuf[wp + i] = a % 10 | 48;
   wp += sz;
 };
