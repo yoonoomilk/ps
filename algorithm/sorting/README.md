@@ -1,10 +1,7 @@
 # 종류
 * [radix sort](#radix-sort)
-  * [수 정렬하기 2](http://boj.kr/2628384ad9d94edfa59cdff3a782d9a3)
-    * 204ms
+  * [204ms](http://boj.kr/2628384ad9d94edfa59cdff3a782d9a3)
 * merge sort
-
-
 
 # 코드
 

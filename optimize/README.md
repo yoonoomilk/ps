@@ -39,13 +39,13 @@ auto readInt = [&]() {
 char wbuf[1 << 18];
 int wp = 0;
 
-auto getSz = [](ll a) {
+auto getSz = [](int a) {
   int tmp = 1;
   while(a /= 10) tmp++;
   return tmp;
 };
 
-auto writeInt = [&](ll a) {
+auto writeInt = [&](int a) {
   int sz = getSz(a);
   if(wp + sz + 1 > (1 << 18)) write(1, wbuf, wp), wp = 0;
   for(int i = sz;i--;a /= 10) wbuf[wp + i] = a % 10 | 48;

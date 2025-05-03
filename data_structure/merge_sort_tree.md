@@ -16,6 +16,7 @@ public:
       merge(l.begin(), l.end(), r.begin(), r.end(), tree[i].begin());
     }
   }
+
   int query(int l, int r, const T& k) {
     l += sz; r += sz;
     int s = 0;
