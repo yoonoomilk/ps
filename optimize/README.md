@@ -1,4 +1,4 @@
-# header
+## header
 ```cpp
 #pragma GCC optimize("O3")
 #pragma GCC optimize("Ofast")
@@ -6,9 +6,9 @@
 #pragma GCC target("avx,avx2")
 ```
 
-# short & fast IO
+## short & fast IO
 
-## mmap fast input
+### mmap fast input
 ```cpp
 #include <sys/stat.h>
 #include <sys/mman.h>
@@ -32,23 +32,43 @@ auto readInt = [&]() {
 };
 ```
 
-## fast output
+### fast output
 ```cpp
 #include <unistd.h>
 
 char wbuf[1 << 18];
 int wp = 0;
 
-auto getSz = [](int a) {
+auto getSz = [](int n) {
   int tmp = 1;
-  while(a /= 10) tmp++;
+  while(n /= 10) tmp++;
   return tmp;
 };
 
-auto writeInt = [&](int a) {
-  int sz = getSz(a);
-  if(wp + sz + 1 > (1 << 18)) write(1, wbuf, wp), wp = 0;
-  for(int i = sz;i--;a /= 10) wbuf[wp + i] = a % 10 | 48;
+auto writeInt = [&](int n) {
+  int sz = getSz(n);
+  if(wp + sz + 2 > (1 << 19)) write(1, wbuf, wp), wp = 0;
+  if(n < 0) wbuf[wp++] = '-', n = -n;
+  for(int i = sz;i--;n /= 10) wbuf[wp + i] = n % 10 | 48;
   wp += sz;
+  wbuf[wp++] = ' ';
 };
+```
+
+## fast IO
+```cpp
+int getSz(int n) {
+  int tmp = 1;
+  while(n /= 10) tmp++;
+  return tmp;
+}
+
+void writeInt(int n) {
+  int sz = getSz(n);
+  if(wp + sz + 2 > (1 << 19)) write(1, wbuf, wp), wp = 0;
+  if(n < 0) wbuf[wp++] = '-', n = -n;
+  for(int i = sz;i--;n /= 10) wbuf[wp + i] = n % 10 | 48;
+  wp += sz;
+  wbuf[wp++] = ' ';
+}
 ```
