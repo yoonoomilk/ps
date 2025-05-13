@@ -1,5 +1,3 @@
-# 코드
-```cpp
 template <typename T, typename Merge>
 class dynamic_segment_tree {
   const int sz;
@@ -59,8 +57,3 @@ public:
     return query(0, 0, sz - 1, l, r);
   }
 };
-```
-
-# 문제
-* [달리기](https://boj.kr/2517)
-  * http://boj.kr/da9969f707114ffca31593e742e523a5

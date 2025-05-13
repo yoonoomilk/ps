@@ -1,5 +1,3 @@
-# 코드
-```cpp
 template <typename T, typename Count>
 class merge_sort_tree {
   const int sz;
@@ -27,14 +25,3 @@ public:
     return s;
   }
 };
-```
-
-# 문제
-* [수열과 쿼리 1](https://boj.kr/13537)
-  * http://boj.kr/dcad82fba6374b9dac65cd3846be3d15
-* [수열과 쿼리 3](https://boj.kr/13544)
-  * http://boj.kr/b238a74b209a406486a82180f2793b47
-* [K번째 수](https://boj.kr/7469)
-  * http://boj.kr/2c605b1d357e4fcc9adac0e2b056a212
-* [서로 다른 수와 쿼리 2](https://boj.kr/14898)
-  * http://boj.kr/6939fd8112fa469a82e4e86ffc49029f

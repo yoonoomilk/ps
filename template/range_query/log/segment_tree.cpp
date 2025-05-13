@@ -1,4 +1,3 @@
-```cpp
 template <typename T, typename Merge>
 class segment_tree {
   const int sz;
@@ -28,10 +27,8 @@ public:
     return op(s1, s2);
   }
 };
-```
 
-## 추가
-```cpp
+// 추가
 void assign(const vector<T> &raw) {
   for (int i = 0;i < raw.size();i++) tree[i + sz] = raw[i];
   for (int i = sz;--i;) tree[i] = op(tree[i * 2], op[i * 2 + 1]);
@@ -40,10 +37,8 @@ void assign(const vector<T> &raw) {
 T top() {
   return tree[1];
 }
-```
 
-### 최대 구간합
-```cpp
+// 최대 구간합
 struct hoit {
   int p, l, r, a;
 };
@@ -58,4 +53,3 @@ struct op {
     return tmp;
   }
 };
-```

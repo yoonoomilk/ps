@@ -1,10 +1,10 @@
-# constants
+## constants
 ```cpp
 const double PI = acos(-1);
 ```
 
-# iostream
-## custom iostream
+## iostream
+### custom iostream
 ```cpp
 istream& operator >> (istream &cin, T &v) {
   cin >> T;
@@ -17,7 +17,7 @@ ostream& operator << (ostream &cout, T &v) {
 }
 ```
 
-## cout precision
+### cout precision
 ```cpp
 cout << fixed;
 

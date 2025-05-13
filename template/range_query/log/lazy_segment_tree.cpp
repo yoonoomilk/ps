@@ -1,5 +1,3 @@
-# 코드
-```cpp
 template <typename T, typename L, typename Merge, typename Update, typename Composition>
 class lazy_segment_tree {
   const int lg, sz;
@@ -79,9 +77,8 @@ public:
     return op(s1, s2);
   }
 };
-```
 
-## 참고
+/*
 `lazy_segment_tree<T, L, Merge, Update, Composition> seg(n, raw, lazy_raw)`
 
 * T : tree에 들어갈 타입
@@ -92,17 +89,4 @@ public:
   * non-lazy한 b에 lazy한 a를 적용
 * Composition : `L operator() (const L& a, const L& b)`
   * lazy한 b에 lazy한 a 합치기
-
-# 문제
-* [구간 합 구하기 2](https://boj.kr/10999)
-  * http://boj.kr/e42766420f364af689b5137d756f3241
-* [수열과 쿼리 21](https://boj.kr/16975)
-  * http://boj.kr/423b3aeec32d4adb9a22d9d5a9afc9ce
-* [스위치](https://boj.kr/1395)
-  * http://boj.kr/68d225afeb8a430db1131870685452d4
-* [XOR](https://boj.kr/12844) (12844)
-  * http://boj.kr/250ab06024954f229a38d38733ee8269
-* [XOR](https://boj.kr/14245) (14245)
-  * http://boj.kr/e79c9109db6f47beaa60ea243a43ce3b
-* [가로 블록 쌓기](https://boj.kr/18407)
-  * http://boj.kr/15e191d543e7426fae5dc682a6de0134
+*/

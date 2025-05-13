@@ -1,8 +1,7 @@
-# 코드 (MLE 이슈 + TLE 이슈 = 쓰레기)
-```cpp
 #include <ext/pb_ds/assoc_container.hpp>
 using namespace __gnu_pbds;
 
+// MLE 이슈 + TLE 이슈 = 쓰레기
 template <typename T, typename Merge>
 class dynamic_segment_tree {
   const int sz = 1;
@@ -34,4 +33,3 @@ public:
     return op(s1, s2);
   }
 };
-```

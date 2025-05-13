@@ -1,5 +1,4 @@
-# 코드 (오류가 있을지도?)
-```cpp
+// 오류가 있을지도?
 template <typename T, typename Merge>
 class persistent_segment_tree {
   const int sz;
@@ -66,4 +65,3 @@ public:
     return query(root[ver], 0, sz, l, r);
   }
 };
-```
