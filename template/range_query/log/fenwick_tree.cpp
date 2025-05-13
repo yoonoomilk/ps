@@ -18,7 +18,7 @@ public:
 
   T query(int i) {
     T s = raw;
-    for (;i;i -= i & -i) s += tree[i];
+    for(;i;i -= i & -i) s += tree[i];
     return s;
   }
 };

@@ -14,9 +14,9 @@ public:
   void insert(int x, int delta) {
     trie* cur = this;
     cur->cnt += delta;
-    for (int i = 30;i >= 0;i--) {
+    for(int i = 30;i >= 0;i--) {
       bool bit = (x >> i) & 1;
-      if (!cur->arr[bit]) cur->arr[bit] = new trie();
+      if(!cur->arr[bit]) cur->arr[bit] = new trie();
       cur = cur->arr[bit];
       cur->cnt += delta;
     }
@@ -27,9 +27,9 @@ public:
 int max(int x) {
   int tmp = 0;
   trie* cur = &root;
-  for (int i = 30;i >= 0;i--) {
+  for(int i = 30;i >= 0;i--) {
     bool bit = x >> i & 1;
-    if (cur->arr[!bit] && cur->arr[!bit]->cnt > 0) {
+    if(cur->arr[!bit] && cur->arr[!bit]->cnt > 0) {
       tmp |= (1 << j);
       cur = cur->arr[!bit];
     } else cur = cur->arr[bit];

@@ -16,16 +16,16 @@ class dynamic_segment_tree {
   }
 
   void update(int cur, int s, int e, int i, const T &v) {
-    if (s == e) {
+    if(s == e) {
       tree[cur].v = v;
       return;
     }
     int m = (s + e) / 2;
-    if (i <= m) {
-      if (tree[cur].l == -1) tree[cur].l = append();
+    if(i <= m) {
+      if(tree[cur].l == -1) tree[cur].l = append();
       update(tree[cur].l, s, m, i, v);
     } else {
-      if (tree[cur].r == -1) tree[cur].r = append();
+      if(tree[cur].r == -1) tree[cur].r = append();
       update(tree[cur].r, m + 1, e, i, v);
     }
     tree[cur].v = op(
@@ -35,8 +35,8 @@ class dynamic_segment_tree {
   }
 
   T query(int cur, int s, int e, int l, int r) {
-    if (cur == -1 || r < s || e < l) return raw;
-    if (l <= s && e <= r) return tree[cur].v;
+    if(cur == -1 || r < s || e < l) return raw;
+    if(l <= s && e <= r) return tree[cur].v;
     int m = (s + e) / 2;
     return op(
       query(tree[cur].l, s, m, l, r),

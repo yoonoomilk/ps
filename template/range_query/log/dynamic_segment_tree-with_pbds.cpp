@@ -20,15 +20,15 @@ public:
   void update(int a, T x) {
     a += sz;
     tree[a] = x;
-    while (a /= 2) tree[a] = op(get(a * 2), get(a * 2 + 1));
+    while(a /= 2) tree[a] = op(get(a * 2), get(a * 2 + 1));
   }
 
   T query(int l, int r) {
     l += sz; r += sz;
     T s1 = raw, s2 = raw;
-    for (;l <= r;l /= 2, r /= 2) {
-      if (l & 1) s1 = op(s1, get(l++));
-      if (~r & 1) s2 = op(get(r--), s2);
+    for(;l <= r;l /= 2, r /= 2) {
+      if(l & 1) s1 = op(s1, get(l++));
+      if(~r & 1) s2 = op(get(r--), s2);
     }
     return op(s1, s2);
   }

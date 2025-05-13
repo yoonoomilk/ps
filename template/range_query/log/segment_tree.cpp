@@ -11,7 +11,7 @@ public:
   void update(int i, const T &v) {
     i += sz;
     tree[i] = v;
-    while (i /= 2) tree[i] = op(tree[i * 2], tree[i * 2 + 1]);
+    while(i /= 2) tree[i] = op(tree[i * 2], tree[i * 2 + 1]);
   }
 
   T query(int i) {
@@ -20,9 +20,9 @@ public:
   T query(int l, int r) {
     l += sz; r += sz;
     T s1 = raw, s2 = raw;
-    for (;l <= r;l /= 2, r /= 2) {
-      if (l & 1) s1 = op(s1, tree[l++]);
-      if (~r & 1) s2 = op(tree[r--], s2);
+    for(;l <= r;l /= 2, r /= 2) {
+      if(l & 1) s1 = op(s1, tree[l++]);
+      if(~r & 1) s2 = op(tree[r--], s2);
     }
     return op(s1, s2);
   }
@@ -30,8 +30,8 @@ public:
 
 // 추가
 void assign(const vector<T> &raw) {
-  for (int i = 0;i < raw.size();i++) tree[i + sz] = raw[i];
-  for (int i = sz;--i;) tree[i] = op(tree[i * 2], op[i * 2 + 1]);
+  for(int i = 0;i < raw.size();i++) tree[i + sz] = raw[i];
+  for(int i = sz;--i;) tree[i] = op(tree[i * 2], op[i * 2 + 1]);
 }
 
 T top() {

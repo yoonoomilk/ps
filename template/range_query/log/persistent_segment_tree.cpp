@@ -42,8 +42,8 @@ class persistent_segment_tree {
   }
 
   T query(int cur, int s, int e, int l, int r) {
-    if (cur == -1 || r < s || e < l) return raw;
-    if (l <= s && e <= r) return tree[cur].v;
+    if(cur == -1 || r < s || e < l) return raw;
+    if(l <= s && e <= r) return tree[cur].v;
     int m = (s + e) / 2;
     return op(
       query(tree[cur].l, s, m, l, r),

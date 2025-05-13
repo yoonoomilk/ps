@@ -11,7 +11,7 @@ class lazy_segment_tree {
 
   void apply(int i, const L &v) {
     tree[i] = upd(v, tree[i]);
-    if (i < sz) lazy[i] = comp(v, lazy[i]);
+    if(i < sz) lazy[i] = comp(v, lazy[i]);
   }
 
   void push(int i) {
@@ -33,46 +33,46 @@ public:
   }
 
   void init() {
-    for (int i = sz;--i;) pull(i);
+    for(int i = sz;--i;) pull(i);
   }
 
   void update(int i, const L &v) {
     i += sz;
-    for (int j = lg;j;j--) push(i >> j);
+    for(int j = lg;j;j--) push(i >> j);
     apply(i, v);
-    for (int j = 1;j <= lg;j++) pull(i >> j);
+    for(int j = 1;j <= lg;j++) pull(i >> j);
   }
   void update(int l, int r, const L &v) {
     l += sz; r += sz;
-    for (int i = lg;i;i--) {
-      if (l >> i << i != l) push(l >> i);
-      if (r + 1 >> i << i != r + 1) push(r >> i);
+    for(int i = lg;i;i--) {
+      if(l >> i << i != l) push(l >> i);
+      if(r + 1 >> i << i != r + 1) push(r >> i);
     }
-    for (int s = l, e = r;s <= e;s /= 2, e /= 2) {
-      if (s & 1) apply(s++, v);
-      if (~e & 1) apply(e--, v);
+    for(int s = l, e = r;s <= e;s /= 2, e /= 2) {
+      if(s & 1) apply(s++, v);
+      if(~e & 1) apply(e--, v);
     }
-    for (int i = 1;i <= lg;i++) {
-      if (l >> i << i != l) pull(l >> i);
-      if (r + 1 >> i << i != r + 1) pull(r >> i);
+    for(int i = 1;i <= lg;i++) {
+      if(l >> i << i != l) pull(l >> i);
+      if(r + 1 >> i << i != r + 1) pull(r >> i);
     }
   }
 
   T query(int i) {
     i += sz;
-    for (int j = lg;j;j--) push(i >> j);
+    for(int j = lg;j;j--) push(i >> j);
     return tree[i];
   }
   T query(int l, int r) {
     l += sz; r += sz;
     T s1 = raw, s2 = raw;
-    for (int i = lg;i;i--) {
-      if (l >> i << i != l) push(l >> i);
-      if (r + 1 >> i << i != r + 1) push(r >> i);
+    for(int i = lg;i;i--) {
+      if(l >> i << i != l) push(l >> i);
+      if(r + 1 >> i << i != r + 1) push(r >> i);
     }
-    for (;l <= r;l /= 2, r /= 2) {
-      if (l & 1) s1 = op(s1, tree[l++]);
-      if (~r & 1) s2 = op(tree[r--], s2);
+    for(;l <= r;l /= 2, r /= 2) {
+      if(l & 1) s1 = op(s1, tree[l++]);
+      if(~r & 1) s2 = op(tree[r--], s2);
     }
     return op(s1, s2);
   }

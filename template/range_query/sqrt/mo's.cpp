@@ -20,7 +20,7 @@ for(int i = 0;i < m;i++) {
 
 // O(N√Q) [An alternative sorting order for Mo's algorithm](https://codeforces.com/blog/entry/61203)
 inline int64_t hilbertOrder(int x, int y, int pow, int rotate) {
-  if (pow == 0) return 0;
+  if(pow == 0) return 0;
   int hpow = 1 << (pow - 1);
   int seg = (x < hpow) ? (
     (y < hpow) ? 0 : 3

@@ -65,7 +65,7 @@ int getSz(int n) {
 
 void writeInt(int n) {
   int sz = getSz(n);
-  if(wp + sz + 1 > (1 << 19)) write(1, wbuf, wp), wp = 0;
+  if(wp + sz + 1 > (1 << 18)) write(1, wbuf, wp), wp = 0;
   if(n < 0) wbuf[wp++] = '-', n = -n;
   for(int i = sz;i--;n /= 10) wbuf[wp + i] = n % 10 | 48;
   wp += sz;
