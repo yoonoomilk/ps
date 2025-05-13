@@ -18,10 +18,6 @@ public:
     return pq.size() - del.size();
   }
 
-  bool empty() {
-    return pq.size() == del.size();
-  }
-
   void insert(const T& v) {
     pq.push(v);
     organize();
@@ -43,4 +39,3 @@ public:
 
 # 문제
 * [이중 우선순위 큐](https://boj.kr/7662)
-  * http://boj.kr/d81f035dfcc64454a74093e744f794e2

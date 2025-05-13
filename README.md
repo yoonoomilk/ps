@@ -1,4 +1,4 @@
 # ps
-c++ ps template + examples
+c++ ps template
 
-`,` 오버로딩하기
+`> <` 오버로딩하기

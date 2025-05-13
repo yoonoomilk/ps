@@ -1,11 +1,11 @@
-# 종류
+## 종류
 * [radix sort](#radix-sort)
   * [204ms](http://boj.kr/2628384ad9d94edfa59cdff3a782d9a3)
 * merge sort
 
-# 코드
+## 코드
 
-## radix sort
+### radix sort
 ```cpp
 void radix_sort(vector<int>& v) {
   for(int t = 0;t < 32;t += 8) {

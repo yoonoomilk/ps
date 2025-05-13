@@ -1,5 +1,3 @@
-# 코드
-```cpp
 const double PI = acos(-1);
 using base = complex<double>;
 
@@ -42,10 +40,3 @@ vector<base> mul(vector<base> a, vector<base> b) {
 
   return a;
 }
-```
-
-# 문제
-* [큰 수 곱셈 (2)](https://boj.kr/15576)
-  * http://boj.kr/
-* [큰 수 곱셈 (3)](https://boj.kr/22289)
-  * http://boj.kr/
