@@ -14,8 +14,7 @@ static inline int readInt() {
 
 static inline int readInt() {
   int tmp = 0;
-  char c = *rp++;
-  bool flag = 0;
+  char c = *rp++, flag = 0;
   if(c == '-') flag = 1, c = *rp++;
   for(;c & 16;c = *rp++) tmp = tmp * 10 + (c & 15);
   return flag ? -tmp : tmp;
@@ -42,8 +41,7 @@ static inline int readInt() {
 
 static inline int readInt() {
   int tmp = 0;
-  char c = rc();
-  bool flag = 0;
+  char c = rc(), flag = 0;
   if(c == '-') flag = 1, c = rc();
   for(;c & 16;c = rc()) tmp = tmp * 10 + (c & 15);
   return flag ? -tmp : tmp;
@@ -70,5 +68,20 @@ static inline void writeInt(int n) {
   for(int i = sz;i--;n /= 10) wbuf[wp + i] = n % 10 | 48;
   wp += sz;
   wbuf[wp++] = ' ';
+}
+```
+
+## 156/0
+```cpp
+#define REREAD if (__builtin_expect(rp == len, 0)) len = read(0, buf, sizeof buf), rp = 0
+int main;
+int __libc_start_main() {
+  char buf[1 << 15];
+  int rp = 0, len = read(0, buf, sizeof buf);
+  for(;;rp++) {
+    REREAD;
+    if(buf[rp] < '0' || '9' < buf[rp]) break;
+    cur = cur * 10 + (buf[rp] & 15);
+  }
 }
 ```
