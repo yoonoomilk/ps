@@ -64,6 +64,14 @@ static inline int getSz(int n) {
 static inline void writeInt(int n) {
   int sz = getSz(n);
   if(wp + sz + 1 > (1 << 18)) write(1, wbuf, wp), wp = 0;
+  for(int i = sz;i--;n /= 10) wbuf[wp + i] = n % 10 | 48;
+  wp += sz;
+  wbuf[wp++] = ' ';
+}
+
+static inline void writeInt(int n) {
+  int sz = getSz(n);
+  if(wp + sz + 2 > (1 << 18)) write(1, wbuf, wp), wp = 0;
   if(n < 0) wbuf[wp++] = '-', n = -n;
   for(int i = sz;i--;n /= 10) wbuf[wp + i] = n % 10 | 48;
   wp += sz;
