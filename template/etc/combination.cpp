@@ -1,6 +1,7 @@
+template <int sz>
 class combination {
-  const int sz, MOD = 1e9 + 7;
-  vector<int> fact, inv;
+  const int MOD = 1e9 + 7;
+  int fact[sz + 1], inv[sz + 1];
 
   int _pow(ll n, int exp) {
     ll tmp = 1;
@@ -13,7 +14,7 @@ class combination {
   }
 
 public:
-  combination(int sz) : sz(sz), fact(sz + 1), inv(sz + 1) {
+  constexpr combination() {
     fact[0] = 1;
     for(int i = 1;i <= sz;i++) fact[i] = ((ll)fact[i - 1] * i) % MOD;
     inv[sz] = _pow(fact[sz], MOD - 2);
