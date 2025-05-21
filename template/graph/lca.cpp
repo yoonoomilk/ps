@@ -10,6 +10,17 @@ void dfs(int x, int p) {
 
 int lca(int a, int b) {
   if(dep[a] < dep[b]) swap(a, b);
+  while(dep[a] != dep[b]) a = pa[a];
+  while(a != b) {
+    a = pa[a];
+    b = pa[b];
+  }
+  return a;
+}
+
+// binary lifting
+int lca(int a, int b) {
+  if(dep[a] < dep[b]) swap(a, b);
   for(int i = 0, d = dep[a] - dep[b];i < 17;i++) {
     if(d & (1 << i)) a = pa[a][i];
   }
@@ -22,4 +33,5 @@ int lca(int a, int b) {
 }
 
 dfs(1, 0);
+
 for(int i = 1;i < 17;i++) for(int j = 1;j <= n;j++) pa[j][i] = pa[pa[j][i - 1]][i - 1];
