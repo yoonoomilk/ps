@@ -6,8 +6,8 @@ class merge_sort_tree {
 
 public:
   template <typename I>
-  merge_sort_tree(int n, I s) : sz(1 << __lg(n * 2 - 1)), tree(sz * 2) {
-    for(int i = 0;i < n;i++) tree[i + sz].push_back(s[i]);
+  merge_sort_tree(I s, I e) : sz(1 << __lg(distance(s, e) * 2 - 1)), tree(sz * 2) {
+    for(int i = 0;s + i != e;i++) tree[i + sz].push_back(s[i]);
     for(int i = sz;--i;) {
       auto &l = tree[i * 2], &r = tree[i * 2 + 1];
       tree[i].resize(l.size() + r.size());
