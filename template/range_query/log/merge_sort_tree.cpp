@@ -25,3 +25,10 @@ public:
     return s;
   }
 };
+
+// 큰 원소의 개수
+struct op {
+  int operator() (const vector<int>& v, const int& k) {
+    return v.end() - upper_bound(v.begin(), v.end(), k);
+  }
+};
