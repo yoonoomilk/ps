@@ -8,7 +8,7 @@ public:
 
   template <typename I>
   manacher(I s, I e) : sz(distance(s, e) * 2 + 1), arr(sz), str(sz, '\0') {
-    for(int i = 1;s != e;s++, i += 2) str[i] = *s;
+    for(int i = 1;s != e;i += 2) str[i] = *s++;
     int m = 0, r = 0;
     for(int i = 0;i < sz;i++) {
       int l = m * 2 - i;
