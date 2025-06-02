@@ -15,7 +15,7 @@ class dynamic_segment_tree {
     return tree.size() - 1;
   }
 
-  void update(int cur, int s, int e, int i, const T &v) {
+  void update(int cur, int s, int e, int i, const T& v) {
     if(s == e) {
       tree[cur].v = v;
       return;
@@ -45,11 +45,11 @@ class dynamic_segment_tree {
   }
 
 public:
-  dynamic_segment_tree(int mx, const T &raw = T()) : sz(mx + 1), raw(raw) {
+  dynamic_segment_tree(int mx, const T& raw = T()) : sz(mx + 1), raw(raw) {
     append();
   }
 
-  void update(int i, const T &v) {
+  void update(int i, const T& v) {
     update(0, 0, sz - 1, i, v);
   }
 

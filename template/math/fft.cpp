@@ -1,7 +1,7 @@
 const double PI = acos(-1);
 using base = complex<double>;
 
-void fft(vector<base> &v, bool inv) {
+void fft(vector<base>& v, bool inv) {
   for(int i = 1, j = 0;i < v.size();i++) {
     int bit = v.size() / 2;
     while(j >= bit) {
@@ -25,7 +25,7 @@ void fft(vector<base> &v, bool inv) {
     }
   }
 
-  if(inv) for(base &i : v) i /= v.size();
+  if(inv) for(base& i : v) i /= v.size();
 }
 
 vector<base> mul(vector<base> a, vector<base> b) {

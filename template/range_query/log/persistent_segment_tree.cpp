@@ -17,7 +17,7 @@ class persistent_segment_tree {
     return tree.size() - 1;
   }
 
-  int update(int cur, int s, int e, int i, const T &v){
+  int update(int cur, int s, int e, int i, const T& v){
     int id = append();
     tree[id] = tree[cur];
     if(s == e){
@@ -52,11 +52,11 @@ class persistent_segment_tree {
   }
 
 public:
-  persistent_segment_tree(int mx, const T &raw = T()) : sz(mx + 1), raw(raw) {
+  persistent_segment_tree(int mx, const T& raw = T()) : sz(mx + 1), raw(raw) {
     root.push_back(append());
   }
 
-  int update(int i, const T &v, int base_ver = 0){
+  int update(int i, const T& v, int base_ver = 0){
     root.push_back(update(root[base_ver], 0, sz, i, v));
     return root.size() - 1;
   }

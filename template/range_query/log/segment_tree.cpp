@@ -6,9 +6,9 @@ class segment_tree {
   Merge op;
 
 public:
-  segment_tree(int n, const T &raw = T()) : sz(1 << __lg(n * 2 - 1)), raw(raw), tree(sz * 2, raw) {}
+  segment_tree(int n, const T& raw = T()) : sz(1 << __lg(n * 2 - 1)), raw(raw), tree(sz * 2, raw) {}
 
-  void update(int i, const T &v) {
+  void update(int i, const T& v) {
     i += sz;
     tree[i] = v;
     while(i /= 2) tree[i] = op(tree[i * 2], tree[i * 2 + 1]);
@@ -29,7 +29,7 @@ public:
 };
 
 // 추가
-void assign(const vector<T> &raw) {
+void assign(const vector<T>& raw) {
   for(int i = 0;i < raw.size();i++) tree[i + sz] = raw[i];
   for(int i = sz;--i;) tree[i] = op(tree[i * 2], op[i * 2 + 1]);
 }

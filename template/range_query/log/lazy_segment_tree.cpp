@@ -9,7 +9,7 @@ class lazy_segment_tree {
   Update upd;
   Composition comp;
 
-  void apply(int i, const L &v) {
+  void apply(int i, const L& v) {
     tree[i] = upd(v, tree[i]);
     if(i < sz) lazy[i] = comp(v, lazy[i]);
   }
@@ -25,10 +25,10 @@ class lazy_segment_tree {
   }
 
 public:
-  lazy_segment_tree(int n, const T &raw = T(), const L &lazy_raw = L())
+  lazy_segment_tree(int n, const T& raw = T(), const L& lazy_raw = L())
   : lg(__lg(n * 2 - 1)), sz(1 << lg), raw(raw), lazy_raw(lazy_raw), tree(sz * 2, raw), lazy(sz * 2, lazy_raw) {}
 
-  void set(int i, const T &v) {
+  void set(int i, const T& v) {
     tree[i + sz] = v;
   }
 
@@ -36,13 +36,13 @@ public:
     for(int i = sz;--i;) pull(i);
   }
 
-  void update(int i, const L &v) {
+  void update(int i, const L& v) {
     i += sz;
     for(int j = lg;j;j--) push(i >> j);
     apply(i, v);
     for(int j = 1;j <= lg;j++) pull(i >> j);
   }
-  void update(int l, int r, const L &v) {
+  void update(int l, int r, const L& v) {
     l += sz; r += sz;
     for(int i = lg;i;i--) {
       if(l >> i << i != l) push(l >> i);
