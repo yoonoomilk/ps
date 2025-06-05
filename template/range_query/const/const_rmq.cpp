@@ -13,7 +13,7 @@ public:
 
   T query(int l, int r) {
     int d = __lg(r - l + 1);
-    int a = arr[d][l], b = arr[d][r - (1 << d) + 1];
+    T a = arr[d][l], b = arr[d][r - (1 << d) + 1];
     return op(a, b);
   }
 };
