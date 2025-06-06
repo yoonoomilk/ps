@@ -17,7 +17,7 @@ while(1) {
       if(i == e) break;
     }
   }
-  if(pre[e] == -1) break;
+  if(bef[e] == -1) break;
   int tmp = 1e9;
   for(int i = e;i != s;i = bef[i]) tmp = min(tmp, cap[bef[i]][i] - flow[bef[i]][i]);
   for(int i = e;i != s;i = bef[i]) {
