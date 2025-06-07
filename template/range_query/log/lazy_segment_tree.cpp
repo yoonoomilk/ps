@@ -58,12 +58,12 @@ public:
     }
   }
 
-  T query(int i) {
+  T operator() (int i) {
     i += sz;
     for(int j = lg;j;j--) push(i >> j);
     return tree[i];
   }
-  T query(int l, int r) {
+  T operator() (int l, int r) {
     l += sz; r += sz;
     T s1 = raw, s2 = raw;
     for(int i = lg;i;i--) {

@@ -11,7 +11,7 @@ public:
     for(int i = 1;i <= lg;i++) for(int j = 0;j + (1 << i - 1) < sz;j++) arr[i][j] = op(arr[i - 1][j], arr[i - 1][j + (1 << i - 1)]);
   }
 
-  T query(int l, int r) {
+  T operator() (int l, int r) {
     int d = __lg(r - l + 1);
     T a = arr[d][l], b = arr[d][r - (1 << d) + 1];
     return op(a, b);

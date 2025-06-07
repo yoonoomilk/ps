@@ -16,7 +16,7 @@ public:
     for(r++;r <= sz;r += r & -r) tree[r] -= v;
   }
 
-  T query(int i) {
+  T operator() (int i) {
     T s = raw;
     for(;i;i -= i & -i) s += tree[i];
     return s;
@@ -37,12 +37,12 @@ public:
     for(;i <= sz;i += i & -i) tree[i] += v;
   }
 
-  T query(int i) {
+  T operator() (int i) {
     T s = raw;
     for(;i;i -= i & -i) s += tree[i];
     return s;
   }
-  T query(int l, int r) {
-    return query(r) - query(l - 1);
+  T operator() (int l, int r) {
+    return (*this)(r) - (*this)(l - 1);
   }
 };

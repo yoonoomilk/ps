@@ -15,7 +15,7 @@ public:
     }
   }
 
-  int query(int l, int r, const T& k) {
+  int operator() (int l, int r, const T& k) {
     l += sz; r += sz;
     int s = 0;
     for(;l <= r;l /= 2, r /= 2) {

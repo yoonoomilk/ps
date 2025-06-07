@@ -14,10 +14,10 @@ public:
     while(i /= 2) tree[i] = op(tree[i * 2], tree[i * 2 + 1]);
   }
 
-  T query(int i) {
+  T operator() (int i) {
     return tree[i + sz];
   }
-  T query(int l, int r) {
+  T operator() (int l, int r) {
     l += sz; r += sz;
     T s1 = raw, s2 = raw;
     for(;l <= r;l /= 2, r /= 2) {
