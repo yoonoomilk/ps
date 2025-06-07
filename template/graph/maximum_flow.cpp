@@ -11,7 +11,8 @@ public:
     edges[b].push_back(a);
   }
 
-  int query(int s, int e) {
+  int query(int s, int e, int back = -1) {
+    if(back == -1) back = s;
     int ret = 0;
     while(1) {
       vector<int> bef(sz, -1);
@@ -27,8 +28,8 @@ public:
       }
       if(bef[e] == -1) break;
       int tmp = 1e9;
-      for(int i = e;i != s;i = bef[i]) tmp = min(tmp, cap[bef[i]][i] - flow[bef[i]][i]);
-      for(int i = e;i != s;i = bef[i]) {
+      for(int i = e;i != back;i = bef[i]) tmp = min(tmp, cap[bef[i]][i] - flow[bef[i]][i]);
+      for(int i = e;i != back;i = bef[i]) {
         flow[bef[i]][i] += tmp;
         flow[i][bef[i]] -= tmp;
       }
