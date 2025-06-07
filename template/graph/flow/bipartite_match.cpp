@@ -13,7 +13,7 @@ public:
     int ret = 0;
     vector<bool> visited(l);
     vector<int> idx(r, -1);
-    auto dfs = [&](int cur) -> bool {
+    function<bool(int)> dfs = [&](int cur) {
       visited[cur] = true;
       for(int i : edges[cur]) if(idx[i] == -1) {
         idx[i] = cur;
