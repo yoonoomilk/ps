@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 class bipartite_match {
   const int l, r;
   vector<vector<int>> edges;
@@ -16,7 +13,7 @@ public:
     int ret = 0;
     vector<bool> visited(l);
     vector<int> idx(r, -1);
-    function<bool(int)> dfs = [&](int cur) {
+    auto dfs = [&](int cur) -> bool {
       visited[cur] = true;
       for(int i : edges[cur]) if(idx[i] == -1) {
         idx[i] = cur;
@@ -35,25 +32,3 @@ public:
     return ret;
   }
 };
-
-int n, m;
-
-int main() {
-  ios::sync_with_stdio(0);
-  cin.tie(0);
-
-  cin >> n >> m;
-  bipartite_match bipartite(n + 1, m + 1);
-  for(int i = 1;i <= n;i++) {
-    int a, b;
-    cin >> a;
-    while(a--) {
-      cin >> b;
-      bipartite.add(i, b);
-    }
-  }
-
-  cout << bipartite();
-
-  return 0;
-}
