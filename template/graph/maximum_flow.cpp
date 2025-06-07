@@ -5,13 +5,14 @@ class maximum_flow {
 public:
   maximum_flow(int sz) : sz(sz), edges(sz), cap(sz, vector<int>(sz)), flow(sz, vector<int>(sz)) {}
 
-  void add(int a, int b, int v) {
-    cap[a][b] += v;
+  void add(int a, int b, int v, bool directed = true) {
     edges[a].push_back(b);
     edges[b].push_back(a);
+    cap[a][b] += v;
+    if(!directed) cap[b][a] += v;
   }
 
-  int query(int s, int e, int back = -1) {
+  int operator() (int s, int e, int back = -1) {
     if(back == -1) back = s;
     int ret = 0;
     while(1) {
