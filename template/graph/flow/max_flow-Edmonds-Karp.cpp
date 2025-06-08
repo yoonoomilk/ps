@@ -27,7 +27,7 @@ public:
         }
       }
       if(bef[e] == -1) break;
-      int tmp = 1e9;
+      int tmp = INT_MAX;
       for(int i = e;i != s;i = bef[i]) tmp = min(tmp, cap[bef[i]][i] - flow[bef[i]][i]);
       for(int i = e;i != s;i = bef[i]) {
         flow[bef[i]][i] += tmp;

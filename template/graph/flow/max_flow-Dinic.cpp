@@ -44,7 +44,7 @@ public:
         }
         return 0;
       };
-      for(int i;i = dfs(s, 1e9);ret += i);
+      for(int i;i = dfs(s, INT_MAX);ret += i);
     }
     return ret;
   }
