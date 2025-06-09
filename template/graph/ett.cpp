@@ -1,12 +1,28 @@
-vector<int> raw[100005];
-int arr[100005], arrn;
 int in[100005], out[100005];
 
-void ett(int cur) {
-  in[cur] = ++arrn;
-  arr[arrn] = cur;
-  for(int i : raw[cur]) if(!in[i]) ett(i);
-  out[cur] = arrn;
+void dfs(int cur) {
+  in[cur] = dfsn++;
+  for(int i : raw[cur]) if(!in[i]) dfs(i);
+  out[cur] = dfsn;
 }
 
-ett(1);
+int arr[200005], in[100005], out[100005];
+
+void dfs(int cur, int pa) {
+  arr[dfsn] = cur;
+  in[cur] = dfsn++;
+  for(int i : raw[cur]) if(i != pa) dfs(i, cur);
+  arr[dfsn] = cur;
+  out[cur] = dfsn++;
+}
+
+void dfs(int cur, int pa) {
+  arr[dfsn] = cur;
+  in[cur] = dfsn++;
+  for(int i : raw[cur]) if(i != pa) {
+    dfs(i, cur);
+    arr[dfsn++] = cur;
+  }
+  arr[dfsn] = cur;
+  out[cur] = dfsn++;
+}
