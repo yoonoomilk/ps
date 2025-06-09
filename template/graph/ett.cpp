@@ -16,13 +16,13 @@ void dfs(int cur, int pa) {
   out[cur] = dfsn++;
 }
 
-void dfs(int cur, int pa) {
+void dfs(int cur, int pa, int d) {
+  dep[cur] = d;
   arr[dfsn] = cur;
   in[cur] = dfsn++;
   for(int i : raw[cur]) if(i != pa) {
-    dfs(i, cur);
+    dfs(i, cur, d + 1);
     arr[dfsn++] = cur;
   }
-  arr[dfsn] = cur;
-  out[cur] = dfsn++;
+  out[cur] = dfsn - 1;
 }
