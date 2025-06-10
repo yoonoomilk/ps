@@ -29,9 +29,12 @@ public:
 };
 
 // 추가
-void assign(const vector<T>& raw) {
-  for(int i = 0;i < raw.size();i++) tree[i + sz] = raw[i];
-  for(int i = sz;--i;) tree[i] = op(tree[i * 2], op[i * 2 + 1]);
+void set(int i, const T& v) {
+  tree[i + sz] = v;
+}
+
+void init() {
+  for(int i = sz;--i;) tree[i] = op(tree[i * 2], tree[i * 2 + 1]);
 }
 
 T top() {
