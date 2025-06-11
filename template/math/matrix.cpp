@@ -2,8 +2,9 @@ template <typename T, int N, int M>
 struct matrix : array<array<T, M>, N> {
   using super = array<array<T, M>, N>;
 
-  matrix() {
+  matrix(bool identity = false) {
     for(int i = 0;i < N;i++) super::operator[](i).fill(T());
+    if(identity) for(int i = 0;i < N;i++) super::operator[](i)[i] = 1;
   }
 
   template <int K>
@@ -17,7 +18,7 @@ struct matrix : array<array<T, M>, N> {
 };
 
 template <typename T, int N>
-matrix<T, N, N> pow(matrix<T, N, N> v, ll exp) {
+matrix<T, N, N> pow(matrix<T, N, N> v, long long exp) {
   matrix<T, N, N> tmp;
   for(int i = 0;i < N;i++) tmp[i][i] = 1;
   for(;exp;exp /= 2) {
