@@ -42,19 +42,19 @@ int readInt() {
 ## output
 ```cpp
 constexpr int p10[] = {
-	0, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000
+  0, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000
 };
 
 int getSz(int n) {
-	int t = bit_width(n) * 1233 >> 12;
-	return t - (n < p10[t]) + 1;
+  int t = bit_width(n) * 1233 >> 12;
+  return t - (n < p10[t]) + 1;
 }
 
 void writeInt(int x) {
-	if(wp - wbuf + 40 > sizeof wbuf) write(1, wbuf, wp - wbuf), wp = wbuf;
-	if(x < 0) *wp++ = '-', x = -x;
-	int sz = getSz(x);
-	for(int i = sz - 1;i >= 0;i--) wp[i] = x % 10 | 48, x /= 10;
-	wp += sz;
+  if(wp - wbuf + 40 > sizeof wbuf) write(1, wbuf, wp - wbuf), wp = wbuf;
+  if(x < 0) *wp++ = '-', x = -x;
+  int sz = getSz(x);
+  for(int i = sz - 1;i >= 0;i--) wp[i] = x % 10 | 48, x /= 10;
+  wp += sz;
 }
 ```
