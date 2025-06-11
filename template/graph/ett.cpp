@@ -1,31 +1,31 @@
 int in[100005], out[100005];
 
-void dfs(int cur) {
-  in[cur] = dfsn++;
-  for(int i : raw[cur]) if(!in[i]) dfs(i);
-  out[cur] = dfsn;
+void ett(int cur) {
+  in[cur] = ++ettn;
+  for(int i : raw[cur]) if(!in[i]) ett(i);
+  out[cur] = ettn;
 }
 
 int arr[200005], in[100005], out[100005];
 
-void dfs(int cur, int pa) {
-  arr[dfsn] = cur;
-  in[cur] = dfsn++;
-  for(int i : raw[cur]) if(i != pa) dfs(i, cur);
-  arr[dfsn] = cur;
-  out[cur] = dfsn++;
+void ett(int cur, int pa) {
+  arr[ettn] = cur;
+  in[cur] = ettn++;
+  for(int i : raw[cur]) if(i != pa) ett(i, cur);
+  arr[ettn] = cur;
+  out[cur] = ettn++;
 }
 
-void dfs(int cur, int pa) {
-  arr[dfsn] = cur;
+void ett(int cur, int pa) {
+  arr[ettn] = cur;
   cnt[cur][0]++;
-  in[cur] = dfsn++;
+  in[cur] = ettn++;
   for(int i : raw[cur]) if(i != pa) {
-    dfs(i, cur);
-    arr[dfsn++] = cur;
+    ett(i, cur);
+    arr[ettn++] = cur;
     cnt[cur][0]++;
   }
-  arr[dfsn] = cur;
+  arr[ettn] = cur;
   cnt[cur][0]++;
-  out[cur] = dfsn++;
+  out[cur] = ettn++;
 }
