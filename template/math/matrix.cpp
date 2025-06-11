@@ -4,7 +4,10 @@ struct matrix : array<array<T, M>, N> {
 
   matrix(bool identity = false) {
     for(int i = 0;i < N;i++) super::operator[](i).fill(T());
-    if(identity) for(int i = 0;i < N;i++) super::operator[](i)[i] = 1;
+    if(identity) {
+      assert(N == M);
+      for(int i = 0;i < N;i++) super::operator[](i)[i] = 1;
+    }
   }
 
   template <int K>
@@ -26,4 +29,13 @@ matrix<T, N, N> pow(matrix<T, N, N> v, long long exp) {
     v = v * v;
   }
   return tmp;
+}
+
+// 피보나치 수열
+ll fibo(ll n) {
+  matrix<ll, 2, 2> a;
+  matrix<ll, 2, 1> b;
+  a[0][0] = a[0][1] = a[1][0] = b[0][0] = 1;
+
+  return (pow(a, n) * b)[1][0];
 }
