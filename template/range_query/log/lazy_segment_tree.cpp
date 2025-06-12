@@ -78,6 +78,26 @@ public:
   }
 };
 
+using pii = pair<int, int>;
+
+struct op {
+	pii operator() (pii a, pii b) {
+    return {a.first + b.first, a.second + b.second};
+  }
+};
+
+struct upd {
+	pii operator() (int a, pii b) {
+    return {b.first + a * b.second, b.second};
+  }
+};
+
+struct comp {
+	int operator() (int a, int b) {
+    return a + b;
+  }
+};
+
 /*
 `lazy_segment_tree<T, L, Merge, Update, Composition> seg(n, raw, lazy_raw)`
 
