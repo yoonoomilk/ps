@@ -1,14 +1,16 @@
-int pi[P_SZ];
 vector<int> match;
 
-void pidx(const string& p) {
+vector<int> pidx(const string& p) {
+  vector<int> pi(p.size());
   for(int i = 1, j = 0;i < m;i++) {
     while(j && p[i] != p[j]) j = pi[j - 1];
     if(p[i] == p[j]) pi[i] = ++j;
   }
+  return pi;
 }
 
-void kmp(const string& s, const string& p) {
+vector<int> kmp(string& s, string>& p, vector<int>& pi) {
+  vector<int> match;
   for(int i = 0, j = 0;i < n;i++) {
     while(j && s[i] != p[j]) j = pi[j - 1];
     if(s[i] != p[j]) continue;
@@ -17,4 +19,5 @@ void kmp(const string& s, const string& p) {
       j = pi[j];
     } else j++;
   }
+  return match;
 }
