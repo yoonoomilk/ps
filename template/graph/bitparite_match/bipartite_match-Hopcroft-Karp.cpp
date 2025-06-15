@@ -1,4 +1,3 @@
-// 뭔가 잘못 구현된 듯
 class bit_match {
   const int l, r;
   vector<vector<int>> edges;
