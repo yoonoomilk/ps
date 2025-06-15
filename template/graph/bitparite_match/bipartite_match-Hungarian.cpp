@@ -1,9 +1,9 @@
-class bipartite_match {
+class bit_match {
   const int l, r;
   vector<vector<int>> edges;
 
 public:
-  bipartite_match(int l, int r) : l(l), r(r), edges(l) {}
+  bit_match(int l, int r) : l(l), r(r), edges(l) {}
 
   void add(int a, int b) {
     edges[a].push_back(b);
