@@ -81,19 +81,19 @@ public:
 using pii = pair<int, int>;
 
 struct op {
-	pii operator() (pii a, pii b) {
+  pii operator() (pii a, pii b) {
     return {a.first + b.first, a.second + b.second};
   }
 };
 
 struct upd {
-	pii operator() (int a, pii b) {
+  pii operator() (int a, pii b) {
     return {b.first + a * b.second, b.second};
   }
 };
 
 struct comp {
-	int operator() (int a, int b) {
+  int operator() (int a, int b) {
     return a + b;
   }
 };
