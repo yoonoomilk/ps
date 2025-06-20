@@ -9,7 +9,6 @@ struct query {
   }
 };
 
-
 //faster
 struct query {
   int l, r, idx;
