@@ -9,6 +9,16 @@ struct query {
   }
 };
 
+
+//faster
+struct query {
+  int l, r, idx;
+  bool operator < (const query& v) const {
+    int a = l / sz, b = v.l / sz;
+    return (a < b) || ((a == b) && ((a & 1) ^ (r < v.r)));
+  }
+};
+
 int l = q[0].l, r = l-1;
 for(int i = 0;i < m;i++) {
   while(q[i].l < l) add(raw[--l]);
