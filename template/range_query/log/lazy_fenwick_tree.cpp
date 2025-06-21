@@ -1,5 +1,3 @@
-// https://plzrun.tistory.com/entry/Fenwick-Tree-Range-Update-Range-Sum-펜윅트리-구간업데이트-구간합-OlgN에-구하기-feat-Segment-Tree-Lazy-Propagation
-
 template <typename T>
 class lazy_fenwick_tree {
   using L = complex<T>;
@@ -13,8 +11,8 @@ class lazy_fenwick_tree {
 public:
   lazy_fenwick_tree(int sz) : sz(sz), tree(sz + 1) {}
 
-  void update(int l, int r, T& v) {
-    _update(l, L(v -v * (l - 1)));
+  void update(int l, int r, T v) {
+    _update(l, L(v, -v * (l - 1)));
     _update(r + 1, L(-v, v * r));
   }
 

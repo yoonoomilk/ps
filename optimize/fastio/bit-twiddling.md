@@ -18,7 +18,7 @@ int readInt() {
   int ret = 0, flag = 0;
   if(*rp == '-') flag = 1, rp++;
   {
-    u64 x; memcpy(&x, rp, 8);
+    long long x; memcpy(&x, rp, 8);
     x ^= 0x3030303030303030;
     if(!(x & 0xf0f0f0f0f0f0f0f0)) {
       x = ((x * 10) + (x >> 8)) & 0x00ff00ff00ff00ff;
@@ -29,7 +29,7 @@ int readInt() {
     }
   }
   {
-    u32 x; memcpy(&x, rp, 4);
+    int x; memcpy(&x, rp, 4);
     x ^= 0x30303030;
     if(!(x & 0xf0f0f0f0)) {
       x = ((x * 10) + (x >> 8)) & 0x00ff00ff;
@@ -39,7 +39,7 @@ int readInt() {
     }
   }
   {
-    u16 x; memcpy(&x, rp, 2);
+    short x; memcpy(&x, rp, 2);
     x ^= 0x3030;
     if(!(x & 0xf0f0)) {
       x = ((x * 10) + (x >> 8)) & 0x00ff;
