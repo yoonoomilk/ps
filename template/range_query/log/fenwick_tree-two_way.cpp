@@ -6,9 +6,9 @@ class fenwick_tree {
   vector<T> arr, tree1, tree2;
 
 public:
-  fenwick_tree(int sz, const T& raw = T()) : sz(sz), raw(raw), arr(sz + 1, raw), tree1(sz + 1, raw), tree2(sz + 1, raw) {}
+  fenwick_tree(int sz, T raw = T()) : sz(sz), raw(raw), arr(sz + 1, raw), tree1(sz + 1, raw), tree2(sz + 1, raw) {}
   
-  void update(int i, const T& v) {
+  void update(int i, T v) {
     T tmp = arr[i] = v;
     for(int j = i, l = i - 1, r = i + 1;j <= sz;j += j & -j) {
       for(;l > j - (j & -j);l -= l & -l) tmp = op(tree1[l], tmp);

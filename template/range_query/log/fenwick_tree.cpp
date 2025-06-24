@@ -9,9 +9,9 @@ class fenwick_tree {
   vector<T> tree;
 
 public:
-  fenwick_tree(int sz, const T& raw = T()) : sz(sz), raw(raw), tree(sz + 1, raw) {}
+  fenwick_tree(int sz, T raw = T()) : sz(sz), raw(raw), tree(sz + 1, raw) {}
 
-  void update(int l, int r, const T& v) {
+  void update(int l, int r, T v) {
     for(;l <= sz;l += l & -l) tree[l] += v;
     for(r++;r <= sz;r += r & -r) tree[r] -= v;
   }
@@ -31,9 +31,9 @@ class fenwick_tree {
   vector<T> tree;
 
 public:
-  fenwick_tree(int sz, const T& raw = T()) : sz(sz), raw(raw), tree(sz + 1, raw) {}
+  fenwick_tree(int sz, T raw = T()) : sz(sz), raw(raw), tree(sz + 1, raw) {}
 
-  void update(int i, const T& v) {
+  void update(int i, T v) {
     for(;i <= sz;i += i & -i) tree[i] += v;
   }
 

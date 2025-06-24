@@ -15,7 +15,7 @@ public:
     }
   }
 
-  int operator() (int l, int r, const T& k) {
+  int operator() (int l, int r, T k) {
     l += sz; r += sz;
     int s = 0;
     for(;l <= r;l /= 2, r /= 2) {
@@ -27,7 +27,7 @@ public:
 };
 
 struct op {
-  int operator() (const vector<int>& v, const int& k) {
+  int operator() (vector<int>& v, int k) {
     return 0;
   }
 };
