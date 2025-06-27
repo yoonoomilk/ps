@@ -4,16 +4,12 @@ class lazy_fenwick_tree {
   const int sz;
   vector<L> tree;
 
-  void _update(int i, L v) {
-    for(;i <= sz;i += i & -i) tree[i] += v;
-  }
-
 public:
   lazy_fenwick_tree(int sz) : sz(sz), tree(sz + 1) {}
 
   void update(int l, int r, T v) {
-    _update(l, L(v, -v * (l - 1)));
-    _update(r + 1, L(-v, v * r));
+    for(int i = l;i <= sz;i += i & -i) tree[i] += L(v, -v * (l - 1));
+    for(int i = r + 1;i <= sz;i += i & -i) tree[i] += L(-v, v * r);
   }
 
   T operator() (int i) {
