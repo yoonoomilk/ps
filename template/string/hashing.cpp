@@ -14,6 +14,6 @@ public:
   }
   ll operator() (int s, int e) {
     s++; e++;
-    return (arr[e] - (ll)arr[s - 1] * _pow[e - s + 1] + M) % M;
+    return ((arr[e] - (ll)arr[s - 1] * _pow[e - s + 1]) % M + M) % M;
   }
 };
