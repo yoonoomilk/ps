@@ -16,7 +16,4 @@ public:
     s++; e++;
     return (arr[e] - (ll)arr[s - 1] * _pow[e - s + 1] + M) % M;
   }
-  ll operator() () {
-    return (*this)(0, sz - 1);
-  }
 };
