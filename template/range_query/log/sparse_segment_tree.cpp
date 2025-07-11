@@ -1,4 +1,5 @@
 # TODO
+# https://usaco.guide/plat/sparse-segtree?lang=cpp
 
 template <typename T, typename L, typename Merge, typename Update, typename Composition>
 class sparse_segment_tree {
