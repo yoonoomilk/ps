@@ -1,7 +1,7 @@
 template <typename T, typename I>
 vector<int> manacher(I s, I e) {
   int sz = distance(s, e) * 2 + 1;
-  vector<T> str(sz, '\0');
+  vector<T> str(sz);
   vector<int> arr(sz);
   for(int i = 1;s != e;i += 2) str[i] = *s++;
   int m = 0, r = 0;
