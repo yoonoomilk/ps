@@ -11,27 +11,21 @@ class dynamic_segment_tree {
   Merge op;
 
   int append() {
-    tree.push_back(node());
+    tree.push_back(node(raw));
     return tree.size() - 1;
   }
 
-  void update(int cur, int s, int e, int i, const T& v) {
+  void update(int cur, int s, int e, int i, T& v) {
     if(s == e) {
       tree[cur].v = v;
       return;
     }
     int m = (s + e) / 2;
-    if(i <= m) {
-      if(tree[cur].l == -1) tree[cur].l = append();
-      update(tree[cur].l, s, m, i, v);
-    } else {
-      if(tree[cur].r == -1) tree[cur].r = append();
-      update(tree[cur].r, m + 1, e, i, v);
-    }
-    tree[cur].v = op(
-      tree[cur].l != -1 ? tree[tree[cur].l].v : raw,
-      tree[cur].r != -1 ? tree[tree[cur].r].v : raw
-    );
+    if(tree[cur].l == -1) tree[cur].l = append();
+    if(tree[cur].r == -1) tree[cur].r = append();
+    update(tree[cur].l, s, m, i, v);
+    update(tree[cur].r, m + 1, e, i, v);
+    tree[cur].v = op(tree[tree[cur].l].v, tree[tree[cur].r].v);
   }
 
   T query(int cur, int s, int e, int l, int r) {
