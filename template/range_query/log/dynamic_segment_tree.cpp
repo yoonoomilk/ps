@@ -39,11 +39,11 @@ class dynamic_segment_tree {
   }
 
 public:
-  dynamic_segment_tree(int mx, const T& raw = T()) : sz(mx + 1), raw(raw) {
+  dynamic_segment_tree(int mx, T raw = T()) : sz(mx + 1), raw(raw) {
     append();
   }
 
-  void update(int i, const T& v) {
+  void update(int i, T v) {
     update(0, 0, sz - 1, i, v);
   }
 

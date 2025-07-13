@@ -6,7 +6,7 @@ class segment_tree {
   Merge op;
 
 public:
-  segment_tree(int n, const T& raw = T()) : sz(1 << __lg(n * 2 - 1)), raw(raw), tree(sz * 2, raw) {}
+  segment_tree(int n, T raw = T()) : sz(1 << __lg(n * 2 - 1)), raw(raw), tree(sz * 2, raw) {}
 
   void update(int i, T v) {
     i += sz;
@@ -47,7 +47,7 @@ struct hoit {
 };
 
 struct op {
-  hoit operator() (const hoit& a, const hoit& b) const {
+  hoit operator() (hoit& a, hoit& b) {
     hoit tmp;
     tmp.p = max({a.r + b.l, a.p, b.p});
     tmp.l = max(a.l, a.a + b.l);
