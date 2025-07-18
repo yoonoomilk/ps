@@ -5,7 +5,7 @@ class dynamic_segment_tree {
   struct node {
     int l, r;
     T v;
-    node(const T& a) : l(-1), r(-1), v(a) {}
+    node(const T& v) : l(-1), r(-1), v(v) {}
   };
   vector<node> tree;
   Merge op;
