@@ -22,6 +22,7 @@ public:
       tree2[j] = i ^ j ? op(arr[j], tmp) : tmp;
     }
   }
+
   T operator() (int l, int r) {
     T s1 = raw, s2 = raw;
     int i;
