@@ -7,13 +7,14 @@
 
 ### radix sort
 ```cpp
-void radix_sort(vector<int>& v) {
+template <typename I>
+void radix_sort(I s, I e) {
   for(int t = 0;t < 32;t += 8) {
     queue<int> q[256];
-    for(int i : v) q[(i >> t) & 255].push(i);
-    int cur = 0;
+    for(I i = s;s != e;s++) q[((*i) >> t) & 255].push(*i);
+    I cur = s;
     for(int i = 0;i < 256;i++) while(q[i].size()) {
-      v[cur++] = q[i].front();
+      *s++ = q[i].front();
       q[i].pop();
     }
   }
