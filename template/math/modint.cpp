@@ -48,9 +48,10 @@ public:
   }
 };
 
-modint<> comb(int n, int r) {
+template <int mod = 1'000'000'007>
+modint<mod> comb(int n, int r) {
   if(r > n - r) r = n - r;
-  modint<> x = 1, y = 1;
+  modint<mod> x = 1, y = 1;
   for(int i = 0;i < r;i++) {
     x = x * (n - i);
     y = y * (i + 1);
