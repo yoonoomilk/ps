@@ -1,0 +1,1 @@
+[syscall (basm-rs)](https://github.com/boj-rs/basm-rs/blob/main/basm-std/src/platform/os/linux.rs)
