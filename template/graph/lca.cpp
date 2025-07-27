@@ -35,3 +35,5 @@ int lca(int a, int b) {
 dfs(1, 0);
 
 for(int i = 1;i < 17;i++) for(int j = 1;j <= n;j++) pa[j][i] = pa[pa[j][i - 1]][i - 1];
+
+//https://infossm.github.io/blog/2022/08/19/farachcoltonbender/
