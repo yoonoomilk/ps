@@ -60,7 +60,7 @@ constexpr int p10[] = {
 };
 
 int getSz(int n) {
-  int t = bit_width(n) * 1233 >> 12;
+  int t = (32 - __builtin_clz(n)) * 1233 >> 12;
   return t - (n < p10[t]) + 1;
 }
 
