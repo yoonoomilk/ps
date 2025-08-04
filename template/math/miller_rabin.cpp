@@ -1,4 +1,4 @@
-ll _pow(ll n, ll exp, ll mod) {
+ll _pow(__int128 n, ll exp, ll mod) {
   __int128 tmp = 1;
   for(n %= mod;exp;exp /= 2) {
     if(exp & 1) tmp = tmp * n % mod;
