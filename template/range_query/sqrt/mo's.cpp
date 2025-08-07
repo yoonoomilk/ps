@@ -20,10 +20,10 @@ struct query {
 
 int l = q[0].l, r = l - 1;
 for(int i = 0;i < m;i++) {
-  while(q[i].l < l) add(raw[--l]);
-  while(q[i].l > l) del(raw[l++]);
-  while(q[i].r < r) del(raw[r--]);
-  while(q[i].r > r) add(raw[++r]);
+  while(q[i].l < l) add(arr[--l]);
+  while(q[i].l > l) del(arr[l++]);
+  while(q[i].r < r) del(arr[r--]);
+  while(q[i].r > r) add(arr[++r]);
   ans[q[i].idx] = tmp;
 }
 
