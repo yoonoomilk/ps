@@ -2,6 +2,7 @@ template<typename I>
 requires same_as<typename iterator_traits<I>::value_type, complex<double>>
 void fft(I s, I e, bool inv = false) {
   int sz = distance(s, e);
+  assert((sz & (sz - 1)) == 0);
   for(int i = 1, j = 0;i < sz;i++) {
     int bit = sz / 2;
     while(j >= bit) {
