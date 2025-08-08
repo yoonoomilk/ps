@@ -1,7 +1,5 @@
-using base = complex<double>;
-
 template<typename I>
-requires same_as<typename iterator_traits<I>::value_type, base>
+requires same_as<typename iterator_traits<I>::value_type, complex<double>>
 void fft(I s, I e, bool inv = false) {
   int sz = distance(s, e);
   for(int i = 1, j = 0;i < sz;i++) {
@@ -15,11 +13,11 @@ void fft(I s, I e, bool inv = false) {
   }
   for(int k = 1;k < sz;k *= 2) {
     double angle = inv ? numbers::pi / k : -numbers::pi / k;
-    base w(cos(angle), sin(angle));
+    complex<double> w(cos(angle), sin(angle));
     for(int i = 0;i < sz;i += k * 2) {
-      base z(1, 0);
+      complex<double> z(1, 0);
       for(int j = 0;j < k;j++) {
-        base even = s[i + j], odd = s[i + j + k];
+        complex<double> even = s[i + j], odd = s[i + j + k];
         s[i + j] = even + z * odd;
         s[i + j + k] = even - z * odd;
         z *= w;
