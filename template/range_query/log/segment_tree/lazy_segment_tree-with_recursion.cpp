@@ -20,7 +20,7 @@ class lazy_segment_tree {
 
   void push(int cur, int s, int e) {
     if(lazy[cur] == lazy_raw) return;
-    tree[cur] = upd(lazy[cur], tree[cur]);
+    tree[cur] = upd(lazy[cur], tree[cur], e - s + 1);
     if(s != e) {
       lazy[cur * 2] = comp(lazy[cur], lazy[cur * 2]);
       lazy[cur * 2 + 1] = comp(lazy[cur], lazy[cur * 2 + 1]);
@@ -65,17 +65,16 @@ public:
 };
 
 using ll = long long;
-using pii = pair<ll, int>;
 
 struct op {
-  pii operator() (pii a, pii b) {
-    return {a.first + b.first, a.second + b.second};
+  ll operator() (ll a, ll b) {
+    return a + b;
   }
 };
 
 struct upd {
-  pii operator() (ll a, pii b) {
-    return {b.first + a * b.second, b.second};
+  ll operator() (ll a, ll b, int cnt) {
+    return b + a * cnt;
   }
 };
 
