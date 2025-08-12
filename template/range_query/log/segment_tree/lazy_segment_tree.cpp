@@ -78,7 +78,8 @@ public:
   }
 };
 
-using pii = pair<int, int>;
+using ll = long long;
+using pii = pair<ll, int>;
 
 struct op {
   pii operator() (pii a, pii b) {
@@ -87,13 +88,13 @@ struct op {
 };
 
 struct upd {
-  pii operator() (int a, pii b) {
+  pii operator() (ll a, pii b) {
     return {b.first + a * b.second, b.second};
   }
 };
 
 struct comp {
-  int operator() (int a, int b) {
+  ll operator() (ll a, ll b) {
     return a + b;
   }
 };
