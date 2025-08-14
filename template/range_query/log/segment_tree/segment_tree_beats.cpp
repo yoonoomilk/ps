@@ -9,7 +9,7 @@ class segment_tree_beats {
   Update try_upd;
   Composition comp;
 
-  void apply(int i, const L& v) {
+  void apply(int i, L v) {
     bool fail;
     tie(tree[i], fail) = try_upd(v, tree[i]);
     if(i < sz) {
@@ -35,7 +35,7 @@ public:
   segment_tree_beats(int n, T raw = T(), L lazy_raw = L())
   : lg(__lg(n * 2 - 1)), sz(1 << lg), raw(raw), lazy_raw(lazy_raw), tree(sz * 2, raw), lazy(sz, lazy_raw) {}
 
-  void set(int i, const T& v) {
+  void set(int i, T v) {
     tree[i + sz] = v;
   }
 
