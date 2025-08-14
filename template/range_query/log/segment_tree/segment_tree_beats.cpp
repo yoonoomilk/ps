@@ -10,10 +10,11 @@ class segment_tree_beats {
   Composition comp;
 
   void apply(int i, const L& v) {
-    tree[i] = upd(v, tree[i]);
+    bool fail;
+    tie(tree[i], fail) = upd(v, tree[i]);
     if(i < sz) {
       lazy[i] = comp(v, lazy[i]);
-      if(tree[i].fail) {
+      if(fail) {
         push(i);
         pull(i);
       }
@@ -84,7 +85,10 @@ public:
   }
 };
 
-// 수쿼 26
+
+//수쿼 26
+using ll = long long;
+
 struct hoit {
   ll max1, max2, sum;
   int cnt;
@@ -110,14 +114,15 @@ struct op {
   }
 };
 
-struct upd {
-  hoit operator() (ll a, hoit b) {
+struct try_upd {
+  pair<hoit, bool> operator() (ll a, hoit b) {
+    bool fail = false;
     if(a >= b.max1) {}
     else if(a > b.max2) {
       b.sum -= (b.max1 - a) * b.cnt;
       b.max1 = a;
-    } else b.fail = true;
-    return b;
+    } else fail = true;
+    return {b, fail};
   }
 };
 
