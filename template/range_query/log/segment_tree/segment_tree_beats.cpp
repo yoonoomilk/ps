@@ -6,12 +6,12 @@ class segment_tree_beats {
   vector<T> tree;
   vector<L> lazy;
   Merge op;
-  Update upd;
+  Update try_upd;
   Composition comp;
 
   void apply(int i, const L& v) {
     bool fail;
-    tie(tree[i], fail) = upd(v, tree[i]);
+    tie(tree[i], fail) = try_upd(v, tree[i]);
     if(i < sz) {
       lazy[i] = comp(v, lazy[i]);
       if(fail) {
