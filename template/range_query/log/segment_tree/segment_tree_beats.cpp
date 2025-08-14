@@ -33,7 +33,7 @@ class segment_tree_beats {
 
 public:
   segment_tree_beats(int n, T raw = T(), L lazy_raw = L())
-  : lg(__lg(n * 2 - 1)), sz(1 << lg), raw(raw), lazy_raw(lazy_raw), tree(sz * 2, raw), lazy(sz * 2, lazy_raw) {}
+  : lg(__lg(n * 2 - 1)), sz(1 << lg), raw(raw), lazy_raw(lazy_raw), tree(sz * 2, raw), lazy(sz, lazy_raw) {}
 
   void set(int i, const T& v) {
     tree[i + sz] = v;
@@ -115,7 +115,7 @@ struct op {
 };
 
 struct try_upd {
-  pair<hoit, bool> operator() (ll a, hoit b) {
+  pair<hoit, bool> operator() (ll &a, hoit b) {
     bool fail = false;
     if(a >= b.max1) {}
     else if(a > b.max2) {

@@ -26,7 +26,7 @@ class lazy_segment_tree {
 
 public:
   lazy_segment_tree(int n, T raw = T(), L lazy_raw = L())
-  : lg(__lg(n * 2 - 1)), sz(1 << lg), raw(raw), lazy_raw(lazy_raw), tree(sz * 2, raw), lazy(sz * 2, lazy_raw) {}
+  : lg(__lg(n * 2 - 1)), sz(1 << lg), raw(raw), lazy_raw(lazy_raw), tree(sz * 2, raw), lazy(sz, lazy_raw) {}
 
   void set(int i, const T& v) {
     tree[i + sz] = v;
