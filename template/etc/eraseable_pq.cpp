@@ -6,12 +6,12 @@ public:
   eraseable_pq() {}
   size_t size() { return pq.size() - del.size(); };
   void insert(T v) { pq.push(v); }
-  void erase(T v) {
-    del.push(v);
+  void erase(T v) { del.push(v); }
+  T top() {
     while(del.size() && pq.top() == del.top()) {
       pq.pop();
       del.pop();
     }
+    return pq.top();
   }
-  T top() { return pq.top(); }
 }
