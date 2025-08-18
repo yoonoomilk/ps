@@ -3,8 +3,10 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 
+char *rp;
+
 struct stat st; fstat(0, &st);
-char *rp = (char*)mmap(0, st.st_size, PROT_READ, MAP_SHARED, 0, 0);
+rp = (char*)mmap(0, st.st_size, PROT_READ, MAP_SHARED, 0, 0);
 
 static inline int readInt() {
   int tmp = 0;
