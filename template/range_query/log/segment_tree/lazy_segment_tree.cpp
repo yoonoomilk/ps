@@ -9,9 +9,9 @@ class lazy_segment_tree {
   Update upd;
   Composition comp;
 
-  void apply(int i, const L& v) {
-    upd(v, tree[i]);
-    if(i < sz) lazy[i] = comp(v, lazy[i]);
+  void apply(int i, L v) {
+    upd(tree[i], v);
+    if(i < sz) lazy[i] = comp(lazy[i], v);
   }
 
   void push(int i) {
@@ -88,8 +88,8 @@ struct op {
 };
 
 struct upd {
-  void operator() (ll a, pii &b) {
-    b.first += a * b.second;
+  void operator() (pii& a, ll b) {
+    a.first += b * a.second;
   }
 };
 
@@ -106,8 +106,8 @@ struct comp {
 * L : lazy에 들어갈 타입
 * Merge : `T operator() (T a, T b)`
   * non-lazy한 값끼리 합치기
-* Update : `void operator() (L a, T& b)`
-  * non-lazy한 b에 lazy한 a를 적용
+* Update : `void operator() (T& a, L b)`
+  * non-lazy한 a에 lazy한 b를 적용
 * Composition : `L operator() (L a, L b)`
-  * lazy한 b에 lazy한 a 합치기
+  * lazy한 a에 lazy한 b 합치기
 */

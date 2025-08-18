@@ -21,12 +21,12 @@ class sparse_segment_tree {
 
   void push(int cur, int s, int e) {
     if(cur == -1 || tree[cur].lazy == lazy_raw) return;
-    upd(tree[cur].lazy, tree[cur].v, e - s + 1);
+    upd(tree[cur].v, tree[cur].lazy, e - s + 1);
     if(s != e) {
       if(tree[cur].l == -1) tree[cur].l = append();
       if(tree[cur].r == -1) tree[cur].r = append();
-      tree[tree[cur].l].lazy = comp(tree[cur].lazy, tree[tree[cur].l].lazy);
-      tree[tree[cur].r].lazy = comp(tree[cur].lazy, tree[tree[cur].r].lazy);
+      tree[tree[cur].l].lazy = comp(tree[tree[cur].l].lazy, tree[cur].lazy);
+      tree[tree[cur].r].lazy = comp(tree[tree[cur].r].lazy, tree[cur].lazy);
     }
     tree[cur].lazy = lazy_raw;
   }
@@ -79,8 +79,8 @@ struct op {
 };
 
 struct upd {
-  void operator() (ll a, ll &b, int cnt) {
-    b += a * cnt;
+  void operator() (ll &a, ll b, int cnt) {
+    a += b * cnt;
   }
 };
 
