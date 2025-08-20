@@ -39,7 +39,10 @@ public:
         for(;add_primes[j] < chunk;add_primes[j] += pre_primes[j] * 2) is_prime[add_primes[j]] = false;
         add_primes[j] -= chunk;
       }
-      for(int j = 1;j < chunk;j += 2) if(is_prime[j]) primes.push_back(i + j);
+      for(int j = 1;j < chunk;j += 2) {
+        if(i + j > n) break;
+        if(is_prime[j]) primes.push_back(i + j);
+      }
     }
   }
 
