@@ -47,5 +47,5 @@ public:
   vector<ll>::const_iterator end() { return primes.end(); }
   ll operator[] (int i) { return primes[i - 1]; }
   bool operator() (ll i) { return binary_search(primes.begin(), primes.end(), i); }
-  int size() {return primes.size(); }
+  int count() {return primes.size(); }
 };
