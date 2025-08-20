@@ -1,6 +1,3 @@
-// 오류가 있을지도?
-// TODO
-
 template <typename T, typename Merge>
 class persistent_segment_tree {
   const int sz;
@@ -8,62 +5,65 @@ class persistent_segment_tree {
   struct node {
     int l, r;
     T v;
-    node(const T& a) : l(-1), r(-1), v(a) {}
+    node(const T& v) : l(-1), r(-1), v(v) {}
   };
   vector<node> tree;
   vector<int> root;
   Merge op;
 
   int append() {
-    tree.push_back(node());
+    tree.push_back(node(raw));
     return tree.size() - 1;
   }
 
-  int update(int cur, int s, int e, int i, const T& v){
-    int id = append();
-    tree[id] = tree[cur];
-    if(s == e){
-      tree[id].v = v;
-      return id;
+  void update(int prev, int cur, int s, int e, int i, T& v) {
+    if(cur == -1 || s > i || e < i) return;
+    if(s == e) {
+      tree[cur].v = op(tree[cur].v, v);
+      return;
     }
-    int m=(s+e)/2;
-    if(i <= m){
-      int old = tree[cur].l;
-      if(old == -1) old = append();
-      tree[id].l = update(old, s, m, i, v);
+    if(tree[prev].l == -1) tree[prev].l = append();
+    if(tree[prev].r == -1) tree[prev].r = append();
+    int m = (s + e) / 2;
+    if(i <= m) {
+      int nxt = append();
+      tree[nxt] = tree[tree[prev].l];
+      tree[cur].l = nxt;
+      tree[cur].r = tree[prev].r;
+      update(tree[prev].l, tree[cur].l, s, m, i, v);
     } else {
-      int old = tree[cur].r;
-      if(old == -1) old = append();
-      tree[id].r = update(old, m+1, e, i, v);
+      int nxt = append();
+      tree[nxt] = tree[tree[prev].r];
+      tree[cur].l = tree[prev].l;
+      tree[cur].r = nxt;
+      update(tree[prev].r, tree[cur].r, m + 1, e, i, v);
     }
-    tree[id].v = op(
-      tree[id].l != -1 ? tree[tree[id].l].v : raw,
-      tree[id].r != -1 ? tree[tree[id].r].v : raw
+    tree[cur].v = op(
+      tree[cur].l != -1 ? tree[tree[cur].l].v : raw,
+      tree[cur].r != -1 ? tree[tree[cur].r].v : raw
     );
-    return id;
   }
 
   T query(int cur, int s, int e, int l, int r) {
     if(cur == -1 || r < s || e < l) return raw;
     if(l <= s && e <= r) return tree[cur].v;
     int m = (s + e) / 2;
-    return op(
-      query(tree[cur].l, s, m, l, r),
-      query(tree[cur].r, m + 1, e, l, r)
-    );
+    return op(query(tree[cur].l, s, m, l, r), query(tree[cur].r, m + 1, e, l, r));
   }
 
 public:
-  persistent_segment_tree(int mx, const T& raw = T()) : sz(mx + 1), raw(raw) {
+  persistent_segment_tree(int n, T raw = T()) : sz(n), raw(raw) {
     root.push_back(append());
   }
 
-  int update(int i, const T& v, int base_ver = 0){
-    root.push_back(update(root[base_ver], 0, sz, i, v));
+  int update(int i, T v) {
+    int prev = root.back();
+    root.push_back(append());
+    update(prev, root.back(), 0, sz - 1, i, v);
     return root.size() - 1;
   }
 
   T query(int ver, int l, int r) {
-    return query(root[ver], 0, sz, l, r);
+    return query(root[ver], 0, sz - 1, l, r);
   }
 };
