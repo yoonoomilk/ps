@@ -35,7 +35,7 @@ class sparse_segment_tree {
     push(cur, s, e);
     if(r < s || e < l) return;
     if(l <= s && e <= r) {
-      tree[cur].lazy = comp(v, tree[cur].lazy);
+      tree[cur].lazy = comp(tree[cur].lazy, v);
       push(cur, s, e);
       return;
     }
