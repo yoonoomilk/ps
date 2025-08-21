@@ -46,8 +46,8 @@ public:
     }
   }
 
-  vector<ll>::const_iterator begin() { return primes.begin(); }
-  vector<ll>::const_iterator end() { return primes.end(); }
+  vector<ll>::const_iterator begin() { return primes.cbegin(); }
+  vector<ll>::const_iterator end() { return primes.cend(); }
   ll operator[] (int i) { return primes[i - 1]; }
   bool operator() (ll i) { return binary_search(primes.begin(), primes.end(), i); }
   int count() {return primes.size(); }
