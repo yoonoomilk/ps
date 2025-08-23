@@ -5,7 +5,9 @@ class steinhaus_johnson_trotter {
   vector<char> dir;
 
 public:
-  steinhaus_johnson_trotter(I s, I e) : n(distance(s, e)), s(s), e(e), dir(n, -1) {}
+  steinhaus_johnson_trotter(I s, I e) : n(distance(s, e)), s(s), e(e), dir(n, -1) {
+    assert(is_sorted(s, e));
+  }
 
   bool next() {
     int n = distance(s, e);
