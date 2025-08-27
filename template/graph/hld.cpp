@@ -20,8 +20,7 @@ class heavy_light_decomposition {
       s = op(s, seg(in[top[a]], in[a]));
     }
     if(dep[a] > dep[b]) swap(a, b);
-    if(a != b) s = op(s, seg(in[a] + 1, in[b]));
-    return s;
+    return op(s, seg(in[a] + 1, in[b]));
   }
 
 public:
