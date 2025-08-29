@@ -52,6 +52,7 @@ public:
       s = op(s, seg(in[top[a]], in[a]));
     }
     if(dep[a] > dep[b]) swap(a, b);
-    return op(s, seg(in[a] + 1, in[b]));
+    return op(s, seg(in[a], in[b]));
+    // return op(s, seg(in[a] + 1, in[b])); 간선 쿼리
   }
 };
