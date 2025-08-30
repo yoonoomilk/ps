@@ -36,7 +36,7 @@ public:
     function <void(int, int)> ett = [&](int cur, int bef) {
       in[cur] = ettn++;
       for(int i : edges[cur]) if(i != bef) {
-        top[i] = (i == edges[cur][0] ? top[cur] : i);
+        top[i] = i == edges[cur][0] ? top[cur] : i;
         ett(i, cur);
       }
       out[cur] = ettn - 1;
