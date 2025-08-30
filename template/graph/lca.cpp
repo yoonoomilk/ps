@@ -1,39 +1,38 @@
-vector<int> raw[100005];
-int dep[100005];
-int pa[100005][17];
+class lowest_common_ancestor {
+  const int sz;
+  vector<vector<int>> edges;
+  struct lca_op {
+    pair<int, int> operator() (pair<int, int> a, pair<int, int> b) {
+      return min(a, b);
+    }
+  };
+  segment_tree<pair<int, int>, lca_op> seg;
+  vector<int> in;
 
-void dfs(int x, int p) {
-  pa[x][0] = p;
-  dep[x] = dep[p] + 1;
-  for(int i : raw[x]) if(i != p) dfs(i, x);
-}
+public:
+  lowest_common_ancestor(int n) : sz(n + 1), edges(sz), seg(sz * 2, {1e9, -1}), in(sz) {}
 
-int lca(int a, int b) {
-  if(dep[a] < dep[b]) swap(a, b);
-  while(dep[a] != dep[b]) a = pa[a];
-  while(a != b) {
-    a = pa[a];
-    b = pa[b];
+  void add(int a, int b) {
+    edges[a].push_back(b);
   }
-  return a;
-}
 
-// binary lifting
-int lca(int a, int b) {
-  if(dep[a] < dep[b]) swap(a, b);
-  for(int i = 0, d = dep[a] - dep[b];i < 17;i++) {
-    if(d & (1 << i)) a = pa[a][i];
+  void init(int root) {
+    int ettn = 0;
+    function<void(int, int, int)> ett = [&](int cur, int d, int pa) {
+      seg.update(ettn, {d, cur});
+      in[cur] = ettn++;
+      for(int i : edges[cur]) if(i != pa) {
+        ett(i, d + 1, cur);
+        seg.update(ettn++, {d, cur});
+      }
+    };
+    ett(root, 1, -1);
   }
-  if(a == b) return a;
-  for(int i = 16;i >= 0;i--) if(pa[a][i] != pa[b][i]) {
-    a = pa[a][i];
-    b = pa[b][i];
+
+  int operator() (int a, int b) {
+    if(in[a] > in[b]) swap(a, b);
+    return seg(in[a], in[b]).second;
   }
-  return pa[a][0];
-}
-
-dfs(1, 0);
-
-for(int i = 1;i < 17;i++) for(int j = 1;j <= n;j++) pa[j][i] = pa[pa[j][i - 1]][i - 1];
+};
 
 //https://infossm.github.io/blog/2022/08/19/farachcoltonbender/
