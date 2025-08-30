@@ -1,6 +1,6 @@
 class lowest_common_ancestor {
   const int sz;
-  vector<vector<int>> edges;
+  static_graph<void> graph;
   struct lca_op {
     pair<int, int> operator() (pair<int, int> a, pair<int, int> b) {
       return min(a, b);
@@ -10,10 +10,10 @@ class lowest_common_ancestor {
   vector<int> in;
 
 public:
-  lowest_common_ancestor(int n) : sz(n + 1), edges(sz), seg(sz * 2, {1e9, -1}), in(sz) {}
+  lowest_common_ancestor(int n) : sz(n + 1), graph(n, n * 2 - 2), seg(sz * 2, {1e9, -1}), in(sz) {}
 
   void add(int a, int b) {
-    edges[a].push_back(b);
+    graph.add(a, b);
   }
 
   void init(int root) {
@@ -21,7 +21,7 @@ public:
     function<void(int, int, int)> ett = [&](int cur, int d, int pa) {
       seg.update(ettn, {d, cur});
       in[cur] = ettn++;
-      for(int i : edges[cur]) if(i != pa) {
+      for(int i : graph[cur]) if(i != pa) {
         ett(i, d + 1, cur);
         seg.update(ettn++, {d, cur});
       }
