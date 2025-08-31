@@ -1,5 +1,4 @@
-class trie {
-public:
+struct trie {
   vector<pair<char, trie>> arr;
   bool have = false;
 
@@ -25,8 +24,7 @@ public:
   }
 };
 
-class trie {
-public:
+struct trie {
   map<char, trie*> arr;
   bool have = false;
 
