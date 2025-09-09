@@ -2,16 +2,17 @@ template <typename T, typename L, typename Merge, typename Update, typename Comp
 class heavy_light_decomposition {
   const int sz;
   const T raw;
+  const L lazy_raw;
   vector<int> weight, dep, pa, top, in;
   vector<vector<int>> edges;
-  segment_tree<T, Merge> seg;
+  lazy_segment_tree<T, L, Merge, Update, Composition> seg;
   Merge op;
 
 public:
   heavy_light_decomposition(int n, T raw, L lazy_raw) : sz(n + 1), raw(raw), lazy_raw(lazy_raw),
     weight(sz), dep(sz), pa(sz), top(sz), in(sz),
     edges(sz), seg(sz, raw, lazy_raw) {
-    for(int i = 0;i < sz;i++) seg.set(i, {0, 1});
+    for(int i = 0;i < sz;i++) seg.set(i, 1e9);
     seg.init();
   }
 
