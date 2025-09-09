@@ -53,6 +53,6 @@ public:
     }
     if(dep[a] > dep[b]) swap(a, b);
     return op(s, seg(in[a], in[b]));
-    // return op(s, seg(in[a] + 1, in[b])); 간선 쿼리
+    // return op(s, seg(in[a] + 1, in[b])); 간선
   }
 };
