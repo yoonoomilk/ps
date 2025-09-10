@@ -8,11 +8,5 @@ public:
   }
 
   int find(int i) { return i == pa[i] ? i : pa[i] = find(pa[i]); }
-
-  bool merge(int a, int b) {
-    a = find(a), b = find(b);
-    if(a == b) return false;
-    pa[b] = a;
-    return true;
-  }
+  bool merge(int a, int b) { return find(a) != find(b) && (pa[pa[a]] = pa[b], true); }
 };
