@@ -2,8 +2,8 @@ template <typename T, typename Merge>
 class fenwick_tree {
   const int sz;
   const T raw;
-  Merge op;
   vector<T> arr, tree1, tree2;
+  Merge op;
 
 public:
   fenwick_tree(int sz, T raw = T()) : sz(sz), raw(raw), arr(sz + 1, raw), tree1(sz + 1, raw), tree2(sz + 1, raw) {}

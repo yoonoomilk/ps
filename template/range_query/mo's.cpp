@@ -47,9 +47,3 @@ struct query {
     return ord < v.ord;
   }
 };
-
-/*
-`tmp`는 **[l, r]** 쿼리의 값
-`add(v)`는 `v`를 범위에 포함시켰을 때
-`del(v)`는 `v`를 범위에서 제거했을 때
-*/

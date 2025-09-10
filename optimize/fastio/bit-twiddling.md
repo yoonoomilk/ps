@@ -1,3 +1,5 @@
+https://infossm.github.io/blog/2025/05/11/fastio-2/
+
 ## input
 ```cpp
 int readInt() {
