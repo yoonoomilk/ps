@@ -19,7 +19,7 @@ public:
     r->r = e;
   }
 
-  linked_list cut(node *s, node* e) {
+  linked_list sub(node *s, node* e) {
     node *l = s->l, *r = e->r;
     l->r = r;
     r->l = l;
