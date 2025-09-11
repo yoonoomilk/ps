@@ -5,21 +5,25 @@ class linked_list {
     T v;
     node(T v = T()) : l(nullptr), r(nullptr), v(v) {}
   };
-  node *s, *e;
+  node *s = new node(), *e = new node();
 
 public:
   linked_list() {
-    s = new node();
-    e = new node();
     s->r = e;
     e->l = s;
   }
-  linked_list(node *s, node *e) : s(s), e(e) {}
+  linked_list(node *l, node *r) {
+    s->r = l;
+    e->l = r;
+    l->l = s;
+    r->r = e;
+  }
 
-  void cut(node *s, node* e) {
+  linked_list cut(node *s, node* e) {
     node *l = s->l, *r = e->r;
     l->r = r;
     r->l = l;
+    return linked_list(s, e);
   }
 
   void append(node *loc, node *cur = nullptr) {
