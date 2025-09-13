@@ -9,4 +9,5 @@ public:
 
   int find(int i) { return i == pa[i] ? i : pa[i] = find(pa[i]); }
   bool merge(int a, int b) { return find(a) != find(b) && (pa[pa[a]] = pa[b], true); }
+  bool same(int a, int b) { return find(a) == find(b); }
 };
