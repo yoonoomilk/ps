@@ -19,6 +19,8 @@ class polygon : vector<pt> {
 public:
   using super::push_back;
   using super::size;
+  using super::begin;
+  using super::end;
 
   ll area2() {
     ll tmp = 0;
@@ -31,11 +33,14 @@ public:
 
   polygon convex_hull() {
     polygon tmp;
-    for(int i = 1;i < this->size();i++) if((*this)[0].x > (*this)[i].x || (*this)[0].x == (*this)[i].x && (*this)[0].y > (*this)[i].y) iter_swap(this->begin(), this->begin() + i);
+    auto cmp = [&](pt a, pt b) {
+      return a.y != b.y ? a.y > b.y : a.x < b.x;
+    };
+    for(int i = 1;i < this->size();i++) if(cmp((*this)[i], (*this)[0])) iter_swap(this->begin(), this->begin() + i);
     sort(++this->begin(), this->end(), [&](pt a, pt b) {
       int w = ccw((*this)[0], a, b);
-      if(w) return w > 0;
-      return a.x != b.x ? a.x < b.x : a.y < b.y;
+      if(w) return w < 0;
+      return cmp(a, b);
     });
     tmp.push_back((*this)[0]);
     tmp.push_back((*this)[1]);
@@ -43,7 +48,7 @@ public:
       while(tmp.size() >= 2) {
         pt cur = tmp.back();
         tmp.pop_back();
-        if(ccw(tmp.back(), cur, (*this)[i]) > 0) {
+        if(ccw(tmp.back(), cur, (*this)[i]) < 0) {
           tmp.push_back(cur);
           break;
         }
