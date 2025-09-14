@@ -1,17 +1,3 @@
-using ll = long long;
-struct pt {
-  int x, y;
-};
-
-istream& operator >> (istream& cin, pt& v) {
-  return cin >> v.x >> v.y;
-}
-
-int ccw(pt a, pt b, pt c) {
-  ll s = (ll)(b.x - a.x) * (c.y - b.y) - (ll)(c.x - b.x) * (b.y - a.y);
-  return (s > 0) - (s < 0);
-}
-
 class polygon : vector<pt> {
   using super = vector<pt>;
   using super::super;
@@ -34,14 +20,11 @@ public:
 
   void convex_hull() {
     polygon tmp;
-    auto cmp = [&](pt a, pt b) {
-      return a.y != b.y ? a.y > b.y : a.x < b.x;
-    };
-    for(int i = 1;i < this->size();i++) if(cmp((*this)[i], (*this)[0])) iter_swap(this->begin(), this->begin() + i);
+    for(int i = 1;i < this->size();i++) if((*this)[i] < (*this)[0]) iter_swap(this->begin(), this->begin() + i);
     sort(++this->begin(), this->end(), [&](pt a, pt b) {
       int w = ccw((*this)[0], a, b);
       if(w) return w < 0;
-      return cmp(a, b);
+      return a < b;
     });
     tmp.push_back((*this)[0]);
     tmp.push_back((*this)[1]);

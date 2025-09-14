@@ -20,19 +20,19 @@ istream& operator >> (istream& cin, pt& v) {
 
 ### distance
 ```cpp
-double dist(pt a, pt b) {
-  return hypot(a.x - b.x, a.y - b.y);
+double dist(pt a) {
+  return hypot(a.x, a.y);
 }
 
-ll dist2(pt a, pt b) {
-  return (ll)(a.x - b.x) * (a.x - b.x) + (ll)(a.y - b.y) * (a.y - b.y);
+ll dist2(pt a) {
+  return (ll)a.x * a.x + (ll)b.y * b.y;
 }
 ```
 
 ### CCW
 ```cpp
 int ccw(pt a, pt b, pt c) {
-  ll s = (ll)(b.x - a.x) * (c.y - b.y) - (ll)(c.x - b.x) * (b.y - a.y);
+  ll s = (ll)(b.x - a.x) * (c.y - a.y) - (ll)(b.x - a.x) * (c.y - a.y);
   return (s > 0) - (s < 0);
 }
 ```
