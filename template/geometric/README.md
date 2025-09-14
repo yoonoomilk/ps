@@ -1,13 +1,20 @@
 ## point
 ```cpp
-using pt = complex<int>;
-#define x real()
-#define y imag()
+struct pt {
+  int x, y;
+  pt operator- (pt& v) {
+    return {x - v.x, y - v.y};
+  }
+  bool operator== (pt& v) {
+    return x == v.x && y == v.y;
+  }
+  bool operator< (pt& v) {
+    return x != v.x ? x < v.x : y < v.y;
+  }
+};
 
 istream& operator >> (istream& cin, pt& v) {
-  int a, b; cin >> a >> b;
-  v = pt(a, b);
-  return cin;
+  return cin >> v.x >> v.y;
 }
 ```
 

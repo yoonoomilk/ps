@@ -21,6 +21,7 @@ public:
   using super::size;
   using super::begin;
   using super::end;
+  using super::operator[];
 
   ll area2() {
     ll tmp = 0;
