@@ -1,4 +1,4 @@
-## header
+## flag
 ```cpp
 #pragma GCC optimize("O3")
 #pragma GCC optimize("Ofast")
