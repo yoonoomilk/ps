@@ -31,7 +31,7 @@ public:
     return abs(tmp);
   }
 
-  polygon convex_hull() {
+  void convex_hull() {
     polygon tmp;
     auto cmp = [&](pt a, pt b) {
       return a.y != b.y ? a.y > b.y : a.x < b.x;
@@ -55,6 +55,6 @@ public:
       }
       tmp.push_back((*this)[i]);
     }
-    return tmp;
+    *this = tmp;
   }
 };
