@@ -1,12 +1,10 @@
 using ll = long long;
-using pt = complex<int>;
-#define x real()
-#define y imag()
+struct pt {
+  int x, y;
+};
 
 istream& operator >> (istream& cin, pt& v) {
-  int a, b; cin >> a >> b;
-  v = pt(a, b);
-  return cin;
+  return cin >> v.x >> v.y;
 }
 
 int ccw(pt a, pt b, pt c) {
@@ -26,7 +24,7 @@ public:
     ll tmp = 0;
     for(int i = 0;i < this->size();i++) {
       pt bef = i ? (*this)[i - 1] : this->back();
-      tmp += bef.x * (*this)[i].y - bef.y * (*this)[i].x;
+      tmp += (ll)bef.x * (*this)[i].y - (ll)bef.y * (*this)[i].x;
     }
     return abs(tmp);
   }
