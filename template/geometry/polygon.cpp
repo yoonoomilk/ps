@@ -20,11 +20,11 @@ public:
 
   void convex_hull() {
     polygon tmp;
-    for(int i = 1;i < this->size();i++) if((*this)[i] < (*this)[0]) iter_swap(this->begin(), this->begin() + i);
+    iter_swap(min_element(this->begin(), this->end()), this->begin());
     sort(++this->begin(), this->end(), [&](pt a, pt b) {
       int w = ccw((*this)[0], a, b);
       if(w) return w < 0;
-      return a < b;
+      return dist2((*this)[0] - a) < dist2((*this)[0] - b);
     });
     tmp.push_back((*this)[0]);
     tmp.push_back((*this)[1]);

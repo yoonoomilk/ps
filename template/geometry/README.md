@@ -2,15 +2,10 @@
 ```cpp
 struct pt {
   int x, y;
-  pt operator- (pt& v) {
-    return {x - v.x, y - v.y};
-  }
-  bool operator== (pt& v) {
-    return x == v.x && y == v.y;
-  }
-  bool operator< (pt& v) {
-    return x != v.x ? x < v.x : y < v.y;
-  }
+  pt operator+ (pt& v) { return {x + v.x, y + v.y}; }
+  pt operator- (pt& v) { return {x - v.x, y - v.y}; }
+  bool operator== (pt& v) { return x == v.x && y == v.y; }
+  bool operator< (pt& v) { return x != v.x ? x < v.x : y < v.y; }
 };
 
 istream& operator >> (istream& cin, pt& v) {
@@ -25,14 +20,14 @@ double dist(pt a) {
 }
 
 ll dist2(pt a) {
-  return (ll)a.x * a.x + (ll)b.y * b.y;
+  return (ll)a.x * a.x + (ll)a.y * a.y;
 }
 ```
 
 ### CCW
 ```cpp
 int ccw(pt a, pt b, pt c) {
-  ll s = (ll)(b.x - a.x) * (c.y - a.y) - (ll)(b.x - a.x) * (c.y - a.y);
+  ll s = (ll)(b.x - a.x) * (c.y - a.y) - (ll)(b.y - a.y) * (c.x - a.x);
   return (s > 0) - (s < 0);
 }
 ```

@@ -1,12 +1,12 @@
 ll rotating_calipers(polygon& poly) {
-  int idx = 0;
-  ll tmp = 0;
-  for(int i = 0;i < poly.size();i++) {
-    while(idx + 1 < poly.size() && ccw({0, 0}, poly[i + 1] - poly[i], poly[idx + 1] - poly[idx]) >= 0) {
-      tmp = max(tmp, dist2(poly[i] - poly[idx]));
-      idx++;
+  int sz = poly.size();
+  ll tmp = -1;
+  for(int i = 0, j = 0;i < sz;i++) {
+    while(ccw(poly[i], poly[(i + 1) % sz], poly[(i + 1) % sz] + poly[(j + 1) % sz] - poly[j]) <= 0 && i != j) {
+      j = (j + 1) % sz;
+      tmp = max(tmp, dist2(poly[i] - poly[j]));
     }
-    tmp = max(tmp, dist2(poly[i] - poly[idx]));
+    tmp = max(tmp, dist2(poly[i] - poly[j]));
   }
   return tmp;
 };
