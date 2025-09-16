@@ -10,5 +10,7 @@ bool point_in_polygon(polygon& poly, point cur) {
 }
 
 bool point_in_convex_polygon(polygon& poly, point cur) {
-  //TODO
+  for(int i = 0;i < poly.size();i++) {
+    point p1 = poly[i], p2 = poly[(i + 1) % poly.size()];
+  }
 }

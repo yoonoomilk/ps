@@ -10,7 +10,6 @@ struct point {
 };
 istream& operator>> (istream& cin, point& v) { return cin >> v.x >> v.y; }
 using polygon = vector<point>;
-using line = pair<point, point>;
 ```
 
 ### distance
@@ -31,8 +30,7 @@ ll true_ccw(point a, point b, point c) {
 
 ### cross
 ```cpp
-bool cross(line a, line b) {
-  point p1 = a.first, p2 = a.second, p3 = b.first, p4 = b.second;
+bool cross(point p1, point p2, point p3, point p4) {
   int p1p2 = ccw(p1, p2, p3) * ccw(p1, p2, p4);
   int p3p4 = ccw(p3, p4, p1) * ccw(p3, p4, p2);
   return (p1p2 <= 0 && p3p4 <= 0);
