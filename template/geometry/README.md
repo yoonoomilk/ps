@@ -1,4 +1,4 @@
-## point
+## struct
 ```cpp
 struct pt {
   int x, y;
@@ -11,6 +11,10 @@ struct pt {
 istream& operator >> (istream& cin, pt& v) {
   return cin >> v.x >> v.y;
 }
+
+using line = pair<pt, pt>;
+
+using polygon = vector<pt>;
 ```
 
 ### distance
@@ -30,11 +34,6 @@ int ccw(pt a, pt b, pt c) {
   ll s = (ll)(b.x - a.x) * (c.y - a.y) - (ll)(b.y - a.y) * (c.x - a.x);
   return (s > 0) - (s < 0);
 }
-```
-
-## line
-```cpp
-using line = pair<pt, pt>;
 ```
 
 ### cross
