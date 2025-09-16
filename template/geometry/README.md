@@ -12,9 +12,9 @@ istream& operator >> (istream& cin, pt& v) {
   return cin >> v.x >> v.y;
 }
 
-using line = pair<pt, pt>;
-
 using polygon = vector<pt>;
+
+using line = pair<pt, pt>;
 ```
 
 ### distance
