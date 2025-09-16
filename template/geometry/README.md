@@ -6,6 +6,7 @@ struct pt {
   pt operator- (pt& v) { return {x - v.x, y - v.y}; }
   bool operator== (pt& v) { return x == v.x && y == v.y; }
   bool operator< (pt& v) { return x != v.x ? x < v.x : y < v.y; }
+  ll dist2() { return (ll)x * x + (ll)y * y; }
 };
 istream& operator>> (istream& cin, pt& v) { return cin >> v.x >> v.y; }
 using polygon = vector<pt>;
@@ -16,10 +17,6 @@ using line = pair<pt, pt>;
 ```cpp
 double dist(pt a) {
   return hypot(a.x, a.y);
-}
-
-ll dist2(pt a) {
-  return (ll)a.x * a.x + (ll)a.y * a.y;
 }
 ```
 
