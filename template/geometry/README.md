@@ -6,6 +6,7 @@ struct point {
   point operator- (const point v) const { return {x - v.x, y - v.y}; }
   bool operator== (const point v) const { return x == v.x && y == v.y; }
   bool operator< (const point v) const { return x != v.x ? x < v.x : y < v.y; }
+  bool operator<= (const point v) const { return x != v.x ? x <= v.x : y <= v.y; }
   ll size() const { return (ll)x * x + (ll)y * y; }
 };
 istream& operator>> (istream& cin, point& v) { return cin >> v.x >> v.y; }
