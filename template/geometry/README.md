@@ -13,6 +13,9 @@ using polygon = vector<point>;
 using line = pair<point, point>;
 ```
 
+### distance
+[from point to line defined by two points](https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points)
+
 ### CCW
 ```cpp
 int ccw(point a, point b, point c) {
