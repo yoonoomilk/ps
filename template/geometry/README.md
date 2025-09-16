@@ -7,7 +7,7 @@ struct pt {
   bool operator== (pt& v) { return x == v.x && y == v.y; }
   bool operator< (pt& v) { return x != v.x ? x < v.x : y < v.y; }
 };
-istream& operator >> (istream& cin, pt& v) { return cin >> v.x >> v.y; }
+istream& operator>> (istream& cin, pt& v) { return cin >> v.x >> v.y; }
 using polygon = vector<pt>;
 using line = pair<pt, pt>;
 ```
