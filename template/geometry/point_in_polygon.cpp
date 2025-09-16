@@ -8,3 +8,7 @@ bool point_in_polygon(polygon& poly, point cur) {
   }
   return cnt % 2;
 }
+
+bool point_in_convex_polygon(polygon& poly, point cur) {
+  //TODO
+}
