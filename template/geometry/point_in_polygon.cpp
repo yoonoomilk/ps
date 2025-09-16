@@ -10,9 +10,6 @@ bool point_in_polygon(polygon& poly, point cur) {
 }
 
 bool point_in_convex_polygon(polygon& poly, point cur) {
-  for(int i = 1;i < poly.size();i++) {
-    point p1 = poly[i], p2 = poly[(i + 1) % poly.size()];
-    if(ccw(p1, p2, cur) < 0) return false;
-  }
+  for(int i = 0;i < poly.size();i++) if(ccw(poly[i], poly[(i + 1) % poly.size()], cur) < 0) return false;
   return true;
 }
