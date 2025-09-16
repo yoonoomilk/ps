@@ -14,7 +14,7 @@ using line = pair<point, point>;
 ```
 
 ### distance
-[from point to line defined by two points](https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points)
+[from point to line defined by two points](https://ko.wikipedia.org/wiki/점과_직선_사이의_거리#두_점을_지나는_직선에_대해)
 
 ### CCW
 ```cpp
