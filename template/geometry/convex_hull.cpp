@@ -4,7 +4,7 @@ polygon convex_hull(polygon& poly) {
   sort(++poly.begin(), poly.end(), [&](point a, point b) {
     int w = ccw(poly[0], a, b);
     if(w) return w > 0;
-    return dist2(poly[0] - a) < dist2(poly[0] - b);
+    return (poly[0] - a).size() < (poly[0] - b).size();
   });
   tmp.push_back(poly[0]);
   tmp.push_back(poly[1]);
