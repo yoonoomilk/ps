@@ -50,7 +50,7 @@ int cross(point p1, point p2, point p3, point p4) {
 }
 ```
 
-### intersection
+### intersection (only if cross() == 1)
 ```cpp
 pair<double, double> intersection(point p1, point p2, point p3, point p4) {
   ll l1 = (ll)p1.x * p2.y - (ll)p1.y * p2.x, l2 = (ll)p3.x * p4.y - (ll)p3.y * p4.x;
