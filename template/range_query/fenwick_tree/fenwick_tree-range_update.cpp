@@ -1,11 +1,10 @@
 template <typename T>
 class fenwick_tree {
   const int sz;
-  const T raw;
   vector<T> tree;
 
 public:
-  fenwick_tree(int sz, T raw = T()) : sz(sz), raw(raw), tree(sz + 1, raw) {}
+  fenwick_tree(int sz) : sz(sz), tree(sz + 1) {}
 
   void update(int l, int r, T v) {
     for(;l <= sz;l += l & -l) tree[l] += v;
@@ -13,7 +12,7 @@ public:
   }
 
   T operator() (int i) {
-    T s = raw;
+    T s = 0;
     for(;i;i -= i & -i) s += tree[i];
     return s;
   }
