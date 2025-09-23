@@ -16,6 +16,7 @@ class dynamic_segment_tree {
   }
 
   void update(int cur, ll s, ll e, ll i, T& v) {
+    if(i < s || e < i) return;
     if(s == e) {
       tree[cur].v += v;
       return;
@@ -47,18 +48,18 @@ public:
     update(0, 0, sz - 1, i, v);
   }
 
-  T query(ll l, ll r) {
+  T operator() (ll l, ll r) {
     return query(0, 0, sz - 1, l, r);
   }
 };
 
-int kth(int k) {
-  int cur = 0, s = ;
-  while(cur != -1) {
-    if(tree[tree[cur].l].v < k) {
-      k -= tree[tree[cur].l].v;
-      cur = tree[cur].r;
-    } else cur = tree[cur].l;
-  }
-  return cur;
+ll kth(int cur, ll s, ll e, T v) {
+  if(s == e) return s;
+  ll m = (s + e) / 2;
+  if(tree[tree[cur].l].v >= v) return kth(tree[cur].l, s, m, v);
+  else return kth(tree[cur].r, m + 1, e, v - tree[tree[cur].l].v);
+}
+
+ll kth(T k) {
+  return kth(0, 0, sz - 1, k);
 }
