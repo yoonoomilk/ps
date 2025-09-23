@@ -37,6 +37,17 @@ void init() {
   for(int i = sz;--i;) tree[i] = op(tree[i * 2], tree[i * 2 + 1]);
 }
 
+int kth(int k) {
+  int s = 1;
+  while(s < sz) {
+    if(tree[s * 2] < k) {
+      k -= tree[s * 2];
+      s = s * 2 + 1;
+    } else s = s * 2;
+  }
+  return s;
+}
+
 T top() {
   return tree[1];
 }
