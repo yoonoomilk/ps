@@ -51,3 +51,14 @@ public:
     return query(0, 0, sz - 1, l, r);
   }
 };
+
+int kth(int k) {
+  int cur = 0, s = ;
+  while(cur != -1) {
+    if(tree[tree[cur].l].v < k) {
+      k -= tree[tree[cur].l].v;
+      cur = tree[cur].r;
+    } else cur = tree[cur].l;
+  }
+  return cur;
+}

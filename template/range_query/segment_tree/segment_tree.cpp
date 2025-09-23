@@ -45,7 +45,7 @@ int kth(int k) {
       s = s * 2 + 1;
     } else s = s * 2;
   }
-  return s;
+  return s - sz;
 }
 
 T top() {
