@@ -44,8 +44,7 @@ public:
   }
 };
 
-template <>
-class static_graph<void> {
+class static_graph {
   struct edge {
     int u;
     edge() = default;
