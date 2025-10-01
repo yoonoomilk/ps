@@ -64,3 +64,5 @@ public:
     }
   }
 };
+
+// https://gist.github.com/koosaga/44532e5dec947132ee55da0458255e05
