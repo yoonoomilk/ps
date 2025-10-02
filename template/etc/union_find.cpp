@@ -3,11 +3,16 @@ class union_find {
   vector<int> pa;
 
 public:
-  union_find(int n) : sz(n + 1), pa(sz) {
-    iota(pa.begin(), pa.end(), 0);
-  }
+  union_find(int n) : sz(n + 1), pa(sz, -1) {}
 
-  int find(int i) { return i == pa[i] ? i : pa[i] = find(pa[i]); }
-  bool merge(int a, int b) { return find(a) != find(b) && (pa[pa[a]] = pa[b], true); }
+  int find(int i) { return pa[i] < 0 ? i : pa[i] = find(pa[i]); }
+  bool merge(int a, int b) {
+    a = find(a), b = find(b);
+    if(a == b) return false;
+    if(-pa[a] < -pa[b]) swap(a, b);
+    pa[a] += pa[b];
+    pa[b] = a;
+    return true;
+  }
   bool same(int a, int b) { return find(a) == find(b); }
 };
