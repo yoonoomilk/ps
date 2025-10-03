@@ -22,7 +22,7 @@ public:
     }
     for(int i = 0, j = 0;i < sz;i++) {
       if(pos[i]) {
-        while(i + j < sz && suf[pos[i]-1] + j < sz && s[i + j] == s[suf[pos[i]-1] + j]) j++;
+        while(s[i + j] == s[suf[pos[i] - 1] + j]) j++;
         lcp[pos[i]] = j;
         j = max(0, j - 1);
       } else lcp[pos[i]] = -1;
@@ -57,7 +57,7 @@ public:
     }
     for(int i = 0, j = 0;i < sz;i++) {
       if(pos[i]) {
-        while(i + j < sz && suf[pos[i]-1] + j < sz && s[i + j] == s[suf[pos[i]-1] + j]) j++;
+        while(s[i + j] == s[suf[pos[i] - 1] + j]) j++;
         lcp[pos[i]] = j;
         if(j > 0) j--;
       } else lcp[pos[i]] = -1;
