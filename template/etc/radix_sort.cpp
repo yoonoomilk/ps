@@ -1,12 +1,3 @@
-## 종류
-* [radix sort](#radix-sort)
-  * [204ms](http://boj.kr/2628384ad9d94edfa59cdff3a782d9a3)
-* merge sort
-
-## 코드
-
-### radix sort
-```cpp
 template <typename I>
 void radix_sort(I s, I e) {
   for(int t = 0;t < 32;t += 8) {
@@ -19,4 +10,3 @@ void radix_sort(I s, I e) {
     }
   }
 }
-```

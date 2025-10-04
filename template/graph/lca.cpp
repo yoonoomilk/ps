@@ -1,38 +1,43 @@
 class lowest_common_ancestor {
   const int sz;
+  vector<int> weight, dep, pa, top;
   vector<vector<int>> edges;
-  struct lca_op {
-    pair<int, int> operator() (pair<int, int> a, pair<int, int> b) {
-      return min(a, b);
-    }
-  };
-  segment_tree<pair<int, int>, lca_op> seg;
-  vector<int> in;
 
 public:
-  lowest_common_ancestor(int n) : sz(n + 1), edges(sz), seg(sz * 2, {1e9, -1}), in(sz) {}
+  lowest_common_ancestor(int n) : sz(n + 1), 
+    weight(sz), dep(sz), pa(sz), top(sz),
+    edges(sz) {}
 
   void add(int a, int b) {
     edges[a].push_back(b);
   }
 
   void init(int root) {
-    int ettn = 0;
-    function<void(int, int, int)> ett = [&](int cur, int d, int pa) {
-      seg.update(ettn, {d, cur});
-      in[cur] = ettn++;
-      for(int i : edges[cur]) if(i != pa) {
-        ett(i, d + 1, cur);
-        seg.update(ettn++, {d, cur});
+    function<void(int, int)> dfs = [&](int cur, int bef) {
+      weight[cur] = 1;
+      dep[cur] = dep[bef] + 1;
+      pa[cur] = bef;
+      for(int& i : edges[cur]) if(i != bef) {
+        dfs(i, cur);
+        weight[cur] += weight[i];
+        if(weight[i] > weight[edges[cur][0]]) swap(i, edges[cur][0]);
       }
     };
-    ett(root, 1, -1);
+    dfs(root, 0);
+    function <void(int, int)> ett = [&](int cur, int bef) {
+      for(int i : edges[cur]) if(i != bef) {
+        top[i] = i == edges[cur][0] ? top[cur] : i;
+        ett(i, cur);
+      }
+    };
+    top[root] = 1;
+    ett(root, 0);
   }
 
   int operator() (int a, int b) {
-    if(in[a] > in[b]) swap(a, b);
-    return seg(in[a], in[b]).second;
+    for(;top[a] != top[b];a = pa[top[a]]) {
+      if(dep[top[a]] < dep[top[b]]) swap(a, b);
+    }
+    return dep[a] < dep[b] ? a : b;
   }
 };
-
-//https://infossm.github.io/blog/2022/08/19/farachcoltonbender/

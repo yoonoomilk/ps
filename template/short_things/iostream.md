@@ -1,18 +1,15 @@
-## iostream
-### custom iostream
+## custom iostream
 ```cpp
 istream& operator >> (istream& cin, T& v) {
-  cin >> T;
-  return cin;
+  return cin >> T;
 }
 
 ostream& operator << (ostream& cout, T& v) {
-  cout << T;
-  return cout;
+  return cout << T;
 }
 ```
 
-### cout precision
+## cout precision
 ```cpp
 cout << fixed;
 

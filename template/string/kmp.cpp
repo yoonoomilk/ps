@@ -22,9 +22,11 @@ vector<int> kmp(string_view s, string_view p) {
 
 class kmp {
   const int ssz, psz;
-  vector<int> pi, match;
+  vector<int> pi;
 
 public:
+  vector<int> match;
+
   template <typename I>
   kmp(I s, I se, I p, I pe) : ssz(distance(s, se)), psz(distance(p, pe)), pi(psz) {
     for(int i = 1, j = 0;i < psz;i++) {
@@ -39,9 +41,5 @@ public:
         j = pi[j];
       } else j++;
     }
-  }
-
-  vector<int>& operator() {
-    return match;
   }
 };
