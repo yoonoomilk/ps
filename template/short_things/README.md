@@ -1,8 +1,3 @@
-## constants
-```cpp
-const double PI = acos(-1);
-```
-
 ## iostream
 ### custom iostream
 ```cpp
