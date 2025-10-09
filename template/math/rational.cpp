@@ -10,8 +10,7 @@ struct rational {
   rational operator* (const rational v) const { return rational(n * v.n, d * v.d); }
   rational operator/ (const rational v) const { return rational(n * v.d, d * v.n); }
   double near() const { return (double)n / d; }
-  double floor() const { return n / d; }
-  double ceil() const { return n / d + (n % d != 0); }
-  bool operator== (const rational v) const { return n == v.n && d == v.d; }
-  bool operator< (const rational v) const { return n * v.d < d * v.n; }
+  ll floor() const { return n / d; }
+  ll ceil() const { return n / d + (n % d != 0); }
+  strong_ordering operator<=> (const rational v) const { return n * v.d <=> d * v.n; }
 };
