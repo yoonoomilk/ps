@@ -1,22 +1,4 @@
-template <int n>
-class sieve {
-  bitset<n / 2> not_prime;
-
-public:
-  vector<int> primes = {2};
-
-  seive() {
-    for(ll i = 3;i <= n;i += 2) if(!not_prime[i]) {
-      primes.push_back(i);
-      for(ll j = i * i;j <= n;j += i * 2) not_prime[j] = true;
-    }
-  }
-
-  bool operator() (int i) {
-    return i != 2 && i % 2 && !not_prime[i / 2];
-  }
-};
-
+// segmented sieve
 template <ll n, int chunk>
 class sieve {
   bitset<chunk> is_prime;
@@ -52,3 +34,6 @@ public:
   bool operator() (ll i) { return binary_search(primes.begin(), primes.end(), i); }
   int count() {return primes.size(); }
 };
+
+// linear sieve
+// https://github.com/justiceHui/icpc-teamnote/blob/master/code/Math/LinearSieve.cpp
