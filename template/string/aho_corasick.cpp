@@ -1,5 +1,3 @@
-// TODO
-
 struct aho_corasick {
   map<char, aho_corasick*> arr;
   aho_corasick* fail = nullptr;
