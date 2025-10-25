@@ -1,13 +1,7 @@
 template <typename T, typename comp = less<T>>
 class eraseable_pq {
   priority_queue<T, vector<T>, comp> pq, del;
-
-  void flush() {
-    while(del.size() && pq.top() == del.top()) {
-      pq.pop();
-      del.pop();
-    }
-  }
+  void flush() { while(del.size() && pq.top() == del.top()) pq.pop(), del.pop(); }
 public:
   eraseable_pq() {}
   size_t size() { return pq.size() - del.size(); };

@@ -1,6 +1,4 @@
-using ll = long long;
-
-template <int sz, int mod = 1'000'000'007>
+template <int sz, int mod>
 class combination {
   int fact[sz + 1], inv[sz + 1];
 

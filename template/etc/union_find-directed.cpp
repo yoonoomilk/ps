@@ -9,7 +9,6 @@ public:
   bool merge(int a, int b) {
     a = find(a), b = find(b);
     if(a == b) return false;
-    if(-pa[a] < -pa[b]) swap(a, b);
     pa[a] += pa[b];
     pa[b] = a;
     return true;

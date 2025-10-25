@@ -22,5 +22,3 @@ public:
     for(int i = 0;i < n;i++) if(s[i] > s[nxt]) dir[i] *= -1;
   }
 }
-
-//https://en.wikipedia.org/wiki/Steinhaus%E2%80%93Johnson%E2%80%93Trotter_algorithm

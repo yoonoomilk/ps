@@ -1,4 +1,3 @@
-// segmented sieve
 template <ll n, int chunk>
 class sieve {
   bitset<chunk> is_prime;
@@ -34,6 +33,3 @@ public:
   bool operator() (ll i) { return binary_search(primes.begin(), primes.end(), i); }
   int count() {return primes.size(); }
 };
-
-// linear sieve
-// https://github.com/justiceHui/icpc-teamnote/blob/master/code/Math/LinearSieve.cpp

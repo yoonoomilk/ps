@@ -17,5 +17,3 @@ public:
     return ((arr[e] - (ll)arr[s - 1] * _pow[e - s + 1]) % M + M) % M;
   }
 };
-
-// 1e9+7, 1'234'567'891, (1LL<<63)-25
