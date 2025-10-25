@@ -10,4 +10,5 @@ struct point {
   friend istream& operator>> (istream& cin, point& v) { return cin >> v.x >> v.y; }
   friend ostream& operator<< (ostream& cout, point& v) { return cout << v.x << ' '<< v.y; }
 };
+struct line { point s, t; };
 using polygon = vector<point>;
