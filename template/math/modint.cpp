@@ -21,4 +21,4 @@ public:
   }
   friend ostream& operator<< (ostream& cout, _modint v) { return cout << v.val; }
 };
-using modint = _modint<mod>
+using modint = _modint<mod>;
