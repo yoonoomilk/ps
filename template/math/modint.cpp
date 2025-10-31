@@ -4,6 +4,7 @@ class _modint {
 
 public:
   _modint(ll n = 0) : val((n %= mod) < 0 ? n + mod : n) {}
+  _modint(_modint v) : val(v.val) {}
   _modint operator+ (const _modint v) const { return _modint(val + v.val); }
   _modint operator+= (const _modint v) { return *this = _modint(val + v.val); }
   _modint operator- (const _modint v) const { return _modint(val - v.val); }
@@ -12,7 +13,7 @@ public:
   _modint operator*= (const _modint v) { return *this = _modint(val * v.val); }
   _modint operator/ (const _modint v) const { return _modint(val * _pow<mod>(v.val, mod - 2)); }
   _modint operator/= (const _modint v) { return *this = _modint(val * _pow<mod>(v.val, mod - 2)); }
-  _modint operator- () { return _modint(val ? mod - val : val); }
+  _modint operator- () { return _modint(-val); }
 
   friend istream& operator>> (istream& cin, _modint& v) {
     ll a; cin >> a;
