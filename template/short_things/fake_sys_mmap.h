@@ -1,8 +1,3 @@
-#ifndef FAKE_SYS_MMAN_H
-#define FAKE_SYS_MMAN_H
-
-#include <stdint.h>
-
 #define PROT_READ   0x1
 #define PROT_WRITE  0x2
 #define PROT_EXEC   0x4
@@ -23,5 +18,3 @@ inline int munmap(void* addr, size_t length) {
 inline int mprotect(void* addr, size_t len, int prot) {
   return 0;
 }
-
-#endif // FAKE_SYS_MMAN_H
