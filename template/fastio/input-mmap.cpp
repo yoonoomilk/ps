@@ -1,4 +1,3 @@
-#include <concepts>
 #include <sys/stat.h>
 #include <sys/mman.h>
 
@@ -62,7 +61,7 @@ public:
   requires floating_point<T>
   INPUT& operator >> (T& v) {
     string s;
-    cin >> s;
+    *this >> s;
     v = stod(s);
     return *this;
   }
