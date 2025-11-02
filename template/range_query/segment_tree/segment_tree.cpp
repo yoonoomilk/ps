@@ -28,7 +28,6 @@ public:
   }
 };
 
-// 추가
 void set(int i, T v) {
   tree[i + sz] = v;
 }

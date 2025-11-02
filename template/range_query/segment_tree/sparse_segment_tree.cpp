@@ -7,7 +7,7 @@ class sparse_segment_tree {
     int l, r;
     T v;
     L lazy;
-    node(const T &a, const L &b) : l(-1), r(-1), v(a), lazy(b) {}
+    node(const T& a, const L& b) : l(-1), r(-1), v(a), lazy(b) {}
   };
   vector<node> tree;
   Merge op;
@@ -79,7 +79,7 @@ struct op {
 };
 
 struct upd {
-  void operator() (ll &a, ll b, int cnt) {
+  void operator() (ll& a, ll b, int cnt) {
     a += b * cnt;
   }
 };

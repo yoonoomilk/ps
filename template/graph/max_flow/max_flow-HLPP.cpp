@@ -34,7 +34,7 @@ public:
     excess[e] = 1;
     cnt[0] = sz - 1;
     for(int i = 0;i < sz;i++) ptr[i] = edges[i].data();
-    for(edge &i : edges[s]) apply(i, i.cap);
+    for(edge& i : edges[s]) apply(i, i.cap);
     for(int top = 0;;) {
       while(level_list[top].empty()) if(!top--) return -excess[s];
       int cur = level_list[top].top();
@@ -42,7 +42,7 @@ public:
       while(excess[cur] > 0) {
         if(ptr[cur] == edges[cur].data() + edges[cur].size()) {
           level[cur] = INT_MAX;
-          for(edge &i : edges[cur]) if(i.cap && level[cur] > level[i.loc] + 1) {
+          for(edge& i : edges[cur]) if(i.cap && level[cur] > level[i.loc] + 1) {
             level[cur] = level[i.loc] + 1;
             ptr[cur] = &i;
           }

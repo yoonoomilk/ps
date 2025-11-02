@@ -11,7 +11,7 @@ public:
     for(int i = 1;i <= sz;i++) sort(tree[i].begin(), tree[i].end());
   }
 
-  int operator() (int i, T &k) {
+  int operator() (int i, T& k) {
     int s = 0;
     for(;i;i -= i & -i) s += cnt(tree[i], k);
     return s;

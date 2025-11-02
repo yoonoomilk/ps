@@ -7,6 +7,6 @@ while(q.size()) {
   q.pop();
   if(visited[cur]) continue;
   visited[cur] = true;
-  for(auto &i : flow.edges[cur]) if(i.cap > i.flow) q.push(i.loc);
+  for(auto& i : flow.edges[cur]) if(i.cap > i.flow) q.push(i.loc);
 }
 ```
