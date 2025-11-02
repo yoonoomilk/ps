@@ -2,7 +2,7 @@ struct trie {
   vector<pair<char, trie>> arr;
   bool have = false;
 
-  trie() { }
+  trie() {}
 
   trie* child(char c) {
     for(auto& [k, v] : arr) if(k == c) return &v;

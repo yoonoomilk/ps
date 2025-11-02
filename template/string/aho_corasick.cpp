@@ -5,7 +5,7 @@ struct aho_corasick {
   aho_corasick* fail = nullptr;
   int have = 0;
 
-  aho_corasick() { }
+  aho_corasick() {}
   ~aho_corasick() {
     for(auto [c, nxt] : arr) delete nxt;
   }

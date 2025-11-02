@@ -20,7 +20,7 @@ class max_flow {
   }
 
 public:
-  max_flow(int n) : sz(n), edges(sz), excess(sz), level(sz), level_list(sz * 2) { }
+  max_flow(int n) : sz(n), edges(sz), excess(sz), level(sz), level_list(sz * 2) {}
 
   void add(int a, int b, int cap, bool directed = true) {
     edges[a].emplace_back(b, cap, 0, edges[b].size());

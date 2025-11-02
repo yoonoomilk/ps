@@ -2,7 +2,10 @@ struct trie {
   map<char, trie*> arr;
   bool have = false;
 
-  trie() { }
+  trie() {}
+  ~trie() {
+    for(auto [_, it] : arr) delete it;
+  }
 
   trie* child(char c) {
     if(auto it = arr.find(c);it != arr.end()) return it->second;
@@ -15,9 +18,8 @@ struct trie {
     for(;s != e;s++) {
       trie* nxt = cur->child(*s);
       if(nxt == nullptr) {
-        trie* tmp = new trie();
-        cur->arr[*s] = tmp;
-        nxt = tmp;
+        auto [it, _] = cur->arr.insert({*s, new trie()});
+        nxt = it->second;
       }
       cur = nxt;
     }

@@ -1,7 +1,7 @@
 template <typename I>
 vector<int> manacher(I s, I e) {
   int sz = distance(s, e) * 2 + 1;
-  vector<iterator_traits<I>::value_type> str(sz);
+  vector<decltype(*s)> str(sz);
   vector<int> arr(sz);
   for(int i = 1;s != e;i += 2) str[i] = *s++;
   int m = 0, r = 0;
