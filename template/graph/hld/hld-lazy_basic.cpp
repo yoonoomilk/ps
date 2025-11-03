@@ -15,7 +15,7 @@ public:
   }
 
   void init() {
-    auto dfs = [&](auto&& dfs, int cur, int bef) {
+    auto dfs = [&](auto&& dfs, int cur, int bef) -> void {
       weight[cur] = 1;
       dep[cur] = dep[bef] + 1;
       pa[cur] = bef;
@@ -27,7 +27,7 @@ public:
     };
     dfs(dfs, 1, 0);
     int ettn = 0;
-    auto ett = [&](auto&& ett, int cur, int bef) {
+    auto ett = [&](auto&& ett, int cur, int bef) -> void {
       in[cur] = ettn++;
       for(int i : edges[cur]) if(i != bef) {
         top[i] = i == edges[cur][0] ? top[cur] : i;
