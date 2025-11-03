@@ -1,0 +1,3 @@
+auto f = [&](auto&& f, args...) { f(f, args...); }
+to
+auto f = [&](this auto& f, args...) { f(args...); }
