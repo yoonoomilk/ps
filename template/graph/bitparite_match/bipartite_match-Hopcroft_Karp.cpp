@@ -32,15 +32,15 @@ public:
         }
       }
       if(!flag) break;
-      function<bool(int)> dfs = [&](int cur) {
-        for(int i : edges[cur]) if(idx_r[i] == -1 || level[idx_r[i]] == level[cur] + 1 && dfs(idx_r[i])) {
+      auto dfs = [&](auto&& dfs, int cur) {
+        for(int i : edges[cur]) if(idx_r[i] == -1 || level[idx_r[i]] == level[cur] + 1 && dfs(dfs, idx_r[i])) {
           idx_l[cur] = i;
           idx_r[i] = cur;
           return true;
         }
         return false;
       };
-      for(int i = 0;i < l;i++) if(idx_l[i] == -1 && dfs(i)) ret++;
+      for(int i = 0;i < l;i++) if(idx_l[i] == -1 && dfs(dfs, i)) ret++;
     }
     return ret;
   }

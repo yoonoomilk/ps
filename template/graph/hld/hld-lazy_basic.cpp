@@ -15,27 +15,27 @@ public:
   }
 
   void init() {
-    function<void(int, int)> dfs = [&](int cur, int bef) {
+    auto dfs = [&](auto&& dfs, int cur, int bef) {
       weight[cur] = 1;
       dep[cur] = dep[bef] + 1;
       pa[cur] = bef;
       for(int& i : edges[cur]) if(i != bef) {
-        dfs(i, cur);
+        dfs(dfs, i, cur);
         weight[cur] += weight[i];
         if(weight[i] > weight[edges[cur][0]]) swap(i, edges[cur][0]);
       }
     };
-    dfs(1, 0);
+    dfs(dfs, 1, 0);
     int ettn = 0;
-    function <void(int, int)> ett = [&](int cur, int bef) {
+    auto ett = [&](auto&& ett, int cur, int bef) {
       in[cur] = ettn++;
       for(int i : edges[cur]) if(i != bef) {
         top[i] = i == edges[cur][0] ? top[cur] : i;
-        ett(i, cur);
+        ett(ett, i, cur);
       }
     };
     top[1] = 1;
-    ett(1, 0);
+    ett(ett, 1, 0);
   }
 
   void update(int a, int b, T v) {

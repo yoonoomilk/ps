@@ -1,7 +1,7 @@
 map<ll, int> pollard_rho(ll n) {
   srand(time(nullptr));
   map<ll, int> tmp;
-  function<void(ll)> dfs = [&](ll n) {
+  auto dfs = [&](auto&& dfs, ll n) {
     if(n == 1) return;
     if(miller_rabin(n)) {
       tmp[n]++;
@@ -16,13 +16,13 @@ map<ll, int> pollard_rho(ll n) {
         d = gcd(abs(x - y), n);
       }
       if(d != n) {
-        dfs(d);
-        dfs(n / d);
+        dfs(dfs, d);
+        dfs(dfs, n / d);
         break;
       }
     }
   };
   for(;n % 2 == 0;n /= 2) tmp[2]++;
-  dfs(n);
+  dfs(dfs, n);
   return tmp;
 }

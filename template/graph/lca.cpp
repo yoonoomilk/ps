@@ -13,25 +13,25 @@ public:
   }
 
   void init(int root) {
-    function<void(int, int)> dfs = [&](int cur, int bef) {
+    auto dfs = [&](auto&& dfs, int cur, int bef) {
       weight[cur] = 1;
       dep[cur] = dep[bef] + 1;
       pa[cur] = bef;
       for(int& i : edges[cur]) if(i != bef) {
-        dfs(i, cur);
+        dfs(dfs, i, cur);
         weight[cur] += weight[i];
         if(weight[i] > weight[edges[cur][0]]) swap(i, edges[cur][0]);
       }
     };
-    dfs(root, 0);
-    function <void(int, int)> ett = [&](int cur, int bef) {
+    dfs(dfs, root, 0);
+    auto ett = [&](auto&& ett, int cur, int bef) {
       for(int i : edges[cur]) if(i != bef) {
         top[i] = i == edges[cur][0] ? top[cur] : i;
-        ett(i, cur);
+        ett(ett, i, cur);
       }
     };
     top[root] = 1;
-    ett(root, 0);
+    ett(ett, root, 0);
   }
 
   int operator() (int a, int b) {

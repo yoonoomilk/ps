@@ -30,12 +30,12 @@ public:
         }
       }
       if(level[e] == -1) break;
-      function<int(int, int)> dfs = [&](int cur, int tmp) {
+      auto dfs = [&](auto&& dfs, int cur, int tmp) {
         if(cur == e) return tmp;
         for(int& i = idx[cur];i < edges[cur].size();i++) {
           edge& j = edges[cur][i];
           if(level[cur] + 1 == level[j.loc] && j.cap > j.flow) {
-            int nxt = dfs(j.loc, min(tmp, j.cap - j.flow));
+            int nxt = dfs(dfs, j.loc, min(tmp, j.cap - j.flow));
             if(nxt) {
               j.flow += nxt;
               edges[j.loc][j.rev].flow -= nxt;
@@ -45,7 +45,7 @@ public:
         }
         return 0;
       };
-      for(int i;i = dfs(s, INT_MAX);ret += i);
+      for(int i;i = dfs(dfs, s, INT_MAX);ret += i);
     }
     return ret;
   }

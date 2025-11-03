@@ -17,11 +17,11 @@ public:
     vector<bool> finished(sz);
     stack<int> st;
     int cnt = 0;
-    function<int(int)> dfs = [&](int cur) {
+    auto dfs = [&](auto&& dfs, int cur) {
       st.push(cur);
       int bef = pa[cur] = ++cnt;
       for(int i : edges[cur]) {
-        if(pa[i] == -1) bef = min(bef, dfs(i));
+        if(pa[i] == -1) bef = min(bef, dfs(dfs, i));
         else if(!finished[i]) bef = min(bef, pa[i]);
       }
       if(bef == pa[cur]) {
@@ -38,7 +38,7 @@ public:
       }
       return bef;
     };
-    for(int i = 1;i < sz;i++) if(pa[i] == -1) dfs(i);
+    for(int i = 1;i < sz;i++) if(pa[i] == -1) dfs(dfs, i);
     dag.resize(scc.size());
     for(int i = 1;i < sz;i++) for(int j : edges[i]) if(idx[i] != idx[j]) dag[idx[i]].push_back(idx[j]);
     for(auto& i : dag) {

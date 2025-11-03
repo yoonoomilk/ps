@@ -13,13 +13,13 @@ public:
     int ret = 0;
     vector<bool> visited(l);
     vector<int> idx(r, -1);
-    function<bool(int)> dfs = [&](int cur) {
+    auto dfs = [&](auto&& dfs, int cur) {
       visited[cur] = true;
       for(int i : edges[cur]) if(idx[i] == -1) {
         idx[i] = cur;
         return true;
       }
-      for(int i : edges[cur]) if(idx[i] != -1 && !visited[idx[i]] && dfs(idx[i])) {
+      for(int i : edges[cur]) if(idx[i] != -1 && !visited[idx[i]] && dfs(dfs, idx[i])) {
         idx[i] = cur;
         return true;
       }
@@ -27,7 +27,7 @@ public:
     };
     for(int i = 0;i < l;i++) {
       visited.assign(l, 0);
-      ret += dfs(i);
+      ret += dfs(dfs, i);
     }
     return ret;
   }
