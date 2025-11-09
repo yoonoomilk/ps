@@ -15,23 +15,23 @@ public:
   }
 
   void init() {
-    auto dfs = [&](auto&& dfs, int cur, int bef) -> void {
+    auto dfs = [&](auto& self, int cur, int bef) -> void {
       weight[cur] = 1;
       dep[cur] = dep[bef] + 1;
       pa[cur] = bef;
       for(int& i : edges[cur]) if(i != bef) {
-        dfs(dfs, i, cur);
+        self(self, i, cur);
         weight[cur] += weight[i];
         if(weight[i] > weight[edges[cur][0]]) swap(i, edges[cur][0]);
       }
     };
     dfs(dfs, 1, 0);
     int ettn = 0;
-    auto ett = [&](auto&& ett, int cur, int bef) -> void {
+    auto ett = [&](auto& self, int cur, int bef) -> void {
       in[cur] = ettn++;
       for(int i : edges[cur]) if(i != bef) {
         top[i] = i == edges[cur][0] ? top[cur] : i;
-        ett(ett, i, cur);
+        self(self, i, cur);
       }
     };
     top[1] = 1;

@@ -17,11 +17,11 @@ public:
     vector<bool> finished(sz);
     stack<int> st;
     int cnt = 0;
-    auto dfs = [&](auto&& dfs, int cur) {
+    auto dfs = [&](auto& self, int cur) -> int {
       st.push(cur);
       int bef = pa[cur] = ++cnt;
       for(int i : edges[cur]) {
-        if(pa[i] == -1) bef = min(bef, dfs(dfs, i));
+        if(pa[i] == -1) bef = min(bef, self(self, i));
         else if(!finished[i]) bef = min(bef, pa[i]);
       }
       if(bef == pa[cur]) {

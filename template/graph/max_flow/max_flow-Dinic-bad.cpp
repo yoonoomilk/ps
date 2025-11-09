@@ -29,12 +29,12 @@ public:
       }
       if(level[e] == -1) break;
       vector<int> idx(sz);
-      auto dfs = [&](auto&& dfs, int cur, int tmp) {
+      auto dfs = [&](auto& self, int cur, int tmp) -> int {
         if(cur == e) return tmp;
         for(int& i = idx[cur];i < edges[cur].size();i++) {
           int j = edges[cur][i];
           if(level[cur] + 1 == level[j] && cap[cur][j] > flow[cur][j]) {
-            int nxt = dfs(dfs, j, min(cap[cur][j] - flow[cur][j], tmp));
+            int nxt = self(self, j, min(cap[cur][j] - flow[cur][j], tmp));
             if(nxt) {
               flow[cur][j] += nxt;
               flow[j][cur] -= nxt;

@@ -13,13 +13,13 @@ public:
     int ret = 0;
     vector<bool> visited(l);
     vector<int> idx(r, -1);
-    auto dfs = [&](auto&& dfs, int cur) {
+    auto dfs = [&](auto& self, int cur) -> bool {
       visited[cur] = true;
       for(int i : edges[cur]) if(idx[i] == -1) {
         idx[i] = cur;
         return true;
       }
-      for(int i : edges[cur]) if(idx[i] != -1 && !visited[idx[i]] && dfs(dfs, idx[i])) {
+      for(int i : edges[cur]) if(idx[i] != -1 && !visited[idx[i]] && self(self, idx[i])) {
         idx[i] = cur;
         return true;
       }

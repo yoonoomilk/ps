@@ -32,8 +32,8 @@ public:
         }
       }
       if(!flag) break;
-      auto dfs = [&](auto&& dfs, int cur) {
-        for(int i : edges[cur]) if(idx_r[i] == -1 || level[idx_r[i]] == level[cur] + 1 && dfs(dfs, idx_r[i])) {
+      auto dfs = [&](auto& self, int cur) -> bool {
+        for(int i : edges[cur]) if(idx_r[i] == -1 || level[idx_r[i]] == level[cur] + 1 && self(self, idx_r[i])) {
           idx_l[cur] = i;
           idx_r[i] = cur;
           return true;

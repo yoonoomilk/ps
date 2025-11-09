@@ -30,12 +30,12 @@ public:
         }
       }
       if(level[e] == -1) break;
-      auto dfs = [&](auto&& dfs, int cur, int tmp) {
+      auto dfs = [&](auto& self, int cur, int tmp) -> int {
         if(cur == e) return tmp;
         for(int& i = idx[cur];i < edges[cur].size();i++) {
           edge& j = edges[cur][i];
           if(level[cur] + 1 == level[j.loc] && j.cap > j.flow) {
-            int nxt = dfs(dfs, j.loc, min(tmp, j.cap - j.flow));
+            int nxt = self(self, j.loc, min(tmp, j.cap - j.flow));
             if(nxt) {
               j.flow += nxt;
               edges[j.loc][j.rev].flow -= nxt;

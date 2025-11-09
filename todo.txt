@@ -1,6 +1,0 @@
-auto f = [&](auto&& f, args...) { f(f, args...); }
-to
-[&](this auto& f, args...) -> T { f(args...); }()
-
-nice bbst(avl tree)
-https://gist.github.com/justiceHui/a8406518891ca0dba9c7518f8224378b

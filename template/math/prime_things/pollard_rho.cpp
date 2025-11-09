@@ -1,7 +1,7 @@
 vector<ll> pollard_rho(ll n) {
   srand(time(nullptr));
   vector<ll> tmp;
-  auto dfs = [&](auto&& dfs, ll n) {
+  auto dfs = [&](auto& self, ll n) -> void {
     if(n == 1) return;
     if(miller_rabin(n)) {
       tmp.push_back(n);
@@ -16,8 +16,8 @@ vector<ll> pollard_rho(ll n) {
         d = gcd(abs(x - y), n);
       }
       if(d != n) {
-        dfs(dfs, d);
-        dfs(dfs, n / d);
+        self(self, d);
+        self(self, n / d);
         break;
       }
     }
