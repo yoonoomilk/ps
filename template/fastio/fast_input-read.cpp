@@ -24,18 +24,7 @@ public:
   }
 
   template <typename T>
-  requires unsigned_integral<T>
-  INPUT& operator >> (T& v) {
-    v = 0;
-    char c = rc();
-    while(is_blank(c)) c = rc();
-    for(;!is_blank(c) && !is_eof(c);c = rc()) v = v * 10 + (c & 15);
-    if(is_eof(c)) END_FLAG = true;
-    return *this;
-  }
-
-  template <typename T>
-  requires signed_integral<T>
+  requires integral<T>
   INPUT& operator >> (T& v) {
     v = 0;
     char c = rc();

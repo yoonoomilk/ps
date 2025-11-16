@@ -33,23 +33,13 @@ public:
   }
 
   template <typename T>
-  requires unsigned_integral<T>
-  OUTPUT& operator << (T v) {
-    int len = get_len(v);
-    if(wp + len > wbuf + sz) flush();
-    for(int i = len;i--;v /= 10) wp[i] = v % 10 | 48;
-    wp += len;
-    return *this;
-  }
-
-  template <typename T>
-  requires signed_integral<T>
+  requires integral<T>
   OUTPUT& operator << (T v) {
     int len = get_len(v);
     if(wp + len + 1 > wbuf + sz) flush();
     if(v < 0) {
       *wp++ = '-';
-      v = abs(v);
+      v = -v;
     }
     for(int i = len;i--;v /= 10) wp[i] = v % 10 | 48;
     wp += len;
