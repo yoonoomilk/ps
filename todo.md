@@ -3,3 +3,6 @@
 
 - fraction
   - a / b + sqrt(c / d)
+
+- polygon tangent
+  - https://leo630.tistory.com/146
