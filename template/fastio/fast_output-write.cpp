@@ -72,3 +72,4 @@ public:
 } _OUTPUT;
 
 #define cout _OUTPUT
+#define ostream OUTPUT

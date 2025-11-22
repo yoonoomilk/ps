@@ -55,6 +55,7 @@ public:
     return *this;
   }
 
-} _input;
+} _INPUT;
 
-#define cin _input
+#define cin _INPUT
+#define istream INPUT
