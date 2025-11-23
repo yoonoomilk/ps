@@ -1,4 +1,4 @@
-pii convex_polygon_tangent(polygon& poly, point cur) {
+pii tangent_of_convex_polygon(polygon& poly, point cur) {
   if(point_in_convex_polygon(poly, cur)) return {-1, -1};
   const int n = poly.size();
   int s1 = -1, s2 = -1;

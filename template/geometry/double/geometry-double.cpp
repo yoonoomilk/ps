@@ -8,7 +8,8 @@ struct point {
   bool operator== (const point v) const { return abs(x - v.x) < 1e-9 && abs(y - v.y) < 1e-9; }
   bool operator!= (const point v) const { return !(*this == v); }
   bool operator< (const point v) const { return x != v.x ? x < v.x : y < v.y; }
-  double size() const { return hypot(x, y); }
+  double dist2() const { return x * x + y * y; }
+  double dist() const { return sqrt(dist2()); }
   friend istream& operator>> (istream& cin, point& v) { return cin >> v.x >> v.y; }
   friend ostream& operator<< (ostream& cout, point& v) { return cout << v.x << ' ' << v.y; }
 };

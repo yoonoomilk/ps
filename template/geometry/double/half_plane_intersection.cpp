@@ -1,7 +1,7 @@
-polygon intersection(vector<line>& lines) {
+polygon half_plane_intersection(vector<line>& lines) {
   auto bad = [](line& a, line& b, line& c) {
     point v;
-    if(!intersection(a, b, v)) return false;
+    if(!line_intersection(a, b, v)) return false;
     double d = (c.t - c.s)/ (v - c.s);
     return d < 1e-9;
   };
