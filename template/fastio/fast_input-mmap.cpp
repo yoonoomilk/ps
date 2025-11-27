@@ -16,6 +16,8 @@ public:
     rp = (char*)mmap(0, st.st_size, PROT_READ, MAP_SHARED, 0, 0);
   }
 
+  void tie(int i) {}
+
   INPUT& operator >> (char& v) {
     v = rc();
     while(is_blank(v)) v = rc();

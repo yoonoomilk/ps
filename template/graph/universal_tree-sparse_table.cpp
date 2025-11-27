@@ -17,7 +17,7 @@ struct universal_tree {
       dep[cur] = dep[bef] + 1;
       pa[cur][0] = bef;
       for(int i = 1;i < lg && pa[cur][i - 1];i++) pa[cur][i] = pa[pa[cur][i - 1]][i - 1];
-      for(int& i : edges[cur]) if(i != bef) self(self, i, cur);
+      for(int i : edges[cur]) if(i != bef) self(self, i, cur);
     };
     dfs(dfs, root, 0);
   }

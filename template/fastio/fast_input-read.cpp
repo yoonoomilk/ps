@@ -16,6 +16,8 @@ public:
   explicit operator bool() { return !END_FLAG; }
   INPUT() {}
 
+  void tie(int i) {}
+
   INPUT& operator >> (char& v) {
     v = rc();
     while(is_blank(v)) v = rc();
