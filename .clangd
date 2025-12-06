@@ -26,7 +26,7 @@ CompileFlags:
 ---
 
 If:
-  PathMatch: .*\.cpp$
+  PathMatch: .*[^c]$
 CompileFlags:
   Add:
     - -std=gnu++26

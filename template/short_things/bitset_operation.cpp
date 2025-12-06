@@ -1,6 +1,9 @@
-// not working in my pc
+/*
+https://gist.github.com/cgiosy/a441de545c9e96b1d7b02cc7a00561f9
 
-// https://gist.github.com/cgiosy/a441de545c9e96b1d7b02cc7a00561f9
+not working in my pc
+use etc/dynamic_bitset.cpp
+*/
 
 #define private public
 #include <bitset>
