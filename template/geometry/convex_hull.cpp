@@ -2,8 +2,7 @@ polygon convex_hull(polygon& poly) {
   polygon tmp;
   swap(poly[0], *min_element(poly.begin(), poly.end()));
   sort(++poly.begin(), poly.end(), [&](point a, point b) {
-    int w = ccw(poly[0], a, b);
-    if(w) return w > 0;
+    if(int w = ccw(poly[0], a, b)) return w > 0;
     return (poly[0] - a).dist2() < (poly[0] - b).dist2();
   });
   tmp.push_back(poly[0]);

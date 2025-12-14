@@ -6,3 +6,6 @@
 
 - better mo's
   - https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/MoQueries.h
+
+- O(n) + O(1) lca
+  - 
