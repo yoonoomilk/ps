@@ -1,24 +1,24 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 
-class INPUT {
+class _istream {
   char *rp;
   bool END_FLAG = false;
 
-  bool is_blank(char c) { return c == ' ' || c == '\n'; }
-  bool is_eof(char c) { return c == '\0'; }
+  constexpr bool is_blank(char c) { return c == ' ' || c == '\n'; }
+  constexpr bool is_eof(char c) { return c == '\0'; }
   char rc() { return *rp++; }
 
 public:
   explicit operator bool() { return !END_FLAG; }
-  INPUT() {
-    struct stat st; fstat(0,& st);
+  _istream() {
+    struct stat st; fstat(0, &st);
     rp = (char*)mmap(0, st.st_size, PROT_READ, MAP_SHARED, 0, 0);
   }
 
   void tie(int i) {}
 
-  INPUT& operator >> (char& v) {
+  _istream& operator >> (char& v) {
     v = rc();
     while(is_blank(v)) v = rc();
     if(is_eof(v)) END_FLAG = true;
@@ -27,7 +27,7 @@ public:
 
   template <typename T>
   requires integral<T>
-  INPUT& operator >> (T& v) {
+  _istream& operator >> (T& v) {
     v = 0;
     char c = rc();
     bool flag = false;
@@ -39,7 +39,7 @@ public:
     return *this;
   }
 
-  INPUT& operator >> (string& v) {
+  _istream& operator >> (string& v) {
     v.clear();
     char c = rc();
     while(is_blank(c)) c = rc();
@@ -50,14 +50,14 @@ public:
 
   template <typename T>
   requires floating_point<T>
-  INPUT& operator >> (T& v) {
+  _istream& operator >> (T& v) {
     string s;
     *this >> s;
     v = stod(s);
     return *this;
   }
 
-} _INPUT;
+} _cin;
 
-#define cin _INPUT
-#define istream INPUT
+#define cin _cin
+#define istream _istream

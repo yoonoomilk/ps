@@ -1,13 +1,13 @@
 #include <unistd.h>
 
-class OUTPUT {
+class _ostream {
   static const int sz = 1 << 18;
   char wbuf[sz], *wp = wbuf;
   int precision = 9;
 
   template <typename T>
   requires integral<T>
-  int get_len(T v) {
+  constexpr int get_len(T v) {
     int tmp = 1;
     while(v /= 10) tmp++;
     return tmp;
@@ -18,15 +18,15 @@ class OUTPUT {
   }
 
 public:
-  OUTPUT() {}
-  ~OUTPUT() { flush(); }
+  _ostream() {}
+  ~_ostream() { flush(); }
 
   int setprecision(int v) {
     swap(precision, v);
     return v;
   }
 
-  OUTPUT& operator << (char v) {
+  _ostream& operator << (char v) {
     if(wp == wbuf + sz) flush();
     *wp++ = v;
     return *this;
@@ -34,7 +34,7 @@ public:
 
   template <typename T>
   requires integral<T>
-  OUTPUT& operator << (T v) {
+  _ostream& operator << (T v) {
     int len = get_len(v);
     if(wp + len + 1 > wbuf + sz) flush();
     if(v < 0) {
@@ -46,7 +46,7 @@ public:
     return *this;
   }
 
-  OUTPUT& operator << (string_view v) {
+  _ostream& operator << (string_view v) {
     for(auto it = v.begin();it != v.end();) {
       if(wp == wbuf + sz) flush();
       size_t len = min(wbuf + sz - wp, v.end() - it);
@@ -59,9 +59,9 @@ public:
 
   template <typename T>
   requires floating_point<T>
-  OUTPUT& operator << (T v) {
+  _ostream& operator << (T v) {
     char tmp[50]{};
-    sprintf(tmp, "%.*lf", precision, v);
+    sprintf(tmp, "%.*Lf", precision, (long double)v);
     int len = strlen(tmp);
     if(wp + len > wbuf + sz) flush();
     memcpy(wp, tmp, len);
@@ -69,7 +69,7 @@ public:
     return *this;
   }
 
-} _OUTPUT;
+} _cout;
 
-#define cout _OUTPUT
-#define ostream OUTPUT
+#define cout _cout
+#define ostream _ostream
