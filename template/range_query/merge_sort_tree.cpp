@@ -2,32 +2,35 @@ template <typename T, typename Count>
 class merge_sort_tree {
   const int sz;
   vector<vector<T>> tree;
+  vector<pair<T, int>> loc;
   Count cnt;
 
 public:
-  template <typename I>
-  merge_sort_tree(I s, I e) : sz(1 << __lg(distance(s, e) * 2 - 1)), tree(sz * 2) {
-    for(int i = 0;s + i != e;i++) tree[i + sz].push_back(s[i]);
-    for(int i = sz;--i;) {
-      auto &l = tree[i * 2], &r = tree[i * 2 + 1];
-      tree[i].resize(l.size() + r.size());
-      merge(l.begin(), l.end(), r.begin(), r.end(), tree[i].begin());
+  merge_sort_tree(int n) : sz(n + 1), tree(sz + 1), loc(sz, {{}, -1}) {}
+
+  void set(int i, T v) {
+    loc[i] = {v, i};
+  }
+
+  void init() {
+    sort(loc.begin(), loc.end());
+    for(int i = 0;i < sz;i++) if(loc[i].second != -1) {
+      for(int j = loc[i].second;j <= sz;j += j & -j) tree[j].push_back(loc[i].first);
     }
   }
 
-  int operator() (int l, int r, T k) {
-    l += sz; r += sz;
+  int operator() (int i, T &k) {
     int s = 0;
-    for(;l <= r;l /= 2, r /= 2) {
-      if(l & 1) s += cnt(tree[l++], k);
-      if(~r & 1) s += cnt(tree[r--], k);
-    }
+    for(;i;i -= i & -i) s += cnt(tree[i], k);
     return s;
+  }
+  int operator() (int l, int r, T k) {
+    return (*this)(r, k) - (*this)(l - 1, k);
   }
 };
 
 struct op {
-  int operator() (vector<int>& v, int k) {
-    return 0;
+  int operator() (const vector<int>& v, int k) {
+    return v.end() - upper_bound(v.begin(), v.end(), k);
   }
 };
