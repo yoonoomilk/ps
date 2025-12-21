@@ -41,21 +41,18 @@ public:
   reference operator[] (int i) { return reference(*this, i); }
   bool operator[] (int i) const { return (arr[i >> 6] >> (i & 63)) & 1; }
   dynamic_bitset operator& (const dynamic_bitset& v) const {
-    assert(sz == v.sz);
     dynamic_bitset tmp = *this;
     for(int i = 0;i < wsz;i++) tmp.arr[i] &= v.arr[i];
     return tmp;
   }
   dynamic_bitset& operator&= (const dynamic_bitset& v) { return *this = *this & v; }
   dynamic_bitset operator| (const dynamic_bitset& v) const {
-    assert(sz == v.sz);
     dynamic_bitset tmp = *this;
     for(int i = 0;i < wsz;i++) tmp.arr[i] |= v.arr[i];
     return tmp;
   }
   dynamic_bitset& operator|= (const dynamic_bitset& v) { return *this = *this | v; }
   dynamic_bitset operator^ (const dynamic_bitset& v) const {
-    assert(sz == v.sz);
     dynamic_bitset tmp = *this;
     for(int i = 0;i < wsz;i++) tmp.arr[i] ^= v.arr[i];
     return tmp;
@@ -93,14 +90,12 @@ public:
   }
   dynamic_bitset& operator>>= (int v) { return *this = *this >> v; }
   dynamic_bitset operator+ (const dynamic_bitset& v) const {
-    assert(sz == v.sz);
     dynamic_bitset tmp = *this;
     for(int i = 0, c = 0;i < wsz;i++) c = _addcarry_u64(c, tmp.arr[i], v.arr[i], &tmp.arr[i]);
     return tmp;
   }
   dynamic_bitset& operator+= (const dynamic_bitset& v) { return *this = *this + v; }
   dynamic_bitset operator- (const dynamic_bitset& v) const {
-    assert(sz == v.sz);
     dynamic_bitset tmp = *this;
     for(int i = 0, c = 0;i < wsz;i++) c = _subborrow_u64(c, tmp.arr[i], v.arr[i], &tmp.arr[i]);
     return tmp;
