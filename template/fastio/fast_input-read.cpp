@@ -18,7 +18,7 @@ public:
 
   void tie(int i) {}
 
-  _istream& operator >> (char& v) {
+  _istream& operator>> (char& v) {
     v = rc();
     while(is_blank(v)) v = rc();
     if(is_eof(v)) END_FLAG = true;
@@ -27,7 +27,7 @@ public:
 
   template <typename T>
   requires integral<T>
-  _istream& operator >> (T& v) {
+  _istream& operator>> (T& v) {
     v = 0;
     char c = rc();
     bool flag = false;
@@ -39,7 +39,7 @@ public:
     return *this;
   }
 
-  _istream& operator >> (string& v) {
+  _istream& operator>> (string& v) {
     v.clear();
     char c = rc();
     while(is_blank(c)) c = rc();
@@ -50,7 +50,7 @@ public:
 
   template <typename T>
   requires floating_point<T>
-  _istream& operator >> (T& v) {
+  _istream& operator>> (T& v) {
     string s;
     *this >> s;
     v = stod(s);

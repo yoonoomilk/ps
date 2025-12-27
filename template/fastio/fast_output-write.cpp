@@ -26,7 +26,7 @@ public:
     return v;
   }
 
-  _ostream& operator << (char v) {
+  _ostream& operator<< (char v) {
     if(wp == wbuf + sz) flush();
     *wp++ = v;
     return *this;
@@ -34,7 +34,7 @@ public:
 
   template <typename T>
   requires integral<T>
-  _ostream& operator << (T v) {
+  _ostream& operator<< (T v) {
     int len = get_len(v);
     if(wp + len + 1 > wbuf + sz) flush();
     if(v < 0) {
@@ -46,7 +46,7 @@ public:
     return *this;
   }
 
-  _ostream& operator << (string_view v) {
+  _ostream& operator<< (string_view v) {
     for(auto it = v.begin();it != v.end();) {
       if(wp == wbuf + sz) flush();
       size_t len = min(wbuf + sz - wp, v.end() - it);
@@ -59,7 +59,7 @@ public:
 
   template <typename T>
   requires floating_point<T>
-  _ostream& operator << (T v) {
+  _ostream& operator<< (T v) {
     char tmp[50]{};
     sprintf(tmp, "%.*Lf", precision, (long double)v);
     int len = strlen(tmp);

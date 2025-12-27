@@ -1,7 +1,7 @@
 ## pair iostream
 ```cpp
 template <typename T1, typename T2>
-istream& operator >> (istream& cin, pair<T1, T2>& v) {
+istream& operator>> (istream& cin, pair<T1, T2>& v) {
   return cin >> v.first >> v.second;
 }
 

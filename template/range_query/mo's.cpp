@@ -3,7 +3,7 @@ int sz = sqrt(n);
 
 struct query {
   int l, r, idx;
-  bool operator < (const query& v) const {
+  bool operator< (const query& v) const {
     if(l / sz != v.l / sz) return l / sz < v.l / sz;
     return r < v.r;
   }
@@ -12,7 +12,7 @@ struct query {
 //faster
 struct query {
   int l, r, idx;
-  bool operator < (const query& v) const {
+  bool operator< (const query& v) const {
     int a = l / sz, b = v.l / sz;
     return (a < b) || ((a == b) && ((a & 1) ^ (r < v.r)));
   }
@@ -43,7 +43,7 @@ struct query {
       swap(x, y);
     }
   }
-  bool operator < (const query& v) const {
+  bool operator< (const query& v) const {
     return ord < v.ord;
   }
 };

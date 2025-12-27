@@ -47,13 +47,13 @@ ll fibo(ll n) {
 }
 
 template <typename T, int N, int M>
-istream& operator >> (istream& cin, matrix<T, N, M>& v) {
+istream& operator>> (istream& cin, matrix<T, N, M>& v) {
   for(int i = 0;i < N;i++) for(int j = 0;j < M;j++) cin >> v[i][j];
   return cin;
 }
 
 template <typename T, int N, int M>
-ostream& operator << (ostream& cout, matrix<T, N, M>& v) {
+ostream& operator<< (ostream& cout, matrix<T, N, M>& v) {
   for(int i = 0;i < N;i++) for(int j = 0;j < M;j++) cout << v[i][j] << " \n"[j + 1 == M];
   return cout;
 }
