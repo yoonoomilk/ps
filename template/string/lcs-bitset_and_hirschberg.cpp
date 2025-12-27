@@ -11,7 +11,7 @@ string lcs(string_view a, string_view b) {
       }
       return;
     }
-    int m = (l1 + r1) / 2, len = r2 - l2 + 2, sz = (len >> 6) + 1;
+    int m = (l1 + r1) / 2, len = r2 - l2 + 2, sz = len + 63 >> 6;
     vector<int> t1(len), t2(len);
     {
       vector<vector<ull>> loc(128, vector<ull>(sz));

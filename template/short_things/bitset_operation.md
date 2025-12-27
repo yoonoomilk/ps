@@ -1,10 +1,10 @@
-/*
-https://gist.github.com/cgiosy/a441de545c9e96b1d7b02cc7a00561f9
+[reference](https://gist.github.com/cgiosy/a441de545c9e96b1d7b02cc7a00561f9)
 
 not working in my pc
-use etc/dynamic_bitset.cpp
-*/
 
+use etc/dynamic_bitset.cpp or vector\<ull\>
+
+```cpp
 #define private public
 #include <bitset>
 #undef private
@@ -42,3 +42,4 @@ template<size_t _Nb> inline bitset<_Nb> operator+(const bitset<_Nb>& A, const bi
   bitset<_Nb> C(A);
   return C += B;
 }
+```

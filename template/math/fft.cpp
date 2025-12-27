@@ -11,11 +11,11 @@ void fft(vector<base>& v, bool inv = false) {
   }
   for(int k = 1;k < sz;k *= 2) {
     double angle = numbers::pi / k * (inv ? 1 : -1);
-    complex<double> w(cos(angle), sin(angle));
+    base w(cos(angle), sin(angle));
     for(int i = 0;i < sz;i += k * 2) {
-      complex<double> z(1, 0);
+      base z(1, 0);
       for(int j = 0;j < k;j++) {
-        complex<double> even = v[i + j], odd = v[i + j + k];
+        base even = v[i + j], odd = v[i + j + k];
         v[i + j] = even + z * odd;
         v[i + j + k] = even - z * odd;
         z *= w;

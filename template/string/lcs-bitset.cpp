@@ -1,7 +1,7 @@
 #include <x86intrin.h>
 
 int lcs(string_view a, string_view b) {
-  int n = a.size(), m = b.size(), sz = (m >> 6) + 1;
+  int n = a.size(), m = b.size(), sz = m + 63 >> 6;
   vector<vector<ull>> loc(128, vector<ull>(sz));
   vector<ull> dp(sz);
   for(int i = 0;i < m;i++) loc[b[i]][i >> 6] |= 1ULL << (i & 63);

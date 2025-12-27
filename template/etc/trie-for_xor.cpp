@@ -30,7 +30,7 @@ int max(int x) {
   for(int i = 30;i >= 0;i--) {
     bool bit = x >> i & 1;
     if(cur->arr[!bit] && cur->arr[!bit]->cnt > 0) {
-      tmp |= (1 << j);
+      tmp |= (1 << i);
       cur = cur->arr[!bit];
     } else cur = cur->arr[bit];
   }
