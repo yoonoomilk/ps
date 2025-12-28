@@ -5,19 +5,22 @@ class dynamic_bitset {
   vector<ull> arr;
 
 public:
-  class reference {
+  class ref {
     friend class dynamic_bitset;
     ull *ptr;
     int idx;
-    reference(dynamic_bitset& v, int i) : ptr(&v.arr[i >> 6]), idx(i & 63) {}
+    ref(dynamic_bitset& v, int i) : ptr(&v.arr[i >> 6]), idx(i & 63) {}
   public:
     operator bool() const { return (*ptr >> idx) & 1; }
-    reference& operator= (bool v) {
+    ref& operator= (bool v) {
       if(v) *ptr |= 1ULL << idx;
       else *ptr &= ~1ULL << idx;
       return *this;
     }
-    void flip() { *ptr ^= 1ULL << idx; }
+    ref& flip() {
+      *ptr ^= 1ULL << idx;
+      return *this;
+    }
   };
 
   dynamic_bitset(int n = 0, bool raw = false) {
@@ -38,7 +41,7 @@ public:
     return tmp;
   }
 
-  reference operator[] (int i) { return reference(*this, i); }
+  ref operator[] (int i) { return ref(*this, i); }
   bool operator[] (int i) const { return (arr[i >> 6] >> (i & 63)) & 1; }
   dynamic_bitset operator& (const dynamic_bitset& v) const {
     dynamic_bitset tmp = *this;
