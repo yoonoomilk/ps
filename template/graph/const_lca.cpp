@@ -1,27 +1,35 @@
 class const_lca {
   const int sz;
-  vector<vector<int>> edges;
+  vector<pii> edges;
+  vector<int> csr, cnt;
   vector<int> arr, dep, pa, top, in, mask;
 
 public:
-  const_lca(int n) : sz(n + 1), edges(sz),
+  const_lca(int n) : sz(n + 1), cnt(sz + 1),
     arr(sz), dep(sz), pa(sz), top(sz), in(sz), mask(sz) {}
 
   void add(int a, int b, bool directed = true) {
-    edges[a].push_back(b);
-    if(!directed) edges[b].push_back(a);
+    edges.emplace_back(a, b);
+    if (!directed) edges.emplace_back(b, a);
   }
 
   void init() {
+    for(auto [a, b] : edges) cnt[a + 1]++;
+    for(int i = 1;i <= sz;i++) cnt[i] += cnt[i - 1];
+    csr.resize(edges.size());
+    for(auto [a, b] : edges) csr[cnt[a]++] = b;
+
     int ettn = 1;
     auto dfs = [&](auto& self, int cur, int bef) -> void {
       arr[in[cur] = ettn++] = cur;
       dep[cur] = dep[bef] + 1;
       pa[cur] = bef;
-      for(int i : edges[cur]) if(i != bef) {
-        self(self, i, cur);
-        top[in[i]] = cur;
-        if((in[cur] & -in[cur]) < (in[i] & -in[i])) in[cur] = in[i];
+      for(int i  = cnt[cur - 1];i < cnt[cur];i++) {
+        int nxt = csr[i];
+        if(nxt == bef) continue;
+        self(self, nxt, cur);
+        top[in[nxt]] = cur;
+        if((in[cur] & -in[cur]) < (in[nxt] & -in[nxt])) in[cur] = in[nxt];
       }
     };
     dfs(dfs, 1, 0);
