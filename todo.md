@@ -7,8 +7,5 @@
 - better mo's
   - https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/MoQueries.h
 
-- O(n + q) offline lca
-  - https://en.wikipedia.org/wiki/Tarjan%27s_off-line_lowest_common_ancestors_algorithm
-
 - wavelet tree
   - https://nyaannyaan.github.io/library/data-structure-2d/wavelet-matrix.hpp.html
