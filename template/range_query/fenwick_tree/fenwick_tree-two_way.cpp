@@ -31,5 +31,3 @@ public:
     return op(op(s1, arr[i]), s2);
   }
 };
-
-// TODO: with 2 array

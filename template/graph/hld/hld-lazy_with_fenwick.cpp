@@ -1,21 +1,15 @@
-#include "range_query/segment_tree/lazy_segment_tree.cpp"
+#include "range_query/fenwick_tree/lazy_fenwick_tree.cpp"
 
-template <typename T, typename L, typename Merge, typename Update, typename Composition>
+template <typename T>
 class heavy_light_decomposition {
   const int sz;
-  const T raw;
-  const L lazy_raw;
   vector<pii> edges;
   vector<int> dep, pa, top, in, out;
-  lazy_segment_tree<T, L, Merge, Update, Composition> seg;
-  Merge op;
+  lazy_fenwick_tree<T> seg;
 
 public:
-  heavy_light_decomposition(int n, T raw = T(), L lazy_raw = L()) : sz(n + 1), raw(raw), lazy_raw(lazy_raw),
-    dep(sz), pa(sz), top(sz), in(sz), out(sz), seg(sz, raw, lazy_raw) {
-    for(int i = 0;i < sz;i++) seg.set(i, {0, 1});
-    seg.init();
-  }
+  heavy_light_decomposition(int n) : sz(n + 1),
+    dep(sz), pa(sz), top(sz), in(sz), out(sz), seg(sz) {}
 
   void add(int a, int b, bool directed = true) {
     edges.emplace_back(a, b);
@@ -54,28 +48,28 @@ public:
     ett(ett, 1, 0);
   }
 
-  void update(int a, L v) {
+  void update(int a, T v) {
     seg.update(in[a], out[a], v);
   }
-  void update(int a, int b, L v) {
+  void update(int a, int b, T v) {
     for(;top[a] != top[b];a = pa[top[a]]) {
       if(dep[top[a]] < dep[top[b]]) swap(a, b);
       seg.update(in[top[a]], in[a], v);
     }
     if(dep[a] > dep[b]) swap(a, b);
-    seg.update(in[a], in[b], v);
+    seg.update(in[a] + 1, in[b], v);
   }
 
   T operator() (int a) {
     return seg(in[a], out[a]);
   }
   T operator() (int a, int b) {
-    T s = raw;
+    T s = 0;
     for(;top[a] != top[b];a = pa[top[a]]) {
       if(dep[top[a]] < dep[top[b]]) swap(a, b);
-      s = op(s, seg(in[top[a]], in[a]));
+      s += seg(in[top[a]], in[a]);
     }
     if(dep[a] > dep[b]) swap(a, b);
-    return op(s, seg(in[a], in[b]));
+    return s + seg(in[a] + 1, in[b]);
   }
 };

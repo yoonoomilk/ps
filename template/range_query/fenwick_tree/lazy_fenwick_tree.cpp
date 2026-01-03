@@ -7,6 +7,14 @@ class lazy_fenwick_tree {
 public:
   lazy_fenwick_tree(int sz) : sz(sz), tree(sz + 1) {}
 
+  void set(int i, T v) {
+    tree[i] = complex<T>(T(), v);
+  }
+  void init() {
+    for(int i = 1;i <= sz;i++) tree[i] += tree[i - 1];
+    for(int i = sz;i;i--) tree[i] -= tree[i & i - 1];
+  }
+
   void update(int l, int r, T v) {
     for(int i = l;i <= sz;i += i & -i) tree[i] += L(v, -v * (l - 1));
     for(int i = r + 1;i <= sz;i += i & -i) tree[i] += L(-v, v * r);

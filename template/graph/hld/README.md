@@ -17,3 +17,8 @@ T operator() (int a, int b) {
   return op(s1, s2);
 }
 ```
+
+## edge instead of vertex
+```cpp
+return op(s, seg(in[a] + 1, in[b]));
+```

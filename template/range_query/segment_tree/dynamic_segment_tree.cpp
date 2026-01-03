@@ -52,14 +52,3 @@ public:
     return query(0, 0, sz - 1, l, r);
   }
 };
-
-ll kth(int cur, ll s, ll e, T v) {
-  if(s == e) return s;
-  ll m = (s + e) / 2;
-  if(tree[tree[cur].l].v >= v) return kth(tree[cur].l, s, m, v);
-  else return kth(tree[cur].r, m + 1, e, v - tree[tree[cur].l].v);
-}
-
-ll kth(T k) {
-  return kth(0, 0, sz - 1, k);
-}

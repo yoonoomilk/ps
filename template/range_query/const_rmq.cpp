@@ -10,7 +10,6 @@ public:
   void set(int i, T v) {
     arr[0][i] = v;
   }
-
   void init() {
     for(int i = 1;i <= lg;i++) for(int j = 0;j + (1 << i - 1) < sz;j++) arr[i][j] = op(arr[i - 1][j], arr[i - 1][j + (1 << i - 1)]);
   }

@@ -31,7 +31,6 @@ public:
   void set(int i, const T& v) {
     tree[i + sz] = v;
   }
-
   void init() {
     for(int i = sz;--i;) pull(i);
   }
@@ -77,37 +76,3 @@ public:
     return op(s1, s2);
   }
 };
-
-using ll = long long;
-using pii = pair<ll, int>;
-
-struct op {
-  pii operator() (pii a, pii b) {
-    return {a.first + b.first, a.second + b.second};
-  }
-};
-
-struct upd {
-  void operator() (pii& a, ll b) {
-    a.first += b * a.second;
-  }
-};
-
-struct comp {
-  ll operator() (ll a, ll b) {
-    return a + b;
-  }
-};
-
-/*
-`lazy_segment_tree<T, L, Merge, Update, Composition> seg(n, raw, lazy_raw)`
-
-* T : tree에 들어갈 타입
-* L : lazy에 들어갈 타입
-* Merge : `T operator() (T a, T b)`
-  * non-lazy한 값끼리 합치기
-* Update : `void operator() (T& a, L b)`
-  * non-lazy한 a에 lazy한 b를 적용
-* Composition : `L operator() (L a, L b)`
-  * lazy한 a에 lazy한 b 합치기
-*/

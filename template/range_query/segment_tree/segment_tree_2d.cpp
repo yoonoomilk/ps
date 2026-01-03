@@ -17,6 +17,14 @@ class segment_tree_2d {
 public:
   segment_tree_2d(int n, T raw = T()) : sz(1 << __lg(n * 2 - 1)), raw(raw), tree(sz * 2, vector<T>(raw)) {}
 
+  void set(int i, int j, T v) {
+    tree[i + sz][j + sz] = v;
+  }
+  void init() {
+    for(int i = sz;i < sz * 2;i++) for(int j = sz;--j;) tree[i][j] = op(tree[i][j * 2], tree[i][j * 2 + 1]);
+    for(int i = sz;--i;) for(int j = 1;j < sz * 2;j++) tree[i][j] = op(tree[i * 2][j], tree[i * 2 + 1][j]);
+  }
+
   void update(int i, int jj, T v) {
     i += sz; jj += sz;
     tree[i][jj] = v;
@@ -34,12 +42,3 @@ public:
     return s;
   }
 };
-
-void set(int i, int j, T v) {
-  tree[i + sz][j + sz] = v;
-}
-
-void init() {
-  for(int i = sz;i < sz * 2;i++) for(int j = sz;--j;) tree[i][j] = op(tree[i][j * 2], tree[i][j * 2 + 1]);
-  for(int i = sz;--i;) for(int j = 1;j < sz * 2;j++) tree[i][j] = op(tree[i * 2][j], tree[i * 2 + 1][j]);
-}

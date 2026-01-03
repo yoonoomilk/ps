@@ -4,13 +4,13 @@ using namespace __gnu_pbds;
 // MLE 이슈 + TLE 이슈 = 쓰레기
 template <typename T, typename Merge>
 class dynamic_segment_tree {
-  const int sz = 1;
+  const int sz;
   const T raw;
   cc_hash_table<int, T> tree;
   Merge op;
 
   T get(int a) {
-    if(tree.find(a) != tree.end()) return tree[a];
+    if(auto it = tree.find(a);it != tree.end()) return *it;
     return raw;
   }
 

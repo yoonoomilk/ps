@@ -37,7 +37,6 @@ public:
   void set(int i, T v) {
     tree[i + sz] = v;
   }
-
   void init() {
     for(int i = sz;--i;) pull(i);
   }
@@ -81,50 +80,5 @@ public:
       if(~r & 1) s2 = op(tree[r--], s2);
     }
     return op(s1, s2);
-  }
-};
-
-
-//수쿼 26
-using ll = long long;
-
-struct hoit {
-  ll max1, max2, sum;
-  int cnt;
-};
-
-struct op {
-  hoit operator() (hoit& a, hoit& b) {
-    hoit tmp;
-    tmp.sum = a.sum + b.sum;
-    tmp.max1 = max(a.max1, b.max1);
-    if(a.max1 < b.max1) {
-      tmp.cnt = b.cnt;
-      tmp.max2 = max(b.max2, a.max1);
-    } else if(a.max1 > b.max1) {
-      tmp.cnt = a.cnt;
-      tmp.max2 = max(a.max2, b.max1);
-    } else {
-      tmp.cnt = a.cnt + b.cnt;
-      tmp.max2 = max(a.max2, b.max2);
-    }
-    return tmp;
-  }
-};
-
-struct try_upd {
-  bool operator() (hoit& a, ll& b) {
-    if(b >= a.max1) {}
-    else if(b > a.max2) {
-      a.sum -= (a.max1 - b) * a.cnt;
-      a.max1 = b;
-    } else return true;
-    return false;
-  }
-};
-
-struct comp {
-  ll operator() (ll a, ll b) {
-    return min(a, b);
   }
 };

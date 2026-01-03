@@ -11,7 +11,6 @@ public:
   void set(int i, T v) {
     loc[i] = {v, i};
   }
-
   void init() {
     sort(loc.begin(), loc.end());
     for(int i = 0;i < sz;i++) if(loc[i].second != -1) {

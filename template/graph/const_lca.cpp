@@ -25,7 +25,7 @@ public:
       arr[in[cur] = ettn++] = cur;
       dep[cur] = dep[bef] + 1;
       pa[cur] = bef;
-      for(int i  = cnt[cur - 1];i < cnt[cur];i++) {
+      for(int i = cnt[cur - 1];i < cnt[cur];i++) {
         int nxt = csr[i];
         if(nxt == bef) continue;
         self(self, nxt, cur);

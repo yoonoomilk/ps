@@ -8,6 +8,13 @@ class segment_tree {
 public:
   segment_tree(int n, T raw = T()) : sz(1 << __lg(n * 2 - 1)), raw(raw), tree(sz * 2, raw) {}
 
+  void set(int i, T v) {
+    tree[i + sz] = v;
+  }
+  void init() {
+    for(int i = sz;--i;) tree[i] = op(tree[i * 2], tree[i * 2 + 1]);
+  }
+
   void update(int i, T v) {
     i += sz;
     tree[i] = v;
@@ -25,44 +32,5 @@ public:
       if(~r & 1) s2 = op(tree[r--], s2);
     }
     return op(s1, s2);
-  }
-};
-
-void set(int i, T v) {
-  tree[i + sz] = v;
-}
-
-void init() {
-  for(int i = sz;--i;) tree[i] = op(tree[i * 2], tree[i * 2 + 1]);
-}
-
-int kth(int k) {
-  int s = 1;
-  while(s < sz) {
-    if(tree[s * 2] < k) {
-      k -= tree[s * 2];
-      s = s * 2 + 1;
-    } else s = s * 2;
-  }
-  return s - sz;
-}
-
-T top() {
-  return tree[1];
-}
-
-// 최대 구간합
-struct hoit {
-  int p, l, r, a;
-};
-
-struct op {
-  hoit operator() (hoit& a, hoit& b) {
-    hoit tmp;
-    tmp.p = max({a.r + b.l, a.p, b.p});
-    tmp.l = max(a.l, a.a + b.l);
-    tmp.r = max(a.r + b.a, b.r);
-    tmp.a = a.a + b.a;
-    return tmp;
   }
 };
