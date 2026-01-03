@@ -1,12 +1,11 @@
 class const_lca {
   const int sz;
   vector<pii> edges;
-  vector<int> csr, cnt;
-  vector<int> arr, dep, pa, top, in, mask;
+  vector<int> dep, pa, top, in, mask;
 
 public:
-  const_lca(int n) : sz(n + 1), cnt(sz + 1),
-    arr(sz), dep(sz), pa(sz), top(sz), in(sz), mask(sz) {}
+  const_lca(int n) : sz(n + 1),
+    dep(sz), top(sz), in(sz), mask(sz) {}
 
   void add(int a, int b, bool directed = true) {
     edges.emplace_back(a, b);
@@ -14,11 +13,13 @@ public:
   }
 
   void init() {
+    vector<int> cnt(sz + 1), csr(edges.size());
     for(auto [a, b] : edges) cnt[a + 1]++;
     for(int i = 1;i <= sz;i++) cnt[i] += cnt[i - 1];
-    csr.resize(edges.size());
     for(auto [a, b] : edges) csr[cnt[a]++] = b;
+    edges = vector<pii>();
 
+    vector<int> arr(sz), pa(sz);
     int ettn = 1;
     auto dfs = [&](auto& self, int cur, int bef) -> void {
       arr[in[cur] = ettn++] = cur;

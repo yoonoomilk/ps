@@ -1,11 +1,9 @@
 - nice bbst(avl tree)
   -  https://gist.github.com/justiceHui/a8406518891ca0dba9c7518f8224378b
-
 - fraction
   - a / b + sqrt(c / d)
-
 - better mo's
   - https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/MoQueries.h
-
 - wavelet tree
   - https://nyaannyaan.github.io/library/data-structure-2d/wavelet-matrix.hpp.html
+- 그래프 저장을 인접 리스트 대신 csr로
