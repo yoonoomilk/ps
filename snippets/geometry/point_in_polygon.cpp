@@ -1,3 +1,5 @@
+#include "geometry/geometry.cpp"
+
 int point_in_polygon(polygon& poly, point cur) {
   int cnt = 0;
   for(int i = 0;i < poly.size();i++) {

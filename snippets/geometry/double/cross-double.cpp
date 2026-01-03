@@ -1,3 +1,5 @@
+#include "geometry/double/geometry-double.cpp"
+
 bool cross(point p1, point p2, point p3, point p4) {
   if(abs((p2 - p1) / (p4 - p3)) < 1e-9) return false;
   int l1 = ccw(p1, p2, p3) * ccw(p1, p2, p4);

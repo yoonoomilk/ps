@@ -1,3 +1,5 @@
+#include "geometry/geometry.cpp"
+
 int point_in_convex_polygon(polygon& poly, point cur) {
   const int n = poly.size();
   int l = 1, r = n - 1;

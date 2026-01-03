@@ -1,3 +1,6 @@
+#include "geometry/geometry.cpp"
+#include "geometry/point_in_convex_polygon.cpp"
+
 pii tangent_of_convex_polygon(polygon& poly, point cur) {
   if(point_in_convex_polygon(poly, cur)) return {-1, -1};
   const int n = poly.size();

@@ -8,7 +8,7 @@ CompileFlags:
     - -Wno-parentheses
     - -Wno-unknown-pragmas
     - -lm
-    - -ID:/coding/c++/ps/template
+    - -ID:/coding/c++/ps/snippets
 Completion:
   HeaderInsertion: Never
 

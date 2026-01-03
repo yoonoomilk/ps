@@ -1,8 +1,8 @@
-[reference](https://gist.github.com/cgiosy/a441de545c9e96b1d7b02cc7a00561f9)
+environment-dependent code
 
 not working in my pc
 
-use etc/dynamic_bitset.cpp or vector\<ull\>
+use [dynamic bitset](../etc/dynamic_bitset.cpp) or vector\<ull\>
 
 ```cpp
 #define private public
@@ -43,3 +43,4 @@ template<size_t _Nb> inline bitset<_Nb> operator+(const bitset<_Nb>& A, const bi
   return C += B;
 }
 ```
+[reference](https://gist.github.com/cgiosy/a441de545c9e96b1d7b02cc7a00561f9)

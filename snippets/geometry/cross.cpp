@@ -1,3 +1,5 @@
+#include "geometry/geometry.cpp"
+
 int cross(point p1, point p2, point p3, point p4) {
   int l1 = ccw(p1, p2, p3) * ccw(p1, p2, p4);
   int l2 = ccw(p3, p4, p1) * ccw(p3, p4, p2);

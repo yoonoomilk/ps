@@ -1,3 +1,5 @@
+#pragma once
+
 struct point {
   double x, y;
   point operator+ (const point v) const { return {x + v.x, y + v.y}; }
@@ -20,3 +22,8 @@ struct line {
   friend ostream& operator<< (ostream& cout, line& v) { return cout << v.s << ' ' << v.t; }
 };
 using polygon = vector<point>;
+
+int ccw(point a, point b, point c) {
+  ll s = (b - a) / (c - a);
+  return (s > 0) - (s < 0);
+}

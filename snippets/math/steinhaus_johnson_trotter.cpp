@@ -21,4 +21,4 @@ public:
     int nxt = tmp + dir[tmp];
     for(int i = 0;i < n;i++) if(s[i] > s[nxt]) dir[i] *= -1;
   }
-}
+};

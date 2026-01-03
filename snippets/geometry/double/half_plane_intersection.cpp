@@ -1,3 +1,6 @@
+#include "geometry/double/geometry-double.cpp"
+#include "geometry/double/line_intersection-double.cpp"
+
 polygon half_plane_intersection(vector<line>& lines) {
   auto bad = [](line& a, line& b, line& c) {
     point v;
@@ -23,7 +26,7 @@ polygon half_plane_intersection(vector<line>& lines) {
   polygon tmp;
   if(dq.size() >= 3) for(int i = 0;i < dq.size();i++) {
     point v;
-    if(intersection(dq[i], dq[(i + 1) % dq.size()], v)) tmp.push_back(v);
+    if(line_intersection(dq[i], dq[(i + 1) % dq.size()], v)) tmp.push_back(v);
   }
   return tmp;
 }
