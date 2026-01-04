@@ -15,7 +15,7 @@ public:
 
   void add(int a, int b, bool directed = true) {
     edges.emplace_back(a, b);
-    if (!directed) edges.emplace_back(b, a);
+    if(!directed) edges.emplace_back(b, a);
   }
 
   void init() {
@@ -49,8 +49,7 @@ public:
     ett(ett, 1, 0);
   }
 
-  void update(int a, int b, T v) {
-    if(dep[a] < dep[b]) swap(a, b);
+  void update(int a, T v) {
     seg.update(in[a], v);
   }
 

@@ -19,7 +19,7 @@ public:
 
   void add(int a, int b, bool directed = true) {
     edges.emplace_back(a, b);
-    if (!directed) edges.emplace_back(b, a);
+    if(!directed) edges.emplace_back(b, a);
   }
 
   void init() {

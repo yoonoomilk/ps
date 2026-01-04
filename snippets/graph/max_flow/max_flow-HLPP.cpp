@@ -10,7 +10,7 @@ class max_flow {
 
   void apply(edge& e, int flow) {
     edge& rev = edges[e.loc][e.rev];
-    if (!excess[e.loc] && flow) level_list[level[e.loc]].push(e.loc);
+    if(!excess[e.loc] && flow) level_list[level[e.loc]].push(e.loc);
     e.flow += flow;
     e.cap -= flow;
     excess[e.loc] += flow;

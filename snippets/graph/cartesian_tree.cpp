@@ -1,5 +1,5 @@
-template <typename I, typename Compare>
-auto cartesian_tree(I s, I e, Compare cmp = less<>()) {
+template <typename I, typename Compare = less<>>
+auto cartesian_tree(I s, I e, Compare cmp = Compare()) {
   int n = distance(s, e);
   vector<int> pa(n, -1);
   stack<int> st;

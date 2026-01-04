@@ -4,30 +4,11 @@ CompileFlags:
     - -Wall
     - -Wno-sign-compare
     - -Wno-char-subscripts
-    - -Wno-reorder
     - -Wno-parentheses
     - -Wno-unknown-pragmas
     - -lm
+    - -std=gnu++20
     - -ID:/coding/c++/ps/snippets
+    - -include=D:/coding/c++/ps/include/common.h
 Completion:
   HeaderInsertion: Never
-
----
-
-If:
-  PathMatch: .*\.c$
-CompileFlags:
-  Add:
-    - -std=gnu17
-    - -include=D:/coding/c++/ps/include/common-c.h
-    - -Wno-main
-    - -Wno-implicit-int
-
----
-
-If:
-  PathMatch: .*[^c]$
-CompileFlags:
-  Add:
-    - -std=gnu++26
-    - -include=D:/coding/c++/ps/include/common-cpp.h
