@@ -2,8 +2,9 @@
 
 template <typename T, int N>
 matrix<T, N, N> _pow(matrix<T, N, N> v, ll exp) {
-  matrix<T, N, N> tmp = v;
-  for(exp--;exp;exp /= 2) {
+  matrix<T, N, N> tmp;
+  for(int i = 0;i < N;i++) tmp[i][i] = 1;
+  for(;exp;exp /= 2) {
     if(exp & 1) tmp = tmp * v;
     v = v * v;
   }
