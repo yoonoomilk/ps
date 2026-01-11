@@ -1,6 +1,6 @@
 #include "geometry/geometry.cpp"
 
-pair<ll, line> closest_pair(polygon& poly) {
+pair<ll, line> closest_pair(polygon poly) {
   sort(poly.begin(), poly.end(), [](point& a, point& b) { return a.y < b.y; });
   pair<ll, line> tmp = {(poly[0] - poly[1]).dist2(), {poly[0], poly[1]}};
   set<point> arr;

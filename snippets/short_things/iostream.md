@@ -6,7 +6,7 @@ istream& operator>> (istream& cin, pair<T1, T2>& v) {
 }
 
 template <typename T1, typename T2>
-ostream& operator<< (ostream& cout, pair<T1, T2> v) {
+ostream& operator<< (ostream& cout, const pair<T1, T2>& v) {
   return cout << format("({}, {})", v.first, v.second);
 }
 ```

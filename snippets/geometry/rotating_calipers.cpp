@@ -1,6 +1,6 @@
 #include "geometry/geometry.cpp"
 
-pair<ll, line> rotating_calipers(polygon& poly) {
+pair<ll, line> rotating_calipers(const polygon& poly) {
   int n = poly.size();
   pair<ll, line> tmp = {(poly[0] - poly[1]).dist2(), {poly[0], poly[1]}};
   for(int i = 0, j = 0;i < n;i++) {

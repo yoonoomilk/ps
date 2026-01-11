@@ -1,6 +1,6 @@
 #include "geometry/geometry.cpp"
 
-polygon convex_hull(polygon& poly) {
+polygon convex_hull(polygon poly) {
   polygon tmp;
   swap(poly[0], *min_element(poly.begin(), poly.end()));
   sort(++poly.begin(), poly.end(), [&](point a, point b) {

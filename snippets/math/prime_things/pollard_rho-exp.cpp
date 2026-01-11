@@ -1,3 +1,5 @@
+#include "math/prime_things/miller_rabin.cpp"
+
 map<ll, int> pollard_rho(ll n) {
   srand(time(nullptr));
   map<ll, int> tmp;

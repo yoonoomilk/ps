@@ -1,7 +1,7 @@
 #include "geometry/double/geometry-double.cpp"
 #include "geometry/double/line_intersection-double.cpp"
 
-polygon half_plane_intersection(vector<line>& lines) {
+polygon half_plane_intersection(vector<line> lines) {
   auto bad = [](line& a, line& b, line& c) {
     point v;
     if(!line_intersection(a, b, v)) return false;

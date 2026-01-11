@@ -1,9 +1,9 @@
 #include "geometry/geometry.cpp"
 #include "geometry/point_in_convex_polygon.cpp"
 
-pii tangent_of_convex_polygon(polygon& poly, point cur) {
+pii tangent_of_convex_polygon(const polygon& poly, point cur) {
   if(point_in_convex_polygon(poly, cur)) return {-1, -1};
-  const int n = poly.size();
+  int n = poly.size();
   int s1 = -1, s2 = -1;
   bool flag = ccw(cur, poly[0], poly[n - 1]) >= 0;
   {

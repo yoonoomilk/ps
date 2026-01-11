@@ -1,3 +1,5 @@
+#include "math/prime_things/miller_rabin.cpp"
+
 vector<ll> pollard_rho(ll n) {
   srand(time(nullptr));
   vector<ll> tmp;

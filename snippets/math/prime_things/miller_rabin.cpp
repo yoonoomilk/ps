@@ -1,3 +1,5 @@
+#include "math/_pow.cpp"
+
 bool miller_rabin(ll n) {
   if(n == 1) return false;
   if(n == 2) return true;
