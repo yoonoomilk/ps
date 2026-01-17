@@ -1,18 +1,16 @@
-template <typename T, typename Merge>
+template <typename T, typename Merge, T raw = T()>
 class persistent_segment_tree {
   const int sz;
-  const T raw;
   struct node {
-    int l, r;
-    T v;
-    node(const T& v) : l(-1), r(-1), v(v) {}
+    int l = -1, r = -1;
+    T v = raw;
   };
   vector<node> tree;
   vector<int> root;
   Merge op;
 
   int append() {
-    tree.push_back(node(raw));
+    tree.push_back(node());
     return tree.size() - 1;
   }
 
@@ -52,7 +50,7 @@ class persistent_segment_tree {
   }
 
 public:
-  persistent_segment_tree(int n, T raw = T()) : sz(n), raw(raw) {
+  persistent_segment_tree(int n) : sz(n) {
     root.push_back(append());
   }
 

@@ -2,7 +2,7 @@
 #include "geometry/double/line_intersection-double.cpp"
 
 polygon half_plane_intersection(vector<line> lines) {
-  auto bad = [](line& a, line& b, line& c) {
+  auto bad = [](const line& a, const line& b, const line& c) {
     point v;
     if(!line_intersection(a, b, v)) return false;
     double d = (c.t - c.s) / (v - c.s);

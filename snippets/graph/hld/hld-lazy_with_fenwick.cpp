@@ -48,10 +48,10 @@ public:
     ett(ett, 1, 0);
   }
 
-  void update(int a, T v) {
+  void update(int a, const T& v) {
     seg.update(in[a], out[a], v);
   }
-  void update(int a, int b, T v) {
+  void update(int a, int b, const T& v) {
     for(;top[a] != top[b];a = pa[top[a]]) {
       if(dep[top[a]] < dep[top[b]]) swap(a, b);
       seg.update(in[top[a]], in[a], v);

@@ -4,14 +4,14 @@ extern "C" int __libc_start_main() {
   char buf[1000], *p = buf, w = 0;
   read(0, buf, 1000);
 
-  auto I = [&]() {
+  auto ri = [&]() {
     int n = 0;
     while(*p & 16) n = n * 10 + *p++ - 48;
     p++;
     return n;
   };
 
-  int ans = I();
+  int ans = ri();
 
   do buf[9 - ++w] = ans % 10 + 48;
   while(ans /= 10);

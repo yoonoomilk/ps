@@ -6,7 +6,7 @@ class fenwick_tree {
 public:
   fenwick_tree(int sz) : sz(sz), tree(sz + 1) {}
 
-  void update(int l, int r, T v) {
+  void update(int l, int r, const T& v) {
     for(;l <= sz;l += l & -l) tree[l] += v;
     for(r++;r <= sz;r += r & -r) tree[r] -= v;
   }

@@ -5,8 +5,8 @@ class eraseable_pq {
 public:
   eraseable_pq() {}
   size_t size() { return pq.size() - del.size(); };
-  void insert(T v) { pq.push(v); flush(); }
-  void erase(T v) { del.push(v); flush(); }
+  void insert(const T& v) { pq.push(v); flush(); }
+  void erase(const T& v) { del.push(v); flush(); }
   void pop() { del.pop(); flush(); }
   const T& top() { return pq.top(); }
 };

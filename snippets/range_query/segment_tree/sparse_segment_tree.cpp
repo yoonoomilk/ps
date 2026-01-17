@@ -1,13 +1,10 @@
-template <typename T, typename L, typename Merge, typename Update, typename Composition>
+template <typename T, typename L, typename Merge, typename Update, typename Composition, T raw = T(), L lazy_raw = L()>
 class sparse_segment_tree {
   const int sz;
-  const T raw;
-  const L lazy_raw;
   struct node {
-    int l, r;
-    T v;
-    L lazy;
-    node(const T& a, const L& b) : l(-1), r(-1), v(a), lazy(b) {}
+    int l = -1, r = -1;
+    T v = raw;
+    L lazy = lazy_raw;
   };
   vector<node> tree;
   Merge op;
@@ -15,7 +12,7 @@ class sparse_segment_tree {
   Composition comp;
 
   int append() {
-    tree.push_back(node(raw, lazy_raw));
+    tree.push_back(node());
     return tree.size() - 1;
   }
 
@@ -31,7 +28,7 @@ class sparse_segment_tree {
     tree[cur].lazy = lazy_raw;
   }
 
-  void update(int cur, int s, int e, int l, int r, L& v) {
+  void update(int cur, int s, int e, int l, int r, const L& v) {
     push(cur, s, e);
     if(r < s || e < l) return;
     if(l <= s && e <= r) {
@@ -59,33 +56,15 @@ class sparse_segment_tree {
   }
 
 public:
-  sparse_segment_tree(int mx, T raw = T(), L lazy_raw = L()) : sz(mx + 1), raw(raw), lazy_raw(lazy_raw) {
+  sparse_segment_tree(int mx) : sz(mx + 1) {
     append();
   }
 
-  void update(int l, int r, L v) {
+  void update(int l, int r, const L& v) {
     update(0, 0, sz - 1, l, r, v);
   }
 
   T operator() (int l, int r) {
     return query(0, 0, sz - 1, l, r);
-  }
-};
-
-struct op {
-  ll operator() (ll a, ll b) {
-    return a + b;
-  }
-};
-
-struct upd {
-  void operator() (ll& a, ll b, int cnt) {
-    a += b * cnt;
-  }
-};
-
-struct comp {
-  ll operator() (ll a, ll b) {
-    return a + b;
   }
 };

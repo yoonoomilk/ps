@@ -13,6 +13,7 @@ struct point {
   bool operator< (const point& v) const { return x != v.x ? x < v.x : y < v.y; }
   double dist2() const { return x * x + y * y; }
   double dist() const { return sqrt(dist2()); }
+  point norm() const { return *this / dist(); }
   friend istream& operator>> (istream& cin, point& v) { return cin >> v.x >> v.y; }
   friend ostream& operator<< (ostream& cout, const point& v) { return cout << v.x << ' ' << v.y; }
 };
@@ -25,6 +26,6 @@ struct line {
 using polygon = vector<point>;
 
 int ccw(const point& a, const point& b, const point& c) {
-  ll s = (b - a) / (c - a);
+  double s = (b - a) / (c - a);
   return (s > 0) - (s < 0);
 }

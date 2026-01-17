@@ -7,7 +7,7 @@ class const_rmq {
 public:
   const_rmq(int n) : sz(n + 1), lg(__lg(sz)), arr(lg + 1, vector<T>(sz)) {}
 
-  void set(int i, T v) {
+  void set(int i, const T& v) {
     arr[0][i] = v;
   }
   void init() {

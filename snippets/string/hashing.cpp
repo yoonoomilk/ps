@@ -9,7 +9,7 @@ public:
     _pow[0] = 1;
     for(int i = 1;i <= sz;i++) {
       arr[i] = ((ll)arr[i - 1] * P + *s++) % M;
-      _pow[i] = (ll)_pow[i-1] * P % M;
+      _pow[i] = (ll)_pow[i - 1] * P % M;
     }
   }
   ll operator() (int s, int e) {

@@ -7,7 +7,7 @@ extern "C" int __libc_start_main() {
     if(rp == buf + (1 << 16)) read(0, rp = buf, 1 << 16);
     return *rp++;
   };
-  auto readInt = [&]() {
+  auto ri = [&]() {
     int tmp = 0;
     for(char c = rc();c & 16;c = rc()) tmp = tmp * 10 + c - 48;
     return tmp;

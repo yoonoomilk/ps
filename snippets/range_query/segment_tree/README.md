@@ -41,7 +41,7 @@ struct op {
 ```
 
 ## lazy segment tree
-`lazy_segment_tree<T, L, Merge, Update, Composition> seg(n, raw, lazy_raw)`
+`lazy_segment_tree<T, L, Merge, Update, Composition> seg(n)`
 
 * T : tree에 들어갈 타입
 * L : lazy에 들어갈 타입

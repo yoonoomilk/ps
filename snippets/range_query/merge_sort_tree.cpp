@@ -8,7 +8,7 @@ class merge_sort_tree {
 public:
   merge_sort_tree(int n) : sz(n + 1), tree(sz + 1), loc(sz, {{}, -1}) {}
 
-  void set(int i, T v) {
+  void set(int i, const T& v) {
     loc[i] = {v, i};
   }
   void init() {
@@ -18,12 +18,12 @@ public:
     }
   }
 
-  int operator() (int i, T &k) {
+  int operator() (int i, const T& k) {
     int s = 0;
     for(;i;i -= i & -i) s += cnt(tree[i], k);
     return s;
   }
-  int operator() (int l, int r, T k) {
+  int operator() (int l, int r, const T& k) {
     return (*this)(r, k) - (*this)(l - 1, k);
   }
 };

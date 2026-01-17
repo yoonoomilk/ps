@@ -1,24 +1,22 @@
-template <typename T, typename Merge>
+template <typename T, typename Merge, T raw = T()>
 class dynamic_segment_tree {
   const ll sz;
-  const T raw;
   struct node {
-    int l, r;
-    T v;
-    node(const T& v) : l(-1), r(-1), v(v) {}
+    int l = -1, r = -1;
+    T v = raw;
   };
   vector<node> tree;
   Merge op;
 
   int append() {
-    tree.push_back(node(raw));
+    tree.push_back(node());
     return tree.size() - 1;
   }
 
-  void update(int cur, ll s, ll e, ll i, T& v) {
+  void update(int cur, ll s, ll e, ll i, const T& v) {
     if(i < s || e < i) return;
     if(s == e) {
-      tree[cur].v += v;
+      tree[cur].v = op(tree[cur].v, v);
       return;
     }
     ll m = (s + e) / 2;
@@ -40,11 +38,11 @@ class dynamic_segment_tree {
   }
 
 public:
-  dynamic_segment_tree(ll mx, T raw = T()) : sz(mx + 1), raw(raw) {
+  dynamic_segment_tree(ll mx) : sz(mx + 1) {
     append();
   }
 
-  void update(ll i, T v) {
+  void update(ll i, const T& v) {
     update(0, 0, sz - 1, i, v);
   }
 

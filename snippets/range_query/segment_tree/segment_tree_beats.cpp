@@ -1,8 +1,6 @@
-template <typename T, typename L, typename Merge, typename Update, typename Composition>
+template <typename T, typename L, typename Merge, typename Update, typename Composition, T raw = T(), L lazy_raw = L()>
 class segment_tree_beats {
   const int lg, sz;
-  const T raw;
-  const L lazy_raw;
   vector<T> tree;
   vector<L> lazy;
   Merge op;
@@ -31,8 +29,7 @@ class segment_tree_beats {
   }
 
 public:
-  segment_tree_beats(int n, T raw = T(), L lazy_raw = L())
-  : lg(__lg(n * 2 - 1)), sz(1 << lg), raw(raw), lazy_raw(lazy_raw), tree(sz * 2, raw), lazy(sz, lazy_raw) {}
+  segment_tree_beats(int n) : lg(__lg(n * 2 - 1)), sz(1 << lg), tree(sz * 2, raw), lazy(sz, lazy_raw) {}
 
   void set(int i, T v) {
     tree[i + sz] = v;
@@ -41,13 +38,13 @@ public:
     for(int i = sz;--i;) pull(i);
   }
 
-  void update(int i, L v) {
+  void update(int i, const L& v) {
     i += sz;
     for(int j = lg;j;j--) push(i >> j);
     apply(i, v);
     for(int j = 1;j <= lg;j++) pull(i >> j);
   }
-  void update(int l, int r, L v) {
+  void update(int l, int r, const L& v) {
     l += sz; r += sz;
     for(int i = lg;i;i--) {
       if(l >> i << i != l) push(l >> i);

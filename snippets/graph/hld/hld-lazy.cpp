@@ -1,18 +1,16 @@
 #include "range_query/segment_tree/lazy_segment_tree.cpp"
 
-template <typename T, typename L, typename Merge, typename Update, typename Composition>
+template <typename T, typename L, typename Merge, typename Update, typename Composition, T raw = T(), L lazy_raw = L()>
 class heavy_light_decomposition {
   const int sz;
-  const T raw;
-  const L lazy_raw;
   vector<pii> edges;
   vector<int> dep, pa, top, in, out;
-  lazy_segment_tree<T, L, Merge, Update, Composition> seg;
+  lazy_segment_tree<T, L, Merge, Update, Composition, raw, lazy_raw> seg;
   Merge op;
 
 public:
-  heavy_light_decomposition(int n, T raw = T(), L lazy_raw = L()) : sz(n + 1), raw(raw), lazy_raw(lazy_raw),
-    dep(sz), pa(sz), top(sz), in(sz), out(sz), seg(sz, raw, lazy_raw) {
+  heavy_light_decomposition(int n) : sz(n + 1),
+    dep(sz), pa(sz), top(sz), in(sz), out(sz), seg(sz) {
     for(int i = 0;i < sz;i++) seg.set(i, {0, 1});
     seg.init();
   }
@@ -54,10 +52,10 @@ public:
     ett(ett, 1, 0);
   }
 
-  void update(int a, L v) {
+  void update(int a, const L& v) {
     seg.update(in[a], out[a], v);
   }
-  void update(int a, int b, L v) {
+  void update(int a, int b, const L& v) {
     for(;top[a] != top[b];a = pa[top[a]]) {
       if(dep[top[a]] < dep[top[b]]) swap(a, b);
       seg.update(in[top[a]], in[a], v);

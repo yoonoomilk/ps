@@ -1,7 +1,6 @@
-template <typename T, typename Merge>
+template <typename T, typename Merge, T raw = T()>
 class segment_tree_2d {
   const int sz;
-  const T raw;
   vector<vector<T>> tree;
   Merge op;
 
@@ -15,9 +14,9 @@ class segment_tree_2d {
   }
 
 public:
-  segment_tree_2d(int n, T raw = T()) : sz(1 << __lg(n * 2 - 1)), raw(raw), tree(sz * 2, vector<T>(raw)) {}
+  segment_tree_2d(int n) : sz(1 << __lg(n * 2 - 1)), tree(sz * 2, vector<T>(raw)) {}
 
-  void set(int i, int j, T v) {
+  void set(int i, int j, const T& v) {
     tree[i + sz][j + sz] = v;
   }
   void init() {
@@ -25,7 +24,7 @@ public:
     for(int i = sz;--i;) for(int j = 1;j < sz * 2;j++) tree[i][j] = op(tree[i * 2][j], tree[i * 2 + 1][j]);
   }
 
-  void update(int i, int jj, T v) {
+  void update(int i, int jj, const T& v) {
     i += sz; jj += sz;
     tree[i][jj] = v;
     for(int j = jj;j /= 2;) tree[i][j] = op(tree[i][j * 2], tree[i][j * 2 + 1]);

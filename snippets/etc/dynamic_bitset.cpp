@@ -2,12 +2,12 @@
 
 class dynamic_bitset {
   int sz, wsz;
-  vector<ull> arr;
+  vector<uint64_t> arr;
 
 public:
   class ref {
     friend class dynamic_bitset;
-    ull *ptr;
+    uint64_t *ptr;
     int idx;
     ref(dynamic_bitset& v, int i) : ptr(&v.arr[i >> 6]), idx(i & 63) {}
   public:

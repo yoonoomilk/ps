@@ -6,9 +6,8 @@
   - https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/MoQueries.h
 - wavelet tree
   - https://nyaannyaan.github.io/library/data-structure-2d/wavelet-matrix.hpp.html
+- aho corasick optimize
 - 그래프 저장을 인접 리스트 대신 csr로
   - [ ] scc
-  - [ ] max flow
-  - [ ] matching
 - include 추가
   - [ ] scc

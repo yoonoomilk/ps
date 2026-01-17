@@ -1,14 +1,13 @@
-template <typename T, typename Merge>
+template <typename T, typename Merge, T raw = T()>
 class fenwick_tree {
   const int sz;
-  const T raw;
   vector<T> arr, tree1, tree2;
   Merge op;
 
 public:
-  fenwick_tree(int sz, T raw = T()) : sz(sz), raw(raw), arr(sz + 1, raw), tree1(sz + 1, raw), tree2(sz + 1, raw) {}
-  
-  void update(int i, T v) {
+  fenwick_tree(int sz) : sz(sz), arr(sz + 1, raw), tree1(sz + 1, raw), tree2(sz + 1, raw) {}
+
+  void update(int i, const T& v) {
     T tmp = arr[i] = v;
     for(int j = i, l = i - 1, r = i + 1;j <= sz;j += j & -j) {
       for(;l > j - (j & -j);l -= l & -l) tmp = op(tree1[l], tmp);

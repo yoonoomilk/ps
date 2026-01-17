@@ -5,7 +5,6 @@ class strongly_connected_component {
   int scc = 0;
 
 public:
-
   strongly_connected_component(int n) : sz(n + 1), edges(sz), idx(sz, -1) {}
 
   void add(int a, int b) {

@@ -1,17 +1,15 @@
 #include "range_query/segment_tree/segment_tree.cpp"
 
-template <typename T, typename Merge>
+template <typename T, typename Merge, T raw = T()>
 class heavy_light_decomposition {
   const int sz;
-  const T raw;
   vector<pii> edges;
   vector<int> dep, pa, top, in;
-  segment_tree<T, Merge> seg;
+  segment_tree<T, Merge, raw> seg;
   Merge op;
 
 public:
-  heavy_light_decomposition(int n, T raw = T()) : sz(n + 1), raw(raw),
-    dep(sz), pa(sz), top(sz), in(sz), seg(sz, raw) {}
+  heavy_light_decomposition(int n) : sz(n + 1), dep(sz), pa(sz), top(sz), in(sz), seg(sz) {}
 
   void add(int a, int b, bool directed = true) {
     edges.emplace_back(a, b);
@@ -49,7 +47,7 @@ public:
     ett(ett, 1, 0);
   }
 
-  void update(int a, T v) {
+  void update(int a, const T& v) {
     seg.update(in[a], v);
   }
 

@@ -2,10 +2,10 @@
 
 string lcs(string_view a, string_view b) {
   int n = a.size(), m = b.size(), sz = m + 63 >> 6;
-  vector<vector<ull>> loc(128, vector<ull>(sz)), dp(a.size() + 1, vector<ull>(sz));
+  vector<vector<uint64_t>> loc(128, vector<uint64_t>(sz)), dp(a.size() + 1, vector<uint64_t>(sz));
   for(int i = 0;i < m;i++) loc[b[i]][i >> 6] |= 1ULL << (i & 63);
   for(int i = 0;i < n;i++) for(int j = 0, c = 0;j < sz;j++) {
-    ull x = loc[a[i]][j] | dp[i][j];
+    uint64_t x = loc[a[i]][j] | dp[i][j];
     c = _subborrow_u64(c, dp[i][j], dp[i][j] ^ x, dp[i + 1].data() + j);
     dp[i + 1][j] &= x;
   }
