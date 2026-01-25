@@ -6,7 +6,7 @@ class merge_sort_tree {
   Count cnt;
 
 public:
-  merge_sort_tree(int n) : sz(n + 1), tree(sz + 1), loc(sz, {{}, -1}) {}
+  merge_sort_tree(int n) : sz(n + 1), tree(sz + 1), loc(sz, {T(), -1}) {}
 
   void set(int i, const T& v) {
     loc[i] = {v, i};

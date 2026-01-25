@@ -1,7 +1,6 @@
-template <typename I>
-auto suffix_array(I s, I e) {
-  int n = distance(s, e);
-  vector<int> pos(s, e), suf(n), lcp(n);
+auto suffix_array(string_view s) {
+  int n = s.size();
+  vector<int> pos(s.begin(), s.end()), suf(n), lcp(n);
   iota(suf.begin(), suf.end(), 0);
   auto rank = [&](int i) { return i < n ? pos[i] + 1 : 0; };
   for(int i = 1;i < n;i *= 2) {

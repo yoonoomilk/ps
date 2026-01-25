@@ -1,9 +1,8 @@
-template <typename I>
-vector<int> manacher(I s, I e) {
-  int sz = distance(s, e) * 2 + 1;
-  vector<typename iterator_traits<I>::value_type> str(sz);
+vector<int> manacher(string_view s) {
+  int sz = s.size() * 2 + 1;
+  string str(sz, '\0');
   vector<int> arr(sz);
-  for(int i = 1;s != e;i += 2) str[i] = *s++;
+  for(int i = 1, j = 0;j < s.size();i += 2) str[i] = s[j++];
   int m = 0, r = 0;
   for(int i = 0;i < sz;i++) {
     int l = m * 2 - i;

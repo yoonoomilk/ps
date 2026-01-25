@@ -12,10 +12,9 @@ matrix<T, N, N> _pow(matrix<T, N, N> v, ll exp) {
 }
 
 // f(n) = x * f(n - 1) + y * f(n - 2) (aka 피보나치 수열)
-/*
-a = |x y|, b = |f(1)|
-    |1 0|      |f(0)|
-*/
+// a = |x y|, b = |f(1)|
+//     |1 0|      |f(0)|
+
 ll fibo(ll n) {
   matrix<ll, 2, 2> a;
   matrix<ll, 2, 1> b;

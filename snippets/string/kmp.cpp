@@ -1,6 +1,5 @@
-template <typename I>
-auto kmp(I s, I se, I p, I pe) {
-  int n = distance(s, se), m = distance(p, pe);
+auto kmp(string_view s, string_view p) {
+  int n = s.size(), m = p.size();
   vector<int> pi(m), match;
   for(int i = 1, j = 0;i < m;i++) {
     while(j && p[i] != p[j]) j = pi[j - 1];

@@ -32,4 +32,4 @@ struct matrix : array<array<T, M>, N> {
     return cout;
   }
 };
-// dont forget to use modular
+/* dont forget to use modular */
