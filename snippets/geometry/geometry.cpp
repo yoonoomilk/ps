@@ -7,8 +7,7 @@ struct point {
   ll operator* (const point& v) const { return (ll)x * v.x + (ll)y * v.y; }
   ll operator/ (const point& v) const { return (ll)x * v.y - (ll)y * v.x; }
   bool operator== (const point& v) const { return x == v.x && y == v.y; }
-  bool operator!= (const point& v) const { return !(*this == v); }
-  bool operator< (const point& v) const { return x != v.x ? x < v.x : y < v.y; }
+  auto operator<=> (const point& v) const { return tuple{x, y} <=> tuple{v.x, v.y}; }
   ll dist2() const { return (ll)x * x + (ll)y * y; }
   friend istream& operator>> (istream& cin, point& v) { return cin >> v.x >> v.y; }
   friend ostream& operator<< (ostream& cout, const point& v) { return cout << v.x << ' ' << v.y; }

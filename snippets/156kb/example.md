@@ -110,7 +110,7 @@ int __libc_start_main() {
     if (buf[offset] == '\n') {
       if (ocur) write(1, obuf, ocur);
       if (!once) write(1, "NO OUTPUT", 9);
-      _Exit(0);
+      _exit(0);
     }
   }
 }

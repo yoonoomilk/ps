@@ -1,7 +1,12 @@
 class fraction {
   ll n, d;
 public:
-  fraction(ll a = 0, ll b = 1) : n(a / gcd(a, b)), d(b / gcd(a, b)) {}
+  fraction(ll a = 0, ll b = 1) {
+    ll g = gcd(a, b);
+    assert(g != 0);
+    n = a / g;
+    d = b / g;
+  }
   fraction operator+ (const fraction& v) const { return fraction(n * v.d + d * v.n, d * v.d); }
   fraction operator+= (const fraction& v) { return *this = *this + v; }
   fraction operator- (const fraction& v) const { return fraction(n * v.d - d * v.n, d * v.d); }
@@ -12,10 +17,11 @@ public:
   fraction operator/= (const fraction& v) { return *this = *this / v; }
   fraction operator- () const { return fraction(-n, d); }
 
-  auto operator<=> (const fraction& v) { return n * v.d <=> d * v.n; }
+  bool operator== (const fraction& v) const { return n * v.d == d * v.n; }
+  auto operator<=> (const fraction& v) const { return n * v.d <=> d * v.n; }
 
-  explicit operator bool() { return n != 0; }
-  explicit operator double() { return (double)n / d; }
+  explicit operator bool() const { return n != 0; }
+  explicit operator double() const { return (double)n / d; }
 
   friend istream& operator>> (istream& cin, fraction& v) {
     v.d = 1;

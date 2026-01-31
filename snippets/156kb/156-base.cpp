@@ -16,5 +16,5 @@ extern "C" int __libc_start_main() {
   do buf[9 - ++w] = ans % 10 + 48;
   while(ans /= 10);
   write(1, buf + 9 - w, w);
-  _Exit(0);
+  _exit(0);
 } int main() {}

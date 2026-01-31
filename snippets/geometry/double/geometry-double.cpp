@@ -9,8 +9,7 @@ struct point {
   point operator* (double v) const { return {x * v, y * v}; }
   point operator/ (double v) const { return {x / v, y / v}; }
   bool operator== (const point& v) const { return abs(x - v.x) < 1e-9 && abs(y - v.y) < 1e-9; }
-  bool operator!= (const point& v) const { return !(*this == v); }
-  bool operator< (const point& v) const { return x != v.x ? x < v.x : y < v.y; }
+  auto operator<=> (const point& v) const { return tuple{x, y} <=> tuple{v.x, v.y}; }
   double dist2() const { return x * x + y * y; }
   double dist() const { return sqrt(dist2()); }
   point norm() const { return *this / dist(); }
