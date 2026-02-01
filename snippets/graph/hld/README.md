@@ -20,7 +20,7 @@ T operator() (int a, int b) {
 
 ## edge instead of vertex
 ```cpp
-void update(int a, int b, T v) {
+void update(int a, int b, const T& v) {
   if(dep[a] < dep[b]) swap(a, b);
   seg.update(in[a], v);
 }

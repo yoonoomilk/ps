@@ -1,3 +1,5 @@
+// https://en.wikipedia.org/wiki/Burrows–Wheeler_transform
+
 #include "string/suffix_array-nlogn.cpp"
 
 string bwt(string_view s){

@@ -31,7 +31,7 @@ class segment_tree_beats {
 public:
   segment_tree_beats(int n) : lg(__lg(n * 2 - 1)), sz(1 << lg), tree(sz * 2, raw), lazy(sz, lazy_raw) {}
 
-  void set(int i, T v) {
+  void set(int i, const T& v) {
     tree[i + sz] = v;
   }
   void init() {

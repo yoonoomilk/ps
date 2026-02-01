@@ -1,3 +1,5 @@
+// https://en.wikipedia.org/wiki/Steinhaus–Johnson–Trotter_algorithm
+
 template <typename I>
 class steinhaus_johnson_trotter {
   const int n;
