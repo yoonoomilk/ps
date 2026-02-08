@@ -1,6 +1,7 @@
 - nice bbst(avl tree)
   -  https://gist.github.com/justiceHui/a8406518891ca0dba9c7518f8224378b
 - fraction
+  - for geometry
   - a / b + sqrt(c / d)
 - better mo's
   - https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/MoQueries.h

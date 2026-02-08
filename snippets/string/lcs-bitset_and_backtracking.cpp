@@ -2,7 +2,7 @@
 
 string lcs(string_view a, string_view b) {
   int n = a.size(), m = b.size(), sz = m + 63 >> 6;
-  vector<vector<uint64_t>> loc(128, vector<uint64_t>(sz)), dp(a.size() + 1, vector<uint64_t>(sz));
+  vector loc(128, vector(sz, 0ULL)), dp(a.size() + 1, vector(sz, 0ULL));
   for(int i = 0;i < m;i++) loc[b[i]][i >> 6] |= 1ULL << (i & 63);
   for(int i = 0;i < n;i++) for(int j = 0, c = 0;j < sz;j++) {
     uint64_t x = loc[a[i]][j] | dp[i][j];
