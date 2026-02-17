@@ -2,7 +2,7 @@ template <typename Use, typename Unuse, typename Calc>
 class mo_tree {
   const int sz;
   vector<pii> edges;
-  vector<tuple<int, int, int>> queries;
+  vector<tuple<int, int, int, ll, int, int>> queries;
   Use use;
   Unuse unuse;
   Calc calc;
@@ -15,8 +15,8 @@ public:
     if(!directed) edges.emplace_back(b, a);
   }
 
-  void operator() (int a, int b) {
-    queries.emplace_back(a, b, queries.size());
+  void operator() (int a, int b, int k) {
+    queries.emplace_back(a, b, queries.size(), 0, -1, k);
   }
 
   template <int sq>
@@ -60,15 +60,28 @@ public:
       return dep[a] < dep[b] ? a : b;
     };
 
-    for(auto& [a, b, i] : queries) if(in[a] > in[b]) swap(a, b);
+    for(auto& [a, b, i, ord, c, k] : queries) {
+      if(in[a] > in[b]) swap(a, b);
+      c = lca(a, b);
+    }
 
-    sort(queries.begin(), queries.end(), [&](auto& a, auto& b) {
-      int x = in[get<0>(a)] / sq, y = in[get<0>(b)] / sq;
-      return (x < y) || ((x == y) && ((x & 1) ^ (in[get<1>(a)] < in[get<1>(b)])));
-    });
- 
+    for(auto& [a, b, i, ord, c, k] : queries) {
+      int x = a == c ? in[a] : out[a], y = in[b];
+      int lg = __lg(max(x, y) * 2 + 1) | 1;
+      ll maxn = (1LL << lg) - 1;
+      for(ll s = 1LL << (lg - 1);s;s >>= 1) {
+        bool rx = x & s, ry = y & s;
+        ord = (ord << 2) | (rx ? ry ? 2 : 1 : ry ? 3 : 0);
+        if(rx) continue;
+        if(ry) x ^= maxn, y ^= maxn;
+        swap(x, y);
+      }
+    }
+
+    sort(queries.begin(), queries.end(), [&](auto& a, auto& b) { return get<3>(a) < get<3>(b); });
+
     vector<bool> used(sz);
-    vector<decltype(calc())> ans(queries.size());
+    vector<decltype(calc(0))> ans(queries.size());
 
     int l = 0, r = -1;
     auto toggle = [&](int i) {
@@ -76,16 +89,16 @@ public:
       else use(i);
       used[i] = !used[i];
     };
-    for(auto [a, b, i] : queries) {
-      int c = lca(a, b), ll = a == c ? in[a] : out[a], rr = in[b];
+    for(auto [a, b, i, ord, c, k] : queries) {
+      int ll = a == c ? in[a] : out[a], rr = in[b];
       while(ll < l) toggle(arr[--l]);
       while(ll > l) toggle(arr[l++]);
       while(rr < r) toggle(arr[r--]);
       while(rr > r) toggle(arr[++r]);
-      if(a == c) ans[i] = calc();
+      if(a == c) ans[i] = calc(k);
       else {
         toggle(c);
-        ans[i] = calc();
+        ans[i] = calc(k);
         toggle(c);
       }
     }
