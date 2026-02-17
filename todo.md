@@ -3,8 +3,6 @@
 - fraction
   - for geometry
   - a / b + sqrt(c / d)
-- better mo's
-  - https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/MoQueries.h
 - wavelet tree
   - https://nyaannyaan.github.io/library/data-structure-2d/wavelet-matrix.hpp.html
 - aho corasick optimize

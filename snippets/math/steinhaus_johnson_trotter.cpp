@@ -11,7 +11,7 @@ public:
     assert(is_sorted(s, e));
   }
 
-  bool next() {
+  bool operator() () {
     int n = distance(s, e);
     int tmp = -1;
     for(int i = 0;i < n;i++) {

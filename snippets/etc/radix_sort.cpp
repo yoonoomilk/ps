@@ -6,5 +6,5 @@ void radix_sort(I s, I e) {
     I cur = s;
     for(int i = 0;i < 256;i++) for(;q[i].size();q[i].pop()) *cur++ = q[i].front();
   }
-  stable_partition(s, e, [](int a){ return a < 0; });
+  stable_partition(s, e, [](int a) { return a < 0; });
 }

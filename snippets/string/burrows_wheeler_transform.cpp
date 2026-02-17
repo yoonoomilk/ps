@@ -2,7 +2,7 @@
 
 #include "string/suffix_array-nlogn.cpp"
 
-string bwt(string_view s){
+string bwt(string_view s) {
   int n = s.size();
   auto suf = get<1>(suffix_array(s));
   string tmp(n, '\0');
