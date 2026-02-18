@@ -1,6 +1,6 @@
-template <typename T, typename comp = less<T>>
+template <typename T, typename Cmp = less<T>>
 class eraseable_pq {
-  priority_queue<T, vector<T>, comp> pq, del;
+  priority_queue<T, vector<T>, Cmp> pq, del;
   void flush() { while(del.size() && pq.top() == del.top()) pq.pop(), del.pop(); }
 public:
   eraseable_pq() {}
