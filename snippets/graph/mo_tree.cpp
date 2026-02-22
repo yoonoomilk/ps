@@ -2,7 +2,7 @@ template <typename Use, typename Unuse, typename Calc>
 class mo_tree {
   const int sz;
   vector<pii> edges;
-  vector<tuple<int, int, int, ll, int, int>> queries;
+  vector<tuple<int, int, int, ll, int>> queries;
   Use use;
   Unuse unuse;
   Calc calc;
@@ -15,8 +15,8 @@ public:
     if(!directed) edges.emplace_back(b, a);
   }
 
-  void operator() (int a, int b, int k) {
-    queries.emplace_back(a, b, queries.size(), 0, -1, k);
+  void operator() (int a, int b) {
+    queries.emplace_back(a, b, queries.size(), 0, -1);
   }
 
   template <int sq>
@@ -60,12 +60,12 @@ public:
       return dep[a] < dep[b] ? a : b;
     };
 
-    for(auto& [a, b, i, ord, c, k] : queries) {
+    for(auto& [a, b, i, ord, c] : queries) {
       if(in[a] > in[b]) swap(a, b);
       c = lca(a, b);
     }
 
-    for(auto& [a, b, i, ord, c, k] : queries) {
+    for(auto& [a, b, i, ord, c] : queries) {
       int x = a == c ? in[a] : out[a], y = in[b];
       int lg = __lg(max(x, y) * 2 + 1) | 1;
       ll maxn = (1LL << lg) - 1;
@@ -81,7 +81,7 @@ public:
     sort(queries.begin(), queries.end(), [&](auto& a, auto& b) { return get<3>(a) < get<3>(b); });
 
     vector<bool> used(sz);
-    vector<decltype(calc(0))> ans(queries.size());
+    vector<decltype(calc())> ans(queries.size());
 
     int l = 0, r = -1;
     auto toggle = [&](int i) {
@@ -89,18 +89,15 @@ public:
       else use(i);
       used[i] = !used[i];
     };
-    for(auto [a, b, i, ord, c, k] : queries) {
+    for(auto [a, b, i, ord, c] : queries) {
       int ll = a == c ? in[a] : out[a], rr = in[b];
       while(ll < l) toggle(arr[--l]);
       while(ll > l) toggle(arr[l++]);
       while(rr < r) toggle(arr[r--]);
       while(rr > r) toggle(arr[++r]);
-      if(a == c) ans[i] = calc(k);
-      else {
-        toggle(c);
-        ans[i] = calc(k);
-        toggle(c);
-      }
+      if(a != c) toggle(c);
+      ans[i] = calc();
+      if(a != c) toggle(c);
     }
     return ans;
   }

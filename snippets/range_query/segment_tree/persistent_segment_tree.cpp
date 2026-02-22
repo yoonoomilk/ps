@@ -10,35 +10,29 @@ class persistent_segment_tree {
   Merge op;
 
   int append() {
-    tree.push_back(node());
+    tree.push_back({});
     return tree.size() - 1;
   }
 
-  void update(int prev, int cur, int s, int e, int i, T& v) {
-    if(cur == -1 || s > i || e < i) return;
+  void init(int cur, int s, int e) {
+    if(s == e) return;
+    int m = (s + e) / 2;
+    init(tree[cur].l = append(), s, m);
+    init(tree[cur].r = append(), m + 1, e);
+  }
+
+  void update(int prev, int cur, int s, int e, int i, const T& v) {
     if(s == e) {
-      tree[cur].v = op(tree[cur].v, v);
+      tree[cur].v = op(tree[prev].v, v);
       return;
     }
-    if(tree[prev].l == -1) tree[prev].l = append();
-    if(tree[prev].r == -1) tree[prev].r = append();
+    tree[cur] = tree[prev];
     int m = (s + e) / 2;
-    if(i <= m) {
-      int nxt = append();
-      tree[nxt] = tree[tree[prev].l];
-      tree[cur].l = nxt;
-      tree[cur].r = tree[prev].r;
-      update(tree[prev].l, tree[cur].l, s, m, i, v);
-    } else {
-      int nxt = append();
-      tree[nxt] = tree[tree[prev].r];
-      tree[cur].l = tree[prev].l;
-      tree[cur].r = nxt;
-      update(tree[prev].r, tree[cur].r, m + 1, e, i, v);
-    }
+    if(i <= m) update(tree[prev].l, tree[cur].l = append(), s, m, i, v);
+    else update(tree[prev].r, tree[cur].r = append(), m + 1, e, i, v);
     tree[cur].v = op(
-      tree[cur].l != -1 ? tree[tree[cur].l].v : raw,
-      tree[cur].r != -1 ? tree[tree[cur].r].v : raw
+      ~tree[cur].l ? tree[tree[cur].l].v : raw,
+      ~tree[cur].r ? tree[tree[cur].r].v : raw
     );
   }
 
@@ -52,16 +46,16 @@ class persistent_segment_tree {
 public:
   persistent_segment_tree(int n) : sz(n) {
     root.push_back(append());
+    init(0, 0, sz - 1);
   }
 
-  int update(int i, T v) {
-    int prev = root.back();
+  int update(int prev, int i, const T& v) {
     root.push_back(append());
-    update(prev, root.back(), 0, sz - 1, i, v);
+    update(root[prev], root.back(), 0, sz - 1, i, v);
     return root.size() - 1;
   }
 
-  T query(int ver, int l, int r) {
+  T operator() (int ver, int l, int r) {
     return query(root[ver], 0, sz - 1, l, r);
   }
 };
