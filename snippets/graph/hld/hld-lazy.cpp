@@ -15,9 +15,9 @@ public:
     seg.init();
   }
 
-  void add(int a, int b, bool directed = true) {
+  void add(int a, int b) {
     edges.emplace_back(a, b);
-    if(!directed) edges.emplace_back(b, a);
+    edges.emplace_back(b, a);
   }
 
   void init() {

@@ -1,8 +1,8 @@
-template <typename Use, typename Unuse, typename Calc>
+template <typename Use, typename Unuse, typename Calc, typename... Args>
 class mo_tree {
   const int sz;
   vector<pii> edges;
-  vector<tuple<int, int, int, ll, int>> queries;
+  vector<tuple<int, int, int, ll, int, Args...>> queries;
   Use use;
   Unuse unuse;
   Calc calc;
@@ -10,16 +10,15 @@ class mo_tree {
 public:
   mo_tree(int n) : sz(n + 1) {}
 
-  void add(int a, int b, bool directed = true) {
+  void add(int a, int b) {
     edges.emplace_back(a, b);
-    if(!directed) edges.emplace_back(b, a);
+    edges.emplace_back(b, a);
   }
 
-  void operator() (int a, int b) {
-    queries.emplace_back(a, b, queries.size(), 0, -1);
+  void operator() (int a, int b, Args&... args) {
+    queries.emplace_back(a, b, queries.size(), 0, -1, args...);
   }
 
-  template <int sq>
   auto init() {
     vector<int> cnt(sz + 1), csr(edges.size());
     for(auto [a, b] : edges) cnt[a + 1]++;
@@ -60,13 +59,11 @@ public:
       return dep[a] < dep[b] ? a : b;
     };
 
-    for(auto& [a, b, i, ord, c] : queries) {
+    for(auto& q : queries) {
+      int &a = get<0>(q), &b = get<1>(q);
       if(in[a] > in[b]) swap(a, b);
-      c = lca(a, b);
-    }
-
-    for(auto& [a, b, i, ord, c] : queries) {
-      int x = a == c ? in[a] : out[a], y = in[b];
+      int &c = get<4>(q) = lca(a, b), x = a == c ? in[a] : out[a], y = in[b];
+      ll &ord = get<3>(q);
       int lg = __lg(max(x, y) * 2 + 1) | 1;
       ll maxn = (1LL << lg) - 1;
       for(ll s = 1LL << (lg - 1);s;s >>= 1) {
@@ -81,7 +78,7 @@ public:
     sort(queries.begin(), queries.end(), [&](auto& a, auto& b) { return get<3>(a) < get<3>(b); });
 
     vector<bool> used(sz);
-    vector<decltype(calc())> ans(queries.size());
+    vector<decltype(calc(declval<Args>()...))> ans(queries.size());
 
     int l = 0, r = -1;
     auto toggle = [&](int i) {
@@ -89,14 +86,15 @@ public:
       else use(i);
       used[i] = !used[i];
     };
-    for(auto [a, b, i, ord, c] : queries) {
+    for(auto& q : queries) {
+      int a = get<0>(q), b = get<1>(q), i = get<2>(q), c = get<4>(q);
       int ll = a == c ? in[a] : out[a], rr = in[b];
       while(ll < l) toggle(arr[--l]);
       while(ll > l) toggle(arr[l++]);
       while(rr < r) toggle(arr[r--]);
       while(rr > r) toggle(arr[++r]);
       if(a != c) toggle(c);
-      ans[i] = calc();
+      ans[i] = apply([&](auto&, auto&, auto&, auto&, auto&, auto&... args) { return calc(args...); }, q);
       if(a != c) toggle(c);
     }
     return ans;

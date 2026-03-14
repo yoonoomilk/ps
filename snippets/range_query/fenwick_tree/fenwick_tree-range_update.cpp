@@ -12,7 +12,7 @@ public:
   }
 
   T operator() (int i) {
-    T s = 0;
+    T s = T();
     for(;i;i -= i & -i) s += tree[i];
     return s;
   }

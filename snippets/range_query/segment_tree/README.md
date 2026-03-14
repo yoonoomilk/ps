@@ -1,11 +1,3 @@
-
-### top
-```cpp
-T top() {
-  return tree[1];
-}
-```
-
 ## segment tree
 
 ### kth
@@ -19,6 +11,13 @@ int kth(int k) {
     } else idx = idx * 2;
   }
   return idx - sz;
+}
+```
+
+### top
+```cpp
+T top() {
+  return tree[1];
 }
 ```
 

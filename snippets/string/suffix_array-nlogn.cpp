@@ -4,7 +4,7 @@ auto suffix_array(string_view s) {
   iota(suf.begin(), suf.end(), 0);
   auto rank = [&](int i) { return i < n ? pos[i] + 1 : 0; };
   for(int i = 1;i < n;i *= 2) {
-    vector<int> tmp(n), cnt(max(n, 256));
+    vector<int> tmp(n), cnt(max(n, 128));
     for(int j = 0;j < n;j++) cnt[rank(suf[j] + i)]++;
     for(int j = 1;j < cnt.size();j++) cnt[j] += cnt[j - 1];
     for(int j = n;j--;) tmp[--cnt[rank(suf[j] + i)]] = suf[j];

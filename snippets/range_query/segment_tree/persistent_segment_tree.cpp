@@ -14,26 +14,14 @@ class persistent_segment_tree {
     return tree.size() - 1;
   }
 
-  void init(int cur, int s, int e) {
+  void update(int prev, int cur, int s, int e, int i, const T& v) {
+    node tmp = ~prev ? tree[prev] : node();
+    tree[cur] = tmp;
+    tree[cur].v = op(tmp.v, v);
     if(s == e) return;
     int m = (s + e) / 2;
-    init(tree[cur].l = append(), s, m);
-    init(tree[cur].r = append(), m + 1, e);
-  }
-
-  void update(int prev, int cur, int s, int e, int i, const T& v) {
-    if(s == e) {
-      tree[cur].v = op(tree[prev].v, v);
-      return;
-    }
-    tree[cur] = tree[prev];
-    int m = (s + e) / 2;
-    if(i <= m) update(tree[prev].l, tree[cur].l = append(), s, m, i, v);
-    else update(tree[prev].r, tree[cur].r = append(), m + 1, e, i, v);
-    tree[cur].v = op(
-      ~tree[cur].l ? tree[tree[cur].l].v : raw,
-      ~tree[cur].r ? tree[tree[cur].r].v : raw
-    );
+    if(i <= m) update(tmp.l, tree[cur].l = append(), s, m, i, v);
+    else update(tmp.r, tree[cur].r = append(), m + 1, e, i, v);
   }
 
   T query(int cur, int s, int e, int l, int r) {
@@ -45,8 +33,7 @@ class persistent_segment_tree {
 
 public:
   persistent_segment_tree(int n) : sz(n) {
-    root.push_back(append());
-    init(0, 0, sz - 1);
+    root.push_back(-1);
   }
 
   int update(int prev, int i, const T& v) {

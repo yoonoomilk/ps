@@ -1,12 +1,11 @@
-- nice bbst(avl tree)
+- nice bbst (avl tree)
   -  https://gist.github.com/justiceHui/a8406518891ca0dba9c7518f8224378b
 - fraction
   - for geometry
   - a / b + sqrt(c / d)
-- wavelet tree
-  - https://nyaannyaan.github.io/library/data-structure-2d/wavelet-matrix.hpp.html
 - aho corasick optimize
-- 그래프 저장을 인접 리스트 대신 csr로
-  - [ ] scc
-- include 추가
-  - [ ] scc
+- scc
+- dynamic segment tree 관련 코드 깔끔하게
+  - [ ] [dynamic segment tree](snippets\range_query\segment_tree\dynamic_segment_tree.cpp)
+  - [ ] [sparse segment tree](snippets\range_query\segment_tree\sparse_segment_tree.cpp)
+- walk on pst

@@ -25,8 +25,7 @@ public:
     return *this;
   }
 
-  template <typename T>
-  requires integral<T>
+  template <integral T>
   _istream& operator>> (T& v) {
     v = 0;
     char c = rc();
@@ -48,8 +47,7 @@ public:
     return *this;
   }
 
-  template <typename T>
-  requires floating_point<T>
+  template <floating_point T>
   _istream& operator>> (T& v) {
     string s;
     *this >> s;

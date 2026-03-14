@@ -11,9 +11,9 @@ public:
   heavy_light_decomposition(int n) : sz(n + 1),
     dep(sz), pa(sz), top(sz), in(sz), out(sz), seg(sz) {}
 
-  void add(int a, int b, bool directed = true) {
+  void add(int a, int b) {
     edges.emplace_back(a, b);
-    if(!directed) edges.emplace_back(b, a);
+    edges.emplace_back(b, a);
   }
 
   void init() {
@@ -64,7 +64,7 @@ public:
     return seg(in[a], out[a]);
   }
   T operator() (int a, int b) {
-    T s = 0;
+    T s = T();
     for(;top[a] != top[b];a = pa[top[a]]) {
       if(dep[top[a]] < dep[top[b]]) swap(a, b);
       s += seg(in[top[a]], in[a]);

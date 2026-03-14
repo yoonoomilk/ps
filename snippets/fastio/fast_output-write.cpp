@@ -32,8 +32,7 @@ public:
     return *this;
   }
 
-  template <typename T>
-  requires integral<T>
+  template <integral T>
   _ostream& operator<< (T v) {
     int len = get_len(v);
     if(wp + len + 1 > wbuf + sz) flush();
@@ -57,8 +56,7 @@ public:
     return *this;
   }
 
-  template <typename T>
-  requires floating_point<T>
+  template <floating_point T>
   _ostream& operator<< (T v) {
     char tmp[50]{};
     sprintf(tmp, "%.*Lf", precision, (long double)v);
