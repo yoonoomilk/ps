@@ -12,19 +12,21 @@ public:
   }
 
   void init() {
-    vector<int> tmp(raw);
+    vector<int> tmp[2] = {raw, vector<int>(sz)};
     raw.erase(raw.begin());
     sort(raw.begin(), raw.end());
     raw.erase(unique(raw.begin(), raw.end()), raw.end());
-    for(int i = 1;i < sz;i++) tmp[i] = lower_bound(raw.begin(), raw.end(), tmp[i]) - raw.begin();
+    for(int i = 1;i < sz;i++) tmp[0][i] = lower_bound(raw.begin(), raw.end(), tmp[0][i]) - raw.begin();
 
-    for(int d = lg;d--;) {
+    for(int d = lg, t = 0;d--;t ^= 1) {
       arr[d][0] = 0;
       for(int i = 1;i < sz;i++) {
-        int bit = (tmp[i] >> d) & 1;
+        int bit = (tmp[t][i] >> d) & 1;
         arr[d][i] = arr[d][i - 1] + (bit == 0);
       }
-      sum[d] = stable_partition(tmp.begin() + 1, tmp.end(), [&](int x) { return ~(x >> d) & 1; }) - tmp.begin() - 1;
+      sum[d] = arr[d][sz - 1];
+      int idx[2] = {1, arr[d][sz - 1] + 1};
+      for(int i = 1;i < sz;i++) tmp[t ^ 1][idx[(tmp[t][i] >> d) & 1]++] = tmp[t][i];
     }
   }
 
