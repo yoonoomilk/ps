@@ -1,6 +1,6 @@
-auto dijkstra(int n, auto& edges, int s) {
+auto dijkstra(auto& edges, int s) {
   priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<>> pq;
-  vector<ll> dist(n, LLONG_MAX);
+  vector<ll> dist(edges.size(), LLONG_MAX);
   pq.push({0, s});
   dist[s] = 0;
   while(pq.size()) {
