@@ -1,17 +1,16 @@
-class max_flow {
+struct max_flow {
   struct edge {
-    int loc, cap, flow, rev;
+    int loc, left, rev;
   };
 
   const int sz;
   vector<vector<edge>> edges;
 
-public:
   max_flow(int sz) : sz(sz), edges(sz) {}
 
   void add(int a, int b, int cap, bool directed = true) {
-    edges[a].emplace_back(b, cap, 0, edges[b].size());
-    edges[b].emplace_back(a, directed ? 0 : cap, 0, edges[a].size() - 1);
+    edges[a].emplace_back(b, cap, edges[b].size());
+    edges[b].emplace_back(a, directed ? 0 : cap, edges[a].size() - 1);
   }
 
   int operator() (int s, int e) {
@@ -24,21 +23,21 @@ public:
       while(q.size() && level[e] == -1) {
         int cur = q.front();
         q.pop();
-        for(edge &i : edges[cur]) if(level[i.loc] == -1 && i.cap > i.flow) {
-          level[i.loc] = level[cur] + 1;
-          q.push(i.loc);
+        for(auto [loc, left, rev] : edges[cur]) if(level[loc] == -1 && left) {
+          level[loc] = level[cur] + 1;
+          q.push(loc);
         }
       }
       if(level[e] == -1) break;
-      auto dfs = [&](auto& self, int cur, int tmp) -> int {
+      auto dfs = [&](auto& self, int cur, int tmp) {
         if(cur == e) return tmp;
-        for(int& i = idx[cur];i < edges[cur].size();i++) {
-          edge& j = edges[cur][i];
-          if(level[cur] + 1 == level[j.loc] && j.cap > j.flow) {
-            int nxt = self(self, j.loc, min(tmp, j.cap - j.flow));
+        for(;idx[cur] < edges[cur].size();idx[cur]++) {
+          auto& [loc, left, rev] = edges[cur][idx[cur]];
+          if(level[cur] + 1 == level[loc] && left) {
+            int nxt = self(self, loc, min(tmp, left));
             if(nxt) {
-              j.flow += nxt;
-              edges[j.loc][j.rev].flow -= nxt;
+              left -= nxt;
+              edges[loc][rev].left += nxt;
               return nxt;
             }
           }

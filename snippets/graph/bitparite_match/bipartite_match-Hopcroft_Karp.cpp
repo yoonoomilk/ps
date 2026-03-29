@@ -1,9 +1,9 @@
 class bit_match {
-  const int l, r;
+  const int n, m;
   vector<vector<int>> edges;
 
 public:
-  bit_match(int l, int r) : l(l), r(r), edges(l) {}
+  bit_match(int l, int r) : n(l), m(r), edges(l) {}
 
   void add(int a, int b) {
     edges[a].push_back(b);
@@ -11,11 +11,11 @@ public:
 
   int operator() () {
     int ret = 0;
-    vector<int> idx_l(l, -1), idx_r(r, -1);
+    vector<int> idx_l(n, -1), idx_r(m, -1);
     while(1) {
-      vector<int> level(l, -1);
+      vector<int> level(n, -1), idx(n, 0);
       queue<int> q;
-      for(int i = 0;i < l;i++) if(idx_l[i] == -1) {
+      for(int i = 0;i < n;i++) if(idx_l[i] == -1) {
         level[i] = 0;
         q.push(i);
       }
@@ -33,14 +33,18 @@ public:
       }
       if(!flag) break;
       auto dfs = [&](auto& self, int cur) -> bool {
-        for(int i : edges[cur]) if(idx_r[i] == -1 || level[idx_r[i]] == level[cur] + 1 && self(self, idx_r[i])) {
-          idx_l[cur] = i;
-          idx_r[i] = cur;
-          return true;
+        for(int& i = idx[cur];i < edges[cur].size();i++) {
+          int j = edges[cur][i], &rr = idx_r[j];
+          if(rr == -1 || (level[rr] == level[cur] + 1 && self(self, rr))) {
+            idx_l[cur] = j;
+            rr = cur;
+            return true;
+          }
         }
+        level[cur] = -1;
         return false;
       };
-      for(int i = 0;i < l;i++) if(idx_l[i] == -1 && dfs(dfs, i)) ret++;
+      for(int i = 0;i < n;i++) if(idx_l[i] == -1 && dfs(dfs, i)) ret++;
     }
     return ret;
   }
