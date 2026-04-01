@@ -32,7 +32,7 @@ public:
         }
       }
       if(!flag) break;
-      auto dfs = [&](auto& self, int cur) -> bool {
+      auto dfs = [&](auto& self, int cur) {
         for(int& i = idx[cur];i < edges[cur].size();i++) {
           int j = edges[cur][i], &rr = idx_r[j];
           if(rr == -1 || (level[rr] == level[cur] + 1 && self(self, rr))) {

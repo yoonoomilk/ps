@@ -17,29 +17,29 @@ struct min_cost_max_flow {
     int flow = 0, cost = 0;
     while(1) {
       vector<int> dist(sz, INT_MAX), idx(sz);
-      vector<bool> inq(sz);
-      vector<char> visited(sz);
+      vector<char> inq(sz);
       queue<int> q;
       dist[s] = 0;
-      inq[s] = true;
+      inq[s] = 1;
       q.push(s);
       while(q.size()) {
         int cur = q.front();
         q.pop();
-        inq[cur] = false;
+        inq[cur] = 0;
         for(auto [loc, left, cost, rev] : edges[cur]) if(left && dist[loc] > dist[cur] + cost) {
           dist[loc] = dist[cur] + cost;
           if(!inq[loc]) q.push(loc);
-          inq[loc] = true;
+          inq[loc] = 1;
         }
       }
       if(dist[e] == INT_MAX) break;
       auto dfs = [&](auto& self, int cur, int tmp) {
-        visited[cur] = true;
+        inq[cur] = 1;
+        q.push(cur);
         if(cur == e) return tmp;
         for(;idx[cur] < edges[cur].size();idx[cur]++) {
           auto& [loc, left, cost, rev] = edges[cur][idx[cur]];
-          if(!visited[loc] && dist[loc] == dist[cur] + cost && left) {
+          if(!inq[loc] && dist[loc] == dist[cur] + cost && left) {
             int nxt = self(self, loc, min(tmp, left));
             if(nxt) {
               left -= nxt;
@@ -53,7 +53,7 @@ struct min_cost_max_flow {
       for(int i;i = dfs(dfs, s, INT_MAX);) {
         flow += i;
         cost += dist[e] * i;
-        memset(visited.data(), 0, visited.size());
+        for(;q.size();q.pop()) inq[q.front()] = 0;
       };
     }
     return {flow, cost};
