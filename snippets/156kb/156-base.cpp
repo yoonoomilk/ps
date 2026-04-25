@@ -5,10 +5,9 @@ extern "C" int __libc_start_main() {
   read(0, buf, 1000);
 
   auto ri = [&]() {
-    int n = 0;
-    while(*p & 16) n = n * 10 + *p++ - 48;
-    p++;
-    return n;
+    int tmp = 0;
+    for(char c = *p++;c & 16;c = *p++) tmp = tmp * 10 + c - 48;
+    return tmp;
   };
 
   int ans = ri();

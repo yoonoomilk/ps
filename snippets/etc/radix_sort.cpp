@@ -1,10 +1,23 @@
-template <typename I>
+template <random_access_iterator I>
+requires integral<iter_value_t<I>>
 void radix_sort(I s, I e) {
-  for(int t = 0;t < 32;t += 8) {
-    queue<int> q[256];
-    for(I it = s;it != e;++it) q[((*it) >> t) & 255].push(*it);
-    I cur = s;
-    for(int i = 0;i < 256;i++) for(;q[i].size();q[i].pop()) *cur++ = q[i].front();
+  using T = iter_value_t<I>;
+  using U = make_unsigned_t<T>;
+  constexpr int bits = sizeof(T) * 8;
+  constexpr U sign = U(1) << bits - 1;
+
+  size_t sz = distance(s, e);
+  vector<T> tmp1(s, e), tmp2(sz);
+  if constexpr (signed_integral<T>) for(T& i : tmp1) i = T(U(i) ^ sign);
+  for(int t = 0;t < bits;t += 8) {
+    size_t cnt[256]{};
+    for(size_t i = 0;i < sz;i++) cnt[(U(tmp1[i]) >> t) & 255]++;
+    for(int i = 1;i < 256;i++) cnt[i] += cnt[i - 1];
+    for(size_t i = sz;i--;) tmp2[--cnt[(U(tmp1[i]) >> t) & 255]] = tmp1[i];
+    swap(tmp1, tmp2);
   }
-  stable_partition(s, e, [](int a) { return a < 0; });
+  transform(tmp1.begin(), tmp1.end(), s, [](const T& i) {
+    if constexpr (signed_integral<T>) return T(U(i) ^ sign);
+    else return i;
+  });
 }
