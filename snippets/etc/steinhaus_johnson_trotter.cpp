@@ -12,7 +12,6 @@ public:
   }
 
   bool operator() () {
-    int n = distance(s, e);
     int tmp = -1;
     for(int i = 0;i < n;i++) {
       int nxt = i + dir[i];
@@ -21,6 +20,9 @@ public:
     }
     if(tmp == -1) return false;
     int nxt = tmp + dir[tmp];
+    swap(s[tmp], s[nxt]);
+    swap(dir[tmp], dir[nxt]);
     for(int i = 0;i < n;i++) if(s[i] > s[nxt]) dir[i] *= -1;
+    return true;
   }
 };
